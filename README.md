@@ -1,2 +1,20 @@
 # SentinelNet
-Self-hosted WiFi &amp; LAN intrusion detection, rogue access point analysis, and attack-simulation framework for home labs.
+
+SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic, detects rogue access points, flags suspicious activity, and simulates controlled cyber-attacks in a home lab environment.
+
+## Modules
+- scanner: packet capture & metadata extraction
+- detection: anomaly scoring & signature engine
+- simulation: local-only attack simulation framework
+- server: lightweight HTTP interface for dashboard integration
+
+## Build
+SentinelNet uses CMake:
+
+mkdir build
+cd build
+cmake ..
+make
+
+## Status
+In development - architecture scaffolding only.
