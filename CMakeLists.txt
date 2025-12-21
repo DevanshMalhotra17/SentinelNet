@@ -12,3 +12,11 @@ add_executable(SentinelNet
     src/server.cpp
     src/main.cpp
 )
+
+if(WIN32)
+    target_link_libraries(SentinelNet 
+        ws2_32
+        iphlpapi
+    )
+
+endif()
