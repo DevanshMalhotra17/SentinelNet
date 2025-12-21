@@ -10,6 +10,7 @@ add_executable(SentinelNet
     src/detection.cpp
     src/simulation.cpp
     src/server.cpp
+    src/logger.cpp
     src/main.cpp
 )
 
