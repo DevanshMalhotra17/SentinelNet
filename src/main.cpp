@@ -10,6 +10,12 @@ int main() {
     AttackSimulator simulator;
     APIServer server;
 
+    std::cout << "Hostname: " << scanner.getHostname() << "\n";
+    auto interfaces = scanner.getInterfaces();
+    for (const auto& i : interfaces) {
+        std::cout << "Interface: " << i.name << " | IP: " << i.ip << "\n";
+    }
+
     auto scan_result = scanner.scan();
     std::cout << "Scanner: " << scan_result << std::endl;
 
