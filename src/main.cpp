@@ -5,12 +5,16 @@
 #include "detection.h"
 #include "simulation.h"
 #include "server.h"
+#include "logger.h"
 
 int main() {
     NetworkScanner scanner;
     DetectionEngine detector;
     AttackSimulator simulator;
     APIServer server;
+    logger logger;
+
+    logger.logMessage("SentinelNet started");
 
     std::cout << "=== SentinelNet Network Scanner ===" << std::endl;
     std::cout << "\nHostname: " << scanner.getHostname() << "\n";
@@ -44,6 +48,7 @@ int main() {
     std::vector<int> common_ports = {21, 22, 23, 25, 80, 135, 139, 443, 445, 1433, 3306, 3389, 5432, 8080};
     
     auto open_ports = scanner.scanPorts("127.0.0.1", common_ports);
+    logger.logScanResult("127.0.0.1", open_ports);
     
     if (open_ports.empty()) {
         std::cout << "No open ports found on localhost.\n";
@@ -60,6 +65,8 @@ int main() {
 
     std::cout << "\nScanning router (10.0.0.1)...\n";
     auto router_ports = scanner.scanPorts("10.0.0.1", common_ports);
+    logger.logScanResult("10.0.0.1", router_ports);
+    
     if (router_ports.empty()) {
         std::cout << "No open ports found on router.\n";
     } else {
@@ -80,6 +87,8 @@ int main() {
     std::cout << "Simulation: " << simulation_result << std::endl;
 
     server.start();
+    
+    logger.logMessage("SentinelNet shutdown");
 
     return 0;
 }
