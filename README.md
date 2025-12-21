@@ -17,10 +17,10 @@ SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic
 ## Build
 SentinelNet uses CMake:
 
-mkdir build
-cd build
-cmake ..
-make
+- mkdir build
+- cd build
+- cmake ..
+- make
 
 ## Status
-In development - architecture scaffolding only.
+In development

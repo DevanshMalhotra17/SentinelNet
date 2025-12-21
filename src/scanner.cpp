@@ -52,3 +52,31 @@ std::vector<NetworkInterface> NetworkScanner::getInterfaces() const {
 std::string NetworkScanner::scan() const {
        return "Network scan running (placeholder)";
    }
+
+std::vector<int> NetworkScanner::scanPorts(const std::string& target, const std::vector<int>& ports) const {
+    std::vector<int> open_ports;
+    
+    for (int port : ports) {
+        SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        if (sock == INVALID_SOCKET) {
+            continue;
+        }
+        
+        DWORD timeout = 1000;
+        setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout));
+        setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&timeout, sizeof(timeout));
+
+        sockaddr_in addr;
+        addr.sin_family = AF_INET;
+        addr.sin_port = htons(port);
+        inet_pton(AF_INET, target.c_str(), &addr.sin_addr);
+        
+        if (connect(sock, (sockaddr*)&addr, sizeof(addr)) == 0) {
+            open_ports.push_back(port);
+        }
+        
+        closesocket(sock);
+    }
+    
+    return open_ports;
+}
