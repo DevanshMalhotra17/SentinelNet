@@ -1,5 +1,4 @@
-#ifndef NETWORKSCANNER_H
-#define NETWORKSCANNER_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -16,7 +15,6 @@ public:
     std::string getHostname() const;
     std::vector<NetworkInterface> getInterfaces() const;
     
-    std::string scan() const;
+    std::string scan() const;  
+    std::vector<int> scanPorts(const std::string& target, const std::vector<int>& ports) const;
 };
-
-#endif
