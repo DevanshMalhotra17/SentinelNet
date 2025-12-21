@@ -1,3 +1,0 @@
-C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/SentinelNet.dir
-C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/edit_cache.dir
-C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/rebuild_cache.dir
