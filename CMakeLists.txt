@@ -12,6 +12,7 @@ add_executable(SentinelNet
     src/server.cpp
     src/logger.cpp
     src/cli.cpp
+    src/network_utils.cpp
     src/main.cpp
 )
 
