@@ -1,31 +1,14 @@
 #include <iostream>
-#include <vector>
 #include <map>
 #include "scanner.h"
 #include "detection.h"
 #include "simulation.h"
 #include "server.h"
 #include "logger.h"
+#include "cli.h"
 
-int main() {
-    NetworkScanner scanner;
-    DetectionEngine detector;
-    AttackSimulator simulator;
-    APIServer server;
-    logger logger;
-
-    logger.logMessage("SentinelNet started");
-
-    std::cout << "=== SentinelNet Network Scanner ===" << std::endl;
-    std::cout << "\nHostname: " << scanner.getHostname() << "\n";
-    
-    auto interfaces = scanner.getInterfaces();
-    std::cout << "\nNetwork Interfaces:\n";
-    for (const auto& i : interfaces) {
-        std::cout << "  " << i.name << " | IP: " << i.ip << "\n";
-    }
-
-    std::map<int, std::string> port_services = {
+std::map<int, std::string> getPortServices() {
+    return {
         {21, "FTP"},
         {22, "SSH"},
         {23, "Telnet"},
@@ -41,54 +24,75 @@ int main() {
         {5432, "PostgreSQL"},
         {8080, "HTTP Alt"}
     };
+}
 
-    std::cout << "\n=== Port Scan Demo ===" << std::endl;
-    std::cout << "Scanning localhost (127.0.0.1)...\n";
+void displayScanResults(const std::string& target, const std::vector<int>& openPorts) {
+    auto services = getPortServices();
     
-    std::vector<int> common_ports = {21, 22, 23, 25, 80, 135, 139, 443, 445, 1433, 3306, 3389, 5432, 8080};
-    
-    auto open_ports = scanner.scanPorts("127.0.0.1", common_ports);
-    logger.logScanResult("127.0.0.1", open_ports);
-    
-    if (open_ports.empty()) {
-        std::cout << "No open ports found on localhost.\n";
+    if (openPorts.empty()) {
+        std::cout << "No open ports found on " << target << std::endl;
     } else {
-        std::cout << "Open ports found:\n";
-        for (int port : open_ports) {
+        std::cout << "\nOpen ports on " << target << ":" << std::endl;
+        for (int port : openPorts) {
             std::cout << "  Port " << port;
-            if (port_services.count(port)) {
-                std::cout << " (" << port_services[port] << ")";
+            if (services.count(port)) {
+                std::cout << " (" << services[port] << ")";
             }
-            std::cout << " is OPEN\n";
+            std::cout << " is OPEN" << std::endl;
+        }
+        std::cout << "\nTotal: " << openPorts.size() << " open port(s)" << std::endl;
+    }
+}
+
+int main(int argc, char* argv[]) {
+    NetworkScanner scanner;
+    logger log;
+    
+    log.logMessage("SentinelNet started");
+    
+    CLIOptions options = CLIParser::parse(argc, argv);
+    
+    // Show help
+    if (options.showHelp) {
+        CLIParser::printHelp();
+        return 0;
+    }
+    
+    std::cout << "=== SentinelNet Network Scanner ===" << std::endl;
+    std::cout << "Hostname: " << scanner.getHostname() << std::endl;
+    
+    // List interfaces
+    if (options.listInterfaces || options.target.empty()) {
+        auto interfaces = scanner.getInterfaces();
+        std::cout << "\nNetwork Interfaces:" << std::endl;
+        for (const auto& i : interfaces) {
+            std::cout << "  " << i.name << " | IP: " << i.ip << std::endl;
         }
     }
-
-    std::cout << "\nScanning router (10.0.0.1)...\n";
-    auto router_ports = scanner.scanPorts("10.0.0.1", common_ports);
-    logger.logScanResult("10.0.0.1", router_ports);
     
-    if (router_ports.empty()) {
-        std::cout << "No open ports found on router.\n";
-    } else {
-        std::cout << "Router open ports:\n";
-        for (int port : router_ports) {
-            std::cout << "  Port " << port << " is OPEN\n";
-        }
+    // Perform scan if target specified
+    if (!options.target.empty() && !options.ports.empty()) {
+        std::cout << "\nScanning " << options.target << "..." << std::endl;
+        
+        auto openPorts = scanner.scanPorts(options.target, options.ports);
+        log.logScanResult(options.target, openPorts);
+        
+        displayScanResults(options.target, openPorts);
+    }
+    else if (options.target.empty() && !options.showHelp && !options.listInterfaces) {
+        // Default behavior: quick scan localhost
+        std::cout << "\nNo target specified. Running default localhost scan..." << std::endl;
+        std::vector<int> defaultPorts = {21, 22, 23, 25, 80, 135, 139, 443, 445, 3306, 3389, 8080};
+        
+        auto openPorts = scanner.scanPorts("127.0.0.1", defaultPorts);
+        log.logScanResult("127.0.0.1", openPorts);
+        
+        displayScanResults("127.0.0.1", openPorts);
+        
+        std::cout << "\nTip: Use --help to see all available options." << std::endl;
     }
     
-    std::cout << "\n=== Module Status ===" << std::endl;
-    auto scan_result = scanner.scan();
-    std::cout << "Scanner: " << scan_result << std::endl;
-
-    auto detection_result = detector.analyze(scan_result);
-    std::cout << "Detection: " << detection_result << std::endl;
-
-    auto simulation_result = simulator.run();
-    std::cout << "Simulation: " << simulation_result << std::endl;
-
-    server.start();
+    log.logMessage("SentinelNet shutdown");
     
-    logger.logMessage("SentinelNet shutdown");
-
     return 0;
 }
