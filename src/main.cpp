@@ -6,6 +6,7 @@
 #include "server.h"
 #include "logger.h"
 #include "cli.h"
+#include "network_utils.h"
 
 std::map<int, std::string> getPortServices() {
     return {
@@ -44,7 +45,37 @@ void displayScanResults(const std::string& target, const std::vector<int>& openP
     }
 }
 
+void testNetworkUtils() {
+    std::cout << "\n=== Testing Network Utils ===" << std::endl;
+    
+    std::cout << "\nIP Conversion Test:" << std::endl;
+    uint32_t ip = NetworkUtils::ipToInt("10.0.0.87");
+    std::cout << "10.0.0.87 as integer: " << ip << std::endl;
+    std::cout << "Back to IP: " << NetworkUtils::intToIp(ip) << std::endl;
+    
+    std::cout << "\nCIDR Test (10.0.0.0/29 - only 6 IPs):" << std::endl;
+    auto cidr_ips = NetworkUtils::expandCIDR("10.0.0.0/29");
+    std::cout << "Generated " << cidr_ips.size() << " IPs:" << std::endl;
+    for (const auto& ip : cidr_ips) {
+        std::cout << "  " << ip << std::endl;
+    }
+    
+    std::cout << "\nRange Test (10.0.0.1-10.0.0.5):" << std::endl;
+    auto range_ips = NetworkUtils::expandRange("10.0.0.1-10.0.0.5");
+    std::cout << "Generated " << range_ips.size() << " IPs:" << std::endl;
+    for (const auto& ip : range_ips) {
+        std::cout << "  " << ip << std::endl;
+    }
+    
+    std::cout << "\n=== Tests Complete ===" << std::endl;
+}
+
 int main(int argc, char* argv[]) {
+    if (argc > 1 && std::string(argv[1]) == "--testNU") {
+        testNetworkUtils();
+        return 0;
+    }
+    
     NetworkScanner scanner;
     logger log;
     
