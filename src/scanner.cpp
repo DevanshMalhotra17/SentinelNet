@@ -80,3 +80,34 @@ std::vector<int> NetworkScanner::scanPorts(const std::string& target, const std:
     
     return open_ports;
 }
+
+bool NetworkScanner::isHostAlive(const std::string& target, int timeoutMs) const {
+    SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (sock == INVALID_SOCKET) {
+        return false;
+    }
+    
+    DWORD timeout = timeoutMs;
+    setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout));
+    setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&timeout, sizeof(timeout));
+    
+    sockaddr_in addr;
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(80);
+    inet_pton(AF_INET, target.c_str(), &addr.sin_addr);
+    
+    bool alive = (connect(sock, (sockaddr*)&addr, sizeof(addr)) == 0);
+    closesocket(sock);
+    
+    if (!alive) {
+        sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout));
+        setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&timeout, sizeof(timeout));
+        
+        addr.sin_port = htons(445);
+        alive = (connect(sock, (sockaddr*)&addr, sizeof(addr)) == 0);
+        closesocket(sock);
+    }
+    
+    return alive;
+}
