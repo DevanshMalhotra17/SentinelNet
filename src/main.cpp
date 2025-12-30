@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <algorithm>
 #include "scanner.h"
 #include "detection.h"
 #include "simulation.h"
@@ -32,7 +33,8 @@ void displayScanResults(const std::string& target, const std::vector<int>& openP
     
     if (openPorts.empty()) {
         std::cout << "No open ports found on " << target << std::endl;
-    } else {
+    }
+    else {
         std::cout << "\nOpen ports on " << target << ":" << std::endl;
         for (int port : openPorts) {
             std::cout << "  Port " << port;
@@ -70,6 +72,112 @@ void testNetworkUtils() {
     std::cout << "\n=== Tests Complete ===" << std::endl;
 }
 
+void performNetworkDiscovery(NetworkScanner& scanner, logger& log, const CLIOptions& options) {
+    std::cout << "\n=== Network Discovery ===" << std::endl;
+    
+    // Expand the range into individual IPs
+    std::vector<std::string> targets;
+    
+    try {
+        // Check if it's CIDR notation or IP range
+        if (options.discoverRange.find('/') != std::string::npos) {
+            // CIDR notation (e.g., 10.0.0.0/24)
+            std::cout << "Expanding CIDR range: " << options.discoverRange << std::endl;
+            targets = NetworkUtils::expandCIDR(options.discoverRange);
+        }
+        else if (options.discoverRange.find('-') != std::string::npos) {
+            // IP range (e.g., 10.0.0.1-10.0.0.50)
+            std::cout << "Expanding IP range: " << options.discoverRange << std::endl;
+            targets = NetworkUtils::expandRange(options.discoverRange);
+        }
+        else {
+            std::cerr << "Invalid range format. Use CIDR (10.0.0.0/24) or range (10.0.0.1-10.0.0.50)" << std::endl;
+            return;
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error parsing range: " << e.what() << std::endl;
+        return;
+    }
+    
+    std::cout << "Scanning " << targets.size() << " potential hosts..." << std::endl;
+    
+    std::cout << "Checking ARP cache for known devices..." << std::endl;
+    auto arpHosts = scanner.getArpHosts();
+    std::vector<std::string> liveHosts;
+    
+    if (!arpHosts.empty()) {
+        std::cout << "Found " << arpHosts.size() << " device(s) in ARP cache:" << std::endl;
+        
+        // Filter ARP hosts to only include those in our target range
+        for (const auto& arpHost : arpHosts) {
+            if (std::find(targets.begin(), targets.end(), arpHost) != targets.end()) {
+                liveHosts.push_back(arpHost);
+                std::cout << "  [ARP] " << arpHost << std::endl;
+            }
+        }
+    }
+    
+    // Second pass: Ping remaining hosts not found in ARP
+    std::cout << "\nPinging remaining hosts..." << std::endl;
+    int checked = 0;
+    int remaining = 0;
+    
+    for (const auto& ip : targets) {
+        // Skip if already found in ARP cache
+        if (std::find(liveHosts.begin(), liveHosts.end(), ip) != liveHosts.end()) {
+            continue;
+        }
+        
+        remaining++;
+        checked++;
+        
+        if (checked % 10 == 0) {
+            std::cout << "Progress: " << checked << " hosts pinged..." << std::endl;
+        }
+        
+        if (scanner.isHostAlive(ip, 200)) {
+            liveHosts.push_back(ip);
+            std::cout << "  [PING] " << ip << std::endl;
+        }
+    }
+    
+    std::cout << "\nDiscovery complete: Found " << liveHosts.size() << " live host(s)" << std::endl;
+    log.logMessage("Network discovery: " + std::to_string(liveHosts.size()) + " live hosts found in range " + options.discoverRange);
+    
+    // Third pass: Scan live hosts if ports specified
+    if (!options.ports.empty() && !liveHosts.empty()) {
+        auto services = getPortServices();
+        
+        std::cout << "\n=== Scanning Live Hosts ===" << std::endl;
+        for (const auto& host : liveHosts) {
+            std::cout << "\nScanning " << host << "..." << std::endl;
+            auto openPorts = scanner.scanPorts(host, options.ports);
+            log.logScanResult(host, openPorts);
+            
+            if (openPorts.empty()) {
+                std::cout << "  No open ports found" << std::endl;
+            }
+            else {
+                for (int port : openPorts) {
+                    std::cout << "  Port " << port;
+                    if (services.count(port)) {
+                        std::cout << " (" << services[port] << ")";
+                    }
+                    std::cout << " is OPEN" << std::endl;
+                }
+            }
+        }
+    }
+    else if (liveHosts.empty()) {
+        std::cout << "\nNo live hosts found in range." << std::endl;
+    }
+    else {
+        std::cout << "\nTip: Add --quick or --ports to scan the discovered hosts." << std::endl;
+    }
+}
+
+
 int main(int argc, char* argv[]) {
     if (argc > 1 && std::string(argv[1]) == "--testNU") {
         testNetworkUtils();
@@ -99,6 +207,12 @@ int main(int argc, char* argv[]) {
         for (const auto& i : interfaces) {
             std::cout << "  " << i.name << " | IP: " << i.ip << std::endl;
         }
+    }
+
+    if (options.discover && !options.discoverRange.empty()) {
+        performNetworkDiscovery(scanner, log, options);
+        log.logMessage("SentinelNet shutdown");
+        return 0;
     }
     
     // Perform scan if target specified
