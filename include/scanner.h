@@ -20,4 +20,6 @@ public:
     std::vector<int> scanPorts(const std::string& target, const std::vector<int>& ports) const;
     
     bool isHostAlive(const std::string& target, int timeoutMs = 500) const;
+    
+    std::vector<std::string> getArpHosts() const;
 };
