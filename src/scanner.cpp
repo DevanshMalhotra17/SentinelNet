@@ -2,6 +2,9 @@
 #include <winsock2.h>
 #include <iphlpapi.h>
 #include <ws2tcpip.h>
+#include <cstdio>
+#include <array>
+#include <algorithm>
 
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -50,8 +53,8 @@ std::vector<NetworkInterface> NetworkScanner::getInterfaces() const {
 }
 
 std::string NetworkScanner::scan() const {
-       return "Network scan running (placeholder)";
-   }
+    return "Network scan running (placeholder)";
+}
 
 std::vector<int> NetworkScanner::scanPorts(const std::string& target, const std::vector<int>& ports) const {
     std::vector<int> open_ports;
@@ -82,32 +85,42 @@ std::vector<int> NetworkScanner::scanPorts(const std::string& target, const std:
 }
 
 bool NetworkScanner::isHostAlive(const std::string& target, int timeoutMs) const {
-    SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (sock == INVALID_SOCKET) {
-        return false;
-    }
+    std::string command = "ping -n 1 -w " + std::to_string(timeoutMs) + " " + target + " >nul 2>&1";
+    int result = system(command.c_str());
+    return (result == 0);
+}
+
+std::vector<std::string> NetworkScanner::getArpHosts() const {
+    std::vector<std::string> hosts;
+    std::array<char, 256> buffer;
     
-    DWORD timeout = timeoutMs;
-    setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout));
-    setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&timeout, sizeof(timeout));
+    // Run arp -a command
+    FILE* pipe = _popen("arp -a", "r");
+    if (!pipe) return hosts;
     
-    sockaddr_in addr;
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(80);
-    inet_pton(AF_INET, target.c_str(), &addr.sin_addr);
-    
-    bool alive = (connect(sock, (sockaddr*)&addr, sizeof(addr)) == 0);
-    closesocket(sock);
-    
-    if (!alive) {
-        sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-        setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout));
-        setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&timeout, sizeof(timeout));
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+        std::string line = buffer.data();
         
-        addr.sin_port = htons(445);
-        alive = (connect(sock, (sockaddr*)&addr, sizeof(addr)) == 0);
-        closesocket(sock);
+        if (line.find("Interface:") != std::string::npos || 
+            line.find("Internet Address") != std::string::npos ||
+            line.find("---") != std::string::npos) {
+            continue;
+        }
+        
+        size_t start = line.find_first_not_of(" \t");
+        if (start != std::string::npos) {
+            size_t end = line.find_first_of(" \t", start);
+            if (end != std::string::npos) {
+                std::string ip = line.substr(start, end - start);
+                
+                // Check if it's a valid IP format (has 3 dots)
+                if (std::count(ip.begin(), ip.end(), '.') == 3) {
+                    hosts.push_back(ip);
+                }
+            }
+        }
     }
     
-    return alive;
+    _pclose(pipe);
+    return hosts;
 }
