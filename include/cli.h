@@ -10,6 +10,8 @@ struct CLIOptions {
     bool fullScan = false;
     bool showHelp = false;
     bool listInterfaces = false;
+    bool discover = false;
+    std::string discoverRange = "";
 };
 
 class CLIParser {

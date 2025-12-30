@@ -1,4 +1,4 @@
-#include "cli.h"
+#include "../include/cli.h"
 #include <iostream>
 #include <sstream>
 #include <algorithm>
@@ -38,6 +38,12 @@ CLIOptions CLIParser::parse(int argc, char* argv[]) {
         else if (arg == "--list-interfaces" || arg == "-l") {
             options.listInterfaces = true;
         }
+        else if (arg == "--discover" || arg == "-d") {
+            options.discover = true;
+            if (i + 1 < argc) {
+                options.discoverRange = argv[++i];
+            }
+        }
     }
     
     return options;
@@ -72,10 +78,13 @@ void CLIParser::printHelp() {
     std::cout << "  -p, --ports <ports>     Comma-separated ports (e.g., 80,443,8080)" << std::endl;
     std::cout << "  -q, --quick             Quick scan (common ports only)" << std::endl;
     std::cout << "  -f, --full              Full scan (ports 1-1024)" << std::endl;
+    std::cout << "  -d, --discover <range>  Discover devices (CIDR or range)" << std::endl;
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  SentinelNet --list-interfaces" << std::endl;
     std::cout << "  SentinelNet --target 127.0.0.1 --quick" << std::endl;
     std::cout << "  SentinelNet --target 10.0.0.1 --ports 80,443,8080" << std::endl;
     std::cout << "  SentinelNet --target localhost --full" << std::endl;
+    std::cout << "  SentinelNet --discover 10.0.0.0/24 --quick" << std::endl;
+    std::cout << "  SentinelNet --discover 192.168.1.1-192.168.1.50 --ports 80,443" << std::endl;
     std::cout << "\nIf no options provided, runs default localhost quick scan.\n" << std::endl;
 }
