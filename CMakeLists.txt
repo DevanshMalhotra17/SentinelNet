@@ -3,6 +3,10 @@ project(SentinelNet)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(NPCAP_SDK "C:/npcap-sdk")
+include_directories(${NPCAP_SDK}/Include)
+link_directories(${NPCAP_SDK}/Lib/x64)
+
 include_directories(include)
 
 add_executable(SentinelNet
@@ -14,12 +18,7 @@ add_executable(SentinelNet
     src/cli.cpp
     src/network_utils.cpp
     src/main.cpp
+    src/packet_monitor.cpp
 )
 
-if(WIN32)
-    target_link_libraries(SentinelNet 
-        ws2_32
-        iphlpapi
-    )
-
-endif()
+target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet)
