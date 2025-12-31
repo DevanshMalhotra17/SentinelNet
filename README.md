@@ -1,6 +1,6 @@
 # SentinelNet
 
-SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic, detects rogue access points, flags suspicious activity, and simulates controlled cyber-attacks in a home lab environment.
+SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic, detects rogue access points, and flags suspicious activity in a home lab environment.
 
 ## Requirements (as of now)
 - Windows 10/11
