@@ -8,6 +8,7 @@
 #include "logger.h"
 #include "cli.h"
 #include "network_utils.h"
+#include "detection.h"
 
 std::map<int, std::string> getPortServices() {
     return {
@@ -148,8 +149,12 @@ void performNetworkDiscovery(NetworkScanner& scanner, logger& log, const CLIOpti
     // Third pass: Scan live hosts if ports specified
     if (!options.ports.empty() && !liveHosts.empty()) {
         auto services = getPortServices();
+        SecurityDetection detector;
         
         std::cout << "\n=== Scanning Live Hosts ===" << std::endl;
+        
+        int totalAlerts = 0;
+        
         for (const auto& host : liveHosts) {
             std::cout << "\nScanning " << host << "..." << std::endl;
             auto openPorts = scanner.scanPorts(host, options.ports);
@@ -157,8 +162,8 @@ void performNetworkDiscovery(NetworkScanner& scanner, logger& log, const CLIOpti
             
             if (openPorts.empty()) {
                 std::cout << "  No open ports found" << std::endl;
-            }
-            else {
+            } else {
+                // Displays open ports
                 for (int port : openPorts) {
                     std::cout << "  Port " << port;
                     if (services.count(port)) {
@@ -166,12 +171,43 @@ void performNetworkDiscovery(NetworkScanner& scanner, logger& log, const CLIOpti
                     }
                     std::cout << " is OPEN" << std::endl;
                 }
+                
+                auto alerts = detector.analyzeOpenPorts(host, openPorts);
+                if (!alerts.empty()) {
+                    std::cout << "\n  SECURITY ALERTS:" << std::endl;
+                    for (const auto& alert : alerts) {
+                        std::string color = SecurityDetection::getThreatColor(alert.level);
+                        std::string reset = "\033[0m";
+                        
+                        std::cout << "  " << color << "[" 
+                                  << SecurityDetection::threatLevelToString(alert.level) 
+                                  << "]" << reset << " Port " << alert.port 
+                                  << " - " << alert.message << std::endl;
+                        std::cout << "      " << alert.recommendation << std::endl;
+                        
+                        totalAlerts++;
+                        
+                        // Logs to file
+                        log.logMessage("SECURITY ALERT [" + 
+                                     SecurityDetection::threatLevelToString(alert.level) + 
+                                     "] " + host + ":" + std::to_string(alert.port) + 
+                                     " - " + alert.message);
+                    }
+                }
             }
         }
+        
+        if (totalAlerts > 0) {
+            std::cout << "\nSecurity Summary: Found " << totalAlerts 
+                      << " potential security issue(s)" << std::endl;
+            std::cout << "Check sentinelnet.log for details" << std::endl;
+        }
     }
+    
     else if (liveHosts.empty()) {
         std::cout << "\nNo live hosts found in range." << std::endl;
     }
+    
     else {
         std::cout << "\nTip: Add --quick or --ports to scan the discovered hosts." << std::endl;
     }
