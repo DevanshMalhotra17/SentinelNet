@@ -9,6 +9,7 @@
 #include "cli.h"
 #include "network_utils.h"
 #include "detection.h"
+#include "packet_monitor.h"
 
 std::map<int, std::string> getPortServices() {
     return {
@@ -243,6 +244,30 @@ int main(int argc, char* argv[]) {
         for (const auto& i : interfaces) {
             std::cout << "  " << i.name << " | IP: " << i.ip << std::endl;
         }
+    }
+
+    // List packet capture interfaces
+    if (options.listCaptureInterfaces) {
+        std::cout << "\n=== Available Packet Capture Interfaces ===" << std::endl;
+        
+        PacketMonitor monitor;
+        auto captureInterfaces = monitor.listInterfaces();
+        
+        if (captureInterfaces.empty()) {
+            std::cout << "No capture interfaces found!" << std::endl;
+            std::cout << "\nTroubleshooting:" << std::endl;
+            std::cout << "1. Install Npcap: https://npcap.com" << std::endl;
+            std::cout << "2. During installation, check 'WinPcap API-compatible Mode'" << std::endl;
+            std::cout << "3. Restart your computer after installation" << std::endl;
+        } else {
+            std::cout << "Found " << captureInterfaces.size() << " interface(s):\n" << std::endl;
+            for (const auto& iface : captureInterfaces) {
+                std::cout << "  " << iface << std::endl;
+            }
+            std::cout << "\nUse the index number [0, 1, 2...] with --monitor" << std::endl;
+        }
+        
+        return 0;
     }
 
     if (options.discover && !options.discoverRange.empty()) {
