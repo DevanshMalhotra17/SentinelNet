@@ -12,7 +12,6 @@ include_directories(include)
 add_executable(SentinelNet
     src/scanner.cpp
     src/detection.cpp
-    src/simulation.cpp
     src/server.cpp
     src/logger.cpp
     src/cli.cpp

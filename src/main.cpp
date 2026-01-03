@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "scanner.h"
 #include "detection.h"
-#include "simulation.h"
 #include "server.h"
 #include "logger.h"
 #include "cli.h"
@@ -248,25 +247,16 @@ int main(int argc, char* argv[]) {
 
     // List packet capture interfaces
     if (options.listCaptureInterfaces) {
-        std::cout << "\n=== Available Packet Capture Interfaces ===" << std::endl;
-        
-        PacketMonitor monitor;
-        auto captureInterfaces = monitor.listInterfaces();
-        
-        if (captureInterfaces.empty()) {
-            std::cout << "No capture interfaces found!" << std::endl;
-            std::cout << "\nTroubleshooting:" << std::endl;
-            std::cout << "1. Install Npcap: https://npcap.com" << std::endl;
-            std::cout << "2. During installation, check 'WinPcap API-compatible Mode'" << std::endl;
-            std::cout << "3. Restart your computer after installation" << std::endl;
-        } else {
-            std::cout << "Found " << captureInterfaces.size() << " interface(s):\n" << std::endl;
-            for (const auto& iface : captureInterfaces) {
-                std::cout << "  " << iface << std::endl;
-            }
-            std::cout << "\nUse the index number [0, 1, 2...] with --monitor" << std::endl;
-        }
-        
+        // ... existing code ...
+        return 0;
+    }
+
+    // NEW: Start web dashboard
+    if (options.startDashboard) {
+        std::cout << "\n=== Starting Web Dashboard ===" << std::endl;
+        APIServer server(options.dashboardPort);
+        log.logMessage("Web dashboard started on port " + std::to_string(options.dashboardPort));
+        server.start();
         return 0;
     }
 

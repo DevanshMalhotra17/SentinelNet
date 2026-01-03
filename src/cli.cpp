@@ -53,6 +53,19 @@ CLIOptions CLIParser::parse(int argc, char* argv[]) {
         else if (arg == "--list-capture" || arg == "-lc") {
             options.listCaptureInterfaces = true;
         }
+        else if (arg == "--dashboard" || arg == "-D") {
+        options.startDashboard = true;
+        if (i + 1 < argc) {
+        std::string nextArg = argv[i + 1];
+        if (!nextArg.empty() && isdigit(nextArg[0])) {
+            try {
+                options.dashboardPort = std::stoi(nextArg);
+                i++;
+            } catch (...) {
+            }
+        }
+    }
+}
     }
     
     return options;
@@ -91,6 +104,7 @@ void CLIParser::printHelp() {
     std::cout << "  -d, --discover <range>  Discover devices (CIDR or range)" << std::endl;
     std::cout << "  -r, --detect-rogue      Detect unknown/rogue devices" << std::endl;
     std::cout << "  --trust                 Trust mode (add unknown devices as known)" << std::endl;
+    std::cout << "  -D, --dashboard [port]  Start web dashboard (default: 8080)" << std::endl;
     std::cout << "\nExamples:" << std::endl;
     std::cout << "  SentinelNet --list-interfaces" << std::endl;
     std::cout << "  SentinelNet --list-capture" << std::endl;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SentinelNet Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SentinelNet Network Dashboard</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="total-scans">0</div>
+                <div class="stat-label">Total Scans</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="unique-hosts">0</div>
+                <div class="stat-label">Unique Hosts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="open-ports">0</div>
+                <div class="stat-label">Open Ports Found</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value status-indicator"></div>
+                <div class="stat-label">Status: Online</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-primary" onclick="triggerScan()">Start Network Scan</button>
+            <button class="btn btn-secondary" onclick="refreshData()">Refresh</button>
+        </div>
+        
+        <div class="scan-list">
+            <h2>Recent Scans</h2>
+            <div id="scan-list">
+                <p class="empty-state">No scans yet. Click "Start Network Scan" to begin.</p>
+            </div>
+        </div>
+        
+        <div class="alerts-section">
+            <h2>Security Alerts</h2>
+            <div id="alerts-list">
+                <p class="empty-state">No security alerts.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
