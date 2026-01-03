@@ -3,6 +3,13 @@
 
 class APIServer {
 public:
-    APIServer();
+    APIServer(int port = 8080);
+    ~APIServer();
+    
     void start();
+    void stop();
+
+private:
+    int serverPort;
+    bool isRunning;
 };

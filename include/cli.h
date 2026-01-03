@@ -15,6 +15,8 @@ struct CLIOptions {
     bool detectRogue = false;
     bool trustMode = false;
     bool listCaptureInterfaces = false;
+    bool startDashboard = false;
+    int dashboardPort = 8080;
 };
 
 class CLIParser {
