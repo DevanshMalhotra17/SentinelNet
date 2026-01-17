@@ -1,6 +1,6 @@
 let scanData = [];
 let alertData = [];
-let isScanning = false;
+let detectedNetwork = { gateway: '192.168.1.1', subnet: '192.168.1.0/24', base: '192.168.1' };
 
 const PORT_PRESETS = {
     common: [21, 22, 23, 25, 80, 135, 139, 443, 445, 3306, 3389, 8080],
@@ -8,228 +8,323 @@ const PORT_PRESETS = {
     full: Array.from({ length: 1024 }, (_, i) => i + 1)
 };
 
-
-function refreshData() {
-    fetch('/api/scans')
-        .then(r => r.json())
+// Detect the most likely network from available interfaces
+function detectNetwork() {
+    fetch('/api/network-info')
+        .then(response => response.json())
         .then(data => {
-            scanData = Array.isArray(data.scans) ? data.scans : [];
-            updateDashboard();
+            if (data.gateway && data.network) {
+                const parts = data.gateway.split('.');
+                detectedNetwork.gateway = data.gateway;
+                detectedNetwork.subnet = data.network;
+                detectedNetwork.base = parts.slice(0, 3).join('.');
+                console.log('Network detected:', detectedNetwork);
+            }
         })
-        .catch(err => console.error('Scan fetch error:', err));
-
-    fetch('/api/alerts')
-        .then(r => r.json())
-        .then(data => {
-            alertData = Array.isArray(data.alerts) ? data.alerts : [];
-            updateAlerts();
-        })
-        .catch(err => console.error('Alert fetch error:', err));
+        .catch(error => {
+            console.log('Using default network settings');
+        });
 }
 
+// Get friendly name for IP
+function getFriendlyName(ip) {
+    if (ip === '127.0.0.1') return 'Your Computer (Localhost)';
+    if (ip === detectedNetwork.gateway) return 'Router (' + ip + ')';
+    if (ip.endsWith('.1')) return 'Router (' + ip + ')';
+    if (ip.startsWith(detectedNetwork.base + '.')) return 'Local Device (' + ip + ')';
+    if (ip.startsWith('192.168.')) return 'Local Device (' + ip + ')';
+    if (ip.startsWith('10.0.')) return 'Local Device (' + ip + ')';
+    return ip;
+}
+
+// Check if two scans are duplicates (same IP, same ports, within 5 minutes)
+function isDuplicateScan(newScan, existingScan) {
+    // Must be same IP
+    if (newScan.ip !== existingScan.ip) return false;
+
+    // Must have same ports
+    if (newScan.ports.length !== existingScan.ports.length) return false;
+    const sortedNew = [...newScan.ports].sort((a, b) => a - b);
+    const sortedExisting = [...existingScan.ports].sort((a, b) => a - b);
+    if (!sortedNew.every((port, i) => port === sortedExisting[i])) return false;
+
+    // Must be within 5 minutes
+    const newTime = new Date(newScan.timestamp).getTime();
+    const existingTime = new Date(existingScan.timestamp).getTime();
+    const fiveMinutes = 5 * 60 * 1000;
+
+    return (newTime - existingTime) < fiveMinutes;
+}
+
+// Remove duplicate scans
+function removeDuplicates(scans) {
+    const cleaned = [];
+
+    for (let i = scans.length - 1; i >= 0; i--) {
+        const current = scans[i];
+        let isDupe = false;
+
+        // Check if this is a duplicate of any scan we've already added
+        for (const kept of cleaned) {
+            if (isDuplicateScan(current, kept)) {
+                isDupe = true;
+                break;
+            }
+        }
+
+        if (!isDupe) {
+            cleaned.push(current);
+        }
+    }
+
+    return cleaned.reverse();
+}
+
+window.onload = function () {
+    console.log('Dashboard ready!');
+    detectNetwork();
+    refreshData();
+};
+
+function refreshData() {
+    console.log('Loading scan results...');
+
+    fetch('/api/scans')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Scans loaded:', data.scans?.length || 0);
+            scanData = removeDuplicates(data.scans || []);
+            updateDashboard();
+        })
+        .catch(error => {
+            console.error('Error loading scans:', error);
+        });
+
+    fetch('/api/alerts')
+        .then(response => response.json())
+        .then(data => {
+            alertData = data.alerts || [];
+            updateAlerts();
+        })
+        .catch(error => {
+            console.error('Error loading alerts:', error);
+        });
+}
 
 function updateDashboard() {
-    const totalScansEl = document.getElementById('total-scans');
-    const uniqueHostsEl = document.getElementById('unique-hosts');
-    const openPortsEl = document.getElementById('open-ports');
-    const scanList = document.getElementById('scan-list');
+    document.getElementById('total-scans').textContent = scanData.length;
 
-    if (!scanList) return;
-
-    totalScansEl && (totalScansEl.textContent = scanData.length);
-
-    const latestByIp = new Map();
-    scanData.forEach(scan => {
-        if (scan && scan.ip) latestByIp.set(scan.ip, scan);
-    });
-
-    uniqueHostsEl && (uniqueHostsEl.textContent = latestByIp.size);
+    const uniqueIPs = new Set(scanData.map(s => s.ip));
+    document.getElementById('unique-hosts').textContent = uniqueIPs.size;
 
     let totalPorts = 0;
-    latestByIp.forEach(scan => {
-        const ports = Array.isArray(scan.ports) ? scan.ports : [];
-        totalPorts += ports.length;
+    scanData.forEach(scan => {
+        totalPorts += scan.ports.length;
     });
+    document.getElementById('open-ports').textContent = totalPorts;
 
-    openPortsEl && (openPortsEl.textContent = totalPorts);
+    let scanList = document.getElementById('scan-list');
 
     if (scanData.length === 0) {
-        scanList.innerHTML = '<p class="empty-state">No scans yet.</p>';
+        scanList.innerHTML = '<p class="empty-state">No scans yet. Click a button above to start scanning.</p>';
         return;
     }
 
     scanList.innerHTML = '';
-    const recentScans = [...scanData].reverse().slice(0, 20);
+    let recentScans = [...scanData].reverse().slice(0, 20);
 
     recentScans.forEach(scan => {
-        const ports = Array.isArray(scan.ports) ? scan.ports : [];
-
-        const item = document.createElement('div');
+        let item = document.createElement('div');
         item.className = 'scan-item';
 
-        const header = document.createElement('div');
+        let header = document.createElement('div');
         header.className = 'scan-header';
 
-        header.innerHTML = `
-            <span class="scan-ip">${scan.ip || 'Unknown'}</span>
-            <span class="scan-time">${scan.timestamp || 'Unknown'}</span>
-        `;
+        let ip = document.createElement('span');
+        ip.className = 'scan-ip';
+        ip.textContent = getFriendlyName(scan.ip);
 
-        const portsDiv = document.createElement('div');
-        portsDiv.className = 'scan-ports';
+        let time = document.createElement('span');
+        time.className = 'scan-time';
+        time.textContent = scan.timestamp || 'Unknown';
 
-        if (ports.length === 0) {
-            portsDiv.innerHTML = '<span style="color:#8b949e;">No open ports</span>';
+        header.appendChild(ip);
+        header.appendChild(time);
+
+        let ports = document.createElement('div');
+        ports.className = 'scan-ports';
+
+        if (scan.ports.length === 0) {
+            ports.innerHTML = '<span style="color: #8b949e;">No open ports found</span>';
         } else {
-            ports.forEach(p => {
-                const badge = document.createElement('span');
+            scan.ports.forEach(port => {
+                let badge = document.createElement('span');
                 badge.className = 'port-badge';
-                badge.textContent = `Port ${p}`;
-                portsDiv.appendChild(badge);
+                badge.textContent = `Port ${port}`;
+                ports.appendChild(badge);
             });
         }
 
         item.appendChild(header);
-        item.appendChild(portsDiv);
+        item.appendChild(ports);
         scanList.appendChild(item);
     });
 }
 
-
 function updateAlerts() {
-    const alertsList = document.getElementById('alerts-list');
-    if (!alertsList) return;
+    let alertsList = document.getElementById('alerts-list');
 
     if (alertData.length === 0) {
-        alertsList.innerHTML = '<p class="empty-state">No security alerts.</p>';
+        alertsList.innerHTML = '<p class="empty-state">No security alerts detected.</p>';
         return;
     }
 
-    const seen = new Set();
-    alertsList.innerHTML = '';
+    const uniqueAlerts = new Set();
+    const uniqueAlertData = [];
 
     alertData.forEach(alert => {
-        const key = `${alert.ip}-${alert.port}-${alert.level}-${alert.message}`;
-        if (seen.has(key)) return;
-        seen.add(key);
+        const key = `${alert.ip}:${alert.port}:${alert.level}:${alert.message}`;
+        if (!uniqueAlerts.has(key)) {
+            uniqueAlerts.add(key);
+            uniqueAlertData.push(alert);
+        }
+    });
 
-        const item = document.createElement('div');
-        item.className = `alert-item alert-${alert.level?.toLowerCase() || 'info'}`;
+    alertsList.innerHTML = '';
 
-        item.innerHTML = `
-            <div class="alert-header">[${alert.level}] ${alert.ip}:${alert.port}</div>
-            <div class="alert-message">${alert.message}</div>
-        `;
+    uniqueAlertData.forEach(alert => {
+        let item = document.createElement('div');
+        item.className = `alert-item alert-${alert.level.toLowerCase()}`;
 
+        let header = document.createElement('div');
+        header.className = 'alert-header';
+        header.textContent = `[${alert.level}] ${getFriendlyName(alert.ip)} - Port ${alert.port}`;
+
+        let message = document.createElement('div');
+        message.className = 'alert-message';
+        message.textContent = alert.message;
+
+        item.appendChild(header);
+        item.appendChild(message);
         alertsList.appendChild(item);
     });
 }
 
-
 function showNotification(message, type = 'info') {
-    const note = document.createElement('div');
-    note.className = `notification notification-${type}`;
-    note.textContent = message;
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
 
-    document.body.appendChild(note);
-    setTimeout(() => note.classList.add('show'), 10);
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add('show'), 10);
 
     setTimeout(() => {
-        note.classList.remove('show');
-        setTimeout(() => note.remove(), 300);
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-
 function quickScan(target, preset = 'common') {
-    if (isScanning) return showNotification('Scan already running', 'warning');
+    let targetIP;
+    let ports = PORT_PRESETS[preset] || PORT_PRESETS.common;
 
-    const ports = PORT_PRESETS[preset] || PORT_PRESETS.common;
-
-    const targets = {
-        localhost: '127.0.0.1',
-        router: '192.168.1.1',
-        network: '192.168.1.0/24'
-    };
-
-    if (target === 'network') {
-        showNotification('Network scan started (this may take time)', 'info');
+    if (target === 'localhost') {
+        targetIP = '127.0.0.1';
+    }
+    else if (target === 'router') {
+        targetIP = detectedNetwork.gateway;
+    }
+    else if (target === 'network') {
+        targetIP = detectedNetwork.subnet;
+        showNotification('Network scan will take a few minutes...', 'info');
+    }
+    else {
+        targetIP = target;
     }
 
-    triggerScan(targets[target] || target, ports);
+    triggerScan(targetIP, ports);
 }
 
 function customScan() {
-    if (isScanning) return showNotification('Scan already running', 'warning');
+    const targetIP = document.getElementById('target-ip').value.trim();
+    const portsInput = document.getElementById('target-ports').value.trim();
 
-    const ip = document.getElementById('target-ip')?.value.trim();
-    const portsRaw = document.getElementById('target-ports')?.value.trim();
-
-    if (!ip) return showNotification('Target IP required', 'error');
-
-    let ports = PORT_PRESETS.common;
-    if (portsRaw) {
-        ports = portsRaw
-            .split(',')
-            .map(p => parseInt(p.trim()))
-            .filter(p => p > 0 && p <= 65535);
-
-        if (!ports.length) return showNotification('Invalid ports', 'error');
+    if (!targetIP) {
+        showNotification('Please enter a target address', 'error');
+        return;
     }
 
-    triggerScan(ip, ports);
+    let ports;
+    if (portsInput) {
+        ports = portsInput.split(',').map(p => parseInt(p.trim())).filter(p => p > 0 && p <= 65535);
+        if (ports.length === 0) {
+            showNotification('Please enter valid port numbers', 'error');
+            return;
+        }
+    }
+    else {
+        ports = PORT_PRESETS.common;
+    }
+
+    triggerScan(targetIP, ports);
 }
 
 function triggerScan(target, ports) {
-    if (isScanning) return;
+    console.log('Starting scan:', target);
 
-    isScanning = true;
-    toggleScanButtons(true);
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+    });
 
-    showNotification(`Scan started for ${target}`, 'info');
+    showNotification(`Scanning ${getFriendlyName(target)}...`, 'info');
+
+    const payload = JSON.stringify({ target: target, ports: ports });
 
     fetch('/api/scan/trigger', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ target, ports })
+        body: payload
     })
-    .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-    })
-    .then(() => {
-        showNotification('Scan finished', 'success');
-        refreshData();
-    })
-    .finally(() => {
-        isScanning = false;
-        toggleScanButtons(false);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Scan finished');
+            showNotification('Scan complete!', 'success');
+            setTimeout(refreshData, 1500);
+        })
+        .catch(error => {
+            console.error('Scan error:', error);
+            showNotification('Scan failed: ' + error.message, 'error');
+        })
+        .finally(() => {
+            setTimeout(() => {
+                allButtons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                });
+            }, 2000);
+        });
 }
-
-function toggleScanButtons(disabled) {
-    document.querySelectorAll('.scan-button').forEach(btn => {
-        btn.disabled = disabled;
-        btn.style.opacity = disabled ? '0.6' : '1';
-        btn.style.cursor = disabled ? 'not-allowed' : 'pointer';
-    });
-}
-
 
 function clearData() {
-    if (!confirm('Clear all scan data?')) return;
+    if (!confirm('Are you sure you want to clear all scan history?')) {
+        return;
+    }
 
     fetch('/api/clear', { method: 'POST' })
-        .then(() => {
+        .then(response => response.json())
+        .then(data => {
+            showNotification('History cleared', 'success');
             scanData = [];
             alertData = [];
             updateDashboard();
             updateAlerts();
-            showNotification('Data cleared', 'success');
         })
-        .catch(() => showNotification('Clear failed', 'error'));
+        .catch(error => {
+            console.error('Clear error:', error);
+            showNotification('Failed to clear history', 'error');
+        });
 }
 
-
 setInterval(refreshData, 10000);
-window.onload = refreshData;
