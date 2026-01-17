@@ -11,7 +11,6 @@ SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic
 ## Modules
 - scanner: packet capture & metadata extraction
 - detection: anomaly scoring & signature engine
-- simulation: local-only attack simulation framework
 - server: lightweight HTTP interface for dashboard integration
 
 ## Build
