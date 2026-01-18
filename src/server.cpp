@@ -1,5 +1,6 @@
 #include "server.h"
 #include "scanner.h"
+#include <algorithm>
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -239,8 +240,28 @@ void APIServer::start() {
     std::cout << "[REQUEST] " << request.substr(0, request.find("\r\n")) << " ("
               << request.length() << " bytes)" << std::endl;
 
-    if (request.find("GET / ") != std::string::npos ||
-        request.find("GET /dashboard.html") != std::string::npos) {
+    if (request.find("GET /hack.js") != std::string::npos) {
+      std::string js = readFile("hack.js");
+      if (js.empty())
+        js = readFile("../web/hack.js");
+      if (js.empty()) {
+        response = "HTTP/1.1 404 Not Found\r\n\r\n404 - hack.js not found";
+      } else {
+        response =
+            "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" +
+            js;
+      }
+    } else if (request.find("GET /hack") != std::string::npos) {
+      std::string html = readFile("hack.html");
+      if (html.empty())
+        html = readFile("../web/hack.html");
+      if (html.empty()) {
+        response = "HTTP/1.1 404 Not Found\r\n\r\n404 - Hack page not found";
+      } else {
+        response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
+      }
+    } else if (request.find("GET / ") != std::string::npos ||
+               request.find("GET /dashboard.html") != std::string::npos) {
       std::string html = readFile("index.html");
       if (html.empty())
         html = readFile("dashboard.html");
@@ -266,6 +287,17 @@ void APIServer::start() {
       response =
           "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" +
           js;
+    } else if (request.find("GET /hack1.js") != std::string::npos) {
+      std::string js = readFile("hack1.js");
+      if (js.empty())
+        js = readFile("../web/hack1.js");
+      if (js.empty()) {
+        response = "HTTP/1.1 404 Not Found\r\n\r\n404 - hack1.js not found";
+      } else {
+        response =
+            "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" +
+            js;
+      }
     } else if (request.find("GET /api/scans") != std::string::npos) {
       std::string json = buildScansJSON();
       response = "HTTP/1.1 200 OK\r\nContent-Type: "
@@ -275,6 +307,22 @@ void APIServer::start() {
       response = "HTTP/1.1 200 OK\r\nContent-Type: "
                  "application/json\r\nAccess-Control-Allow-Origin: "
                  "*\r\n\r\n{\"alerts\":[]}";
+    } else if (request.find("GET /api/discover") != std::string::npos) {
+      std::cout << "[API] Network discovery requested" << std::endl;
+      NetworkScanner scanner;
+      auto hosts = scanner.getArpHosts();
+
+      std::string json = "{\"hosts\":[";
+      for (size_t i = 0; i < hosts.size(); i++) {
+        json += "\"" + hosts[i] + "\"";
+        if (i < hosts.size() - 1)
+          json += ",";
+      }
+      json += "]}";
+
+      response = "HTTP/1.1 200 OK\r\nContent-Type: "
+                 "application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n" +
+                 json;
     } else if (request.find("GET /api/network-info") != std::string::npos) {
       std::string json = "{\"gateway\":\"" + networkConfig.gateway +
                          "\",\"network\":\"" + networkConfig.subnet + "\"}";
@@ -351,6 +399,58 @@ void APIServer::start() {
       response = "HTTP/1.1 200 OK\r\nContent-Type: "
                  "application/json\r\nAccess-Control-Allow-Origin: "
                  "*\r\n\r\n{\"status\":\"success\"}";
+    } else if (request.find("POST /api/audit/fingerprint") !=
+               std::string::npos) {
+      std::cout << "[API] Audit fingerprinting requested" << std::endl;
+
+      size_t bodyStart = request.find("\r\n\r\n");
+      std::string target = "127.0.0.1";
+      int port = 80;
+
+      if (bodyStart != std::string::npos) {
+        std::string body = request.substr(bodyStart + 4);
+
+        size_t targetPos = body.find("\"target\"");
+        if (targetPos != std::string::npos) {
+          size_t start = body.find("\"", targetPos + 8);
+          size_t end = body.find("\"", start + 1);
+          if (start != std::string::npos && end != std::string::npos) {
+            target = body.substr(start + 1, end - start - 1);
+          }
+        }
+
+        size_t portPos = body.find("\"port\"");
+        if (portPos != std::string::npos) {
+          size_t start = body.find(":", portPos + 5);
+          size_t end = body.find_first_of(",}", start + 1);
+          if (start != std::string::npos && end != std::string::npos) {
+            port = std::stoi(body.substr(start + 1, end - start - 1));
+          }
+        }
+      }
+
+      std::cout << "[AUDIT] Fingerprinting " << target << ":" << port
+                << std::endl;
+
+      NetworkScanner scanner;
+      AuditResult result = scanner.grabBanner(target, port);
+
+      std::string json = "{";
+      json += "\"port\":" + std::to_string(result.port) + ",";
+      json += "\"service\":\"" + result.service + "\",";
+
+      // Clean banner for JSON
+      std::string cleanBanner = result.banner;
+      std::replace(cleanBanner.begin(), cleanBanner.end(), '\r', ' ');
+      std::replace(cleanBanner.begin(), cleanBanner.end(), '\n', ' ');
+      std::replace(cleanBanner.begin(), cleanBanner.end(), '"', '\'');
+
+      json += "\"banner\":\"" + cleanBanner + "\"";
+      json += "}";
+
+      response = "HTTP/1.1 200 OK\r\nContent-Type: "
+                 "application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n" +
+                 json;
     } else if (request.find("POST /api/clear") != std::string::npos) {
       std::lock_guard<std::mutex> lock(dataMutex);
       scanResults.clear();
