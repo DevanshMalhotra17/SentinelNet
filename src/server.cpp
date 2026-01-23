@@ -31,6 +31,16 @@ std::vector<ScanData> scanResults;
 std::mutex dataMutex;
 NetworkConfig networkConfig;
 
+std::string jsonResponse(const std::string &json) {
+  std::string response = "HTTP/1.1 200 OK\r\n";
+  response += "Content-Type: application/json\r\n";
+  response += "Access-Control-Allow-Origin: *\r\n";
+  response += "Content-Length: " + std::to_string(json.length()) + "\r\n";
+  response += "\r\n";
+  response += json;
+  return response;
+}
+
 std::string detectNetworkConfig() {
   NetworkScanner scanner;
   auto interfaces = scanner.getInterfaces();
@@ -458,9 +468,123 @@ void APIServer::start() {
       response = "HTTP/1.1 200 OK\r\nContent-Type: "
                  "application/json\r\nAccess-Control-Allow-Origin: "
                  "*\r\n\r\n{\"status\":\"success\"}";
-    } else {
-      response = "HTTP/1.1 404 Not Found\r\n\r\n404 Not Found";
+    } else if (request.find("GET /api/discover") != std::string::npos) {
+    std::cout << "[API] Network discovery requested" << std::endl;
+    
+    // Use active discovery instead of ARP
+    NetworkScanner scanner;
+    std::vector<std::string> hosts = scanner.discoverActiveHosts(networkConfig.subnet);
+    
+    // Build JSON response
+    std::string json = "{\"hosts\":[";
+    for (size_t i = 0; i < hosts.size(); i++) {
+        json += "\"" + hosts[i] + "\"";
+        if (i < hosts.size() - 1) json += ",";
     }
+    json += "]}";
+    
+    std::cout << "[API] Discovery complete. Found " << hosts.size() << " hosts" << std::endl;
+    response = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n" + json;
+  }
+  else if (request.find("POST /api/audit/fingerprint") != std::string::npos) {
+      std::cout << "[API] Fingerprint request received" << std::endl;
+      
+      // Parse body
+      size_t bodyStart = request.find("\r\n\r\n");
+      if (bodyStart == std::string::npos) {
+          response = jsonResponse("{\"error\":\"No body\"}");
+      } else {
+          std::string body = request.substr(bodyStart + 4);
+          
+          // Parse target IP
+          std::string target = "";
+          int port = 0;
+          
+          size_t targetPos = body.find("\"target\"");
+          if (targetPos != std::string::npos) {
+              size_t start = body.find("\"", targetPos + 8);
+              size_t end = body.find("\"", start + 1);
+              if (start != std::string::npos && end != std::string::npos) {
+                  target = body.substr(start + 1, end - start - 1);
+              }
+          }
+          
+          size_t portPos = body.find("\"port\"");
+          if (portPos != std::string::npos) {
+              size_t colonPos = body.find(":", portPos);
+              if (colonPos != std::string::npos) {
+                  size_t numStart = colonPos + 1;
+                  while (numStart < body.length() && (body[numStart] == ' ' || body[numStart] == '\t')) {
+                      numStart++;
+                  }
+                  std::string portStr = "";
+                  while (numStart < body.length() && isdigit(body[numStart])) {
+                      portStr += body[numStart++];
+                  }
+                  if (!portStr.empty()) {
+                      port = std::stoi(portStr);
+                  }
+              }
+          }
+          
+          if (target.empty() || port == 0) {
+              response = jsonResponse("{\"error\":\"Invalid request\"}");
+          } else {
+              std::cout << "[FINGERPRINT] Grabbing banner from " << target << ":" << port << std::endl;
+              
+              try {
+                  NetworkScanner scanner;
+                  AuditResult result = scanner.grabBanner(target, port);
+                  
+                  std::string json = "{";
+                  json += "\"port\":" + std::to_string(result.port) + ",";
+                  json += "\"service\":\"" + result.service + "\",";
+                  
+                  // Escape banner string for JSON
+                  std::string escapedBanner = result.banner;
+                  size_t pos = 0;
+                  while ((pos = escapedBanner.find("\"", pos)) != std::string::npos) {
+                      escapedBanner.replace(pos, 1, "\\\"");
+                      pos += 2;
+                  }
+                  while ((pos = escapedBanner.find("\n", pos)) != std::string::npos) {
+                      escapedBanner.replace(pos, 1, "\\n");
+                      pos += 2;
+                  }
+                  while ((pos = escapedBanner.find("\r", pos)) != std::string::npos) {
+                      escapedBanner.replace(pos, 1, "\\r");
+                      pos += 2;
+                  }
+                  
+                  json += "\"banner\":\"" + escapedBanner + "\"";
+                  json += "}";
+                  
+                  std::cout << "[FINGERPRINT] Service: " << result.service << std::endl;
+                  response = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n" + json;
+              } catch (...) {
+                  response = jsonResponse("{\"error\":\"Fingerprint failed\"}");
+              }
+          }
+      }
+  }
+  else if (request.find("GET /hack.html") != std::string::npos || request.find("GET /hack") != std::string::npos) {
+      std::string html = readFile("hack.html");
+      if (html.empty()) html = readFile("../web/hack.html");
+      
+      if (html.empty()) {
+          response = "HTTP/1.1 404 Not Found\r\n\r\n404 - hack.html not found";
+      } else {
+          response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
+      }
+  }
+  else if (request.find("GET /hack.js") != std::string::npos) {
+      std::string js = readFile("hack.js");
+      if (js.empty()) js = readFile("../web/hack.js");
+      response = "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" + js;
+  }
+  else {
+      response = "HTTP/1.1 404 Not Found\r\n\r\n404 Not Found";
+  }
 
     send(clientSocket, response.c_str(), response.length(), 0);
     closesocket(clientSocket);

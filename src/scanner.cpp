@@ -17,14 +17,10 @@
 #include <algorithm>
 #include <array>
 #include <cstdio>
-#include <iphlpapi.h>
-#include <windows.h>
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
-
-#pragma comment(lib, "iphlpapi.lib")
-#pragma comment(lib, "ws2_32.lib")
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <vector>
 
 NetworkScanner::NetworkScanner() {
   WSADATA wsa;
@@ -130,9 +126,6 @@ AuditResult NetworkScanner::grabBanner(const std::string &ip, int port) const {
   inet_pton(AF_INET, ip.c_str(), &addr.sin_addr);
 
   if (connect(sock, (sockaddr *)&addr, sizeof(addr)) == 0) {
-    // Some services send banners immediately (SSH, FTP, SMTP)
-    // For others (HTTP), we might need to send a probe
-
     char buffer[1024];
     int bytes = recv(sock, buffer, sizeof(buffer) - 1, 0);
 
@@ -140,7 +133,6 @@ AuditResult NetworkScanner::grabBanner(const std::string &ip, int port) const {
       buffer[bytes] = '\0';
       result.banner = buffer;
     } else {
-      // Try an HTTP probe if no immediate banner
       const char *probe = "GET / HTTP/1.0\r\n\r\n";
       send(sock, probe, strlen(probe), 0);
       bytes = recv(sock, buffer, sizeof(buffer) - 1, 0);
@@ -153,7 +145,6 @@ AuditResult NetworkScanner::grabBanner(const std::string &ip, int port) const {
 
   closesocket(sock);
 
-  // Basic service identification from banner
   if (result.banner.find("SSH") != std::string::npos)
     result.service = "SSH";
   else if (result.banner.find("HTTP") != std::string::npos)
@@ -178,7 +169,6 @@ std::vector<std::string> NetworkScanner::getArpHosts() const {
   std::vector<std::string> hosts;
   std::array<char, 256> buffer;
 
-  // Run arp -a command
   FILE *pipe = _popen("arp -a", "r");
   if (!pipe)
     return hosts;
@@ -198,16 +188,10 @@ std::vector<std::string> NetworkScanner::getArpHosts() const {
       if (end != std::string::npos) {
         std::string ip = line.substr(start, end - start);
 
-        // Check if it's a valid IP format (has 3 dots)
         if (std::count(ip.begin(), ip.end(), '.') == 3) {
           // Filter out broadcast and multicast addresses
+          if (ip.find(".255") != std::string::npos) continue;
           
-          // Skip broadcast addresses (ending in .255)
-          if (ip.find(".255") != std::string::npos) {
-            continue;
-          }
-          
-          // Skip multicast addresses (224.0.0.0 to 239.255.255.255)
           if (ip.find("224.") == 0 || ip.find("225.") == 0 || 
               ip.find("226.") == 0 || ip.find("227.") == 0 ||
               ip.find("228.") == 0 || ip.find("229.") == 0 ||
@@ -215,24 +199,11 @@ std::vector<std::string> NetworkScanner::getArpHosts() const {
               ip.find("232.") == 0 || ip.find("233.") == 0 ||
               ip.find("234.") == 0 || ip.find("235.") == 0 ||
               ip.find("236.") == 0 || ip.find("237.") == 0 ||
-              ip.find("238.") == 0 || ip.find("239.") == 0) {
-            continue;
-          }
+              ip.find("238.") == 0 || ip.find("239.") == 0) continue;
           
-          // Skip global broadcast
-          if (ip == "255.255.255.255") {
-            continue;
-          }
-          
-          // Skip loopback
-          if (ip.find("127.") == 0) {
-            continue;
-          }
-          
-          // Skip link-local (169.254.x.x)
-          if (ip.find("169.254.") == 0) {
-            continue;
-          }
+          if (ip == "255.255.255.255") continue;
+          if (ip.find("127.") == 0) continue;
+          if (ip.find("169.254.") == 0) continue;
           
           hosts.push_back(ip);
         }
@@ -242,4 +213,61 @@ std::vector<std::string> NetworkScanner::getArpHosts() const {
 
   _pclose(pipe);
   return hosts;
+}
+
+std::vector<std::string> NetworkScanner::discoverActiveHosts(const std::string& subnet) const {
+  std::vector<std::string> activeHosts;
+  std::mutex hostsMutex;
+  
+  std::string baseIP = subnet;
+  size_t slashPos = baseIP.find('/');
+  if (slashPos != std::string::npos) {
+    baseIP = baseIP.substr(0, slashPos);
+  }
+  
+  size_t lastDot = baseIP.rfind('.');
+  if (lastDot == std::string::npos) {
+    return activeHosts;
+  }
+  
+  std::string networkBase = baseIP.substr(0, lastDot);
+  
+  std::cout << "[DISCOVERY] Fast scanning network " << networkBase << ".0/24..." << std::endl;
+  std::cout << "[DISCOVERY] Using parallel threads for speed..." << std::endl;
+  
+  auto scanRange = [&](int start, int end) {
+    std::vector<std::string> localHosts;
+    
+    for (int i = start; i <= end; i++) {
+      std::string target = networkBase + "." + std::to_string(i);
+      
+      if (isHostAlive(target, 200)) {
+        localHosts.push_back(target);
+        std::cout << "[FOUND] " << target << std::endl;
+      }
+    }
+    
+    if (!localHosts.empty()) {
+      std::lock_guard<std::mutex> lock(hostsMutex);
+      activeHosts.insert(activeHosts.end(), localHosts.begin(), localHosts.end());
+    }
+  };
+  
+  std::vector<std::thread> threads;
+  int ipsPerThread = 25;
+  
+  for (int t = 0; t < 10; t++) {
+    int start = 1 + (t * ipsPerThread);
+    int end = std::min(start + ipsPerThread - 1, 254);
+    
+    threads.emplace_back(scanRange, start, end);
+  }
+  
+  for (auto& thread : threads) {
+    thread.join();
+  }
+  
+  std::cout << "[DISCOVERY] Scan complete in ~10-15 seconds. Found " << activeHosts.size() << " active hosts." << std::endl;
+  
+  return activeHosts;
 }
