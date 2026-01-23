@@ -293,10 +293,6 @@ function triggerScan(target, ports) {
             showNotification('Scan complete!', 'success');
             setTimeout(refreshData, 1500);
         })
-        .catch(error => {
-            console.error('Scan error:', error);
-            showNotification('Scan failed: ' + error.message, 'error');
-        })
         .finally(() => {
             setTimeout(() => {
                 allButtons.forEach(btn => {
@@ -321,10 +317,6 @@ function clearData() {
             updateDashboard();
             updateAlerts();
         })
-        .catch(error => {
-            console.error('Clear error:', error);
-            showNotification('Failed to clear history', 'error');
-        });
 }
 
 setInterval(refreshData, 10000);
