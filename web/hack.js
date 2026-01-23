@@ -49,7 +49,7 @@ function log(message, type = 'info') {
 }
 
 function refreshTargets() {
-    log("Running network discovery scan (ARP pass)...");
+    log("Running network discovery scan...");
     fetch('/api/discover')
         .then(res => res.json())
         .then(data => {
