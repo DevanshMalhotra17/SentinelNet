@@ -1,8 +1,22 @@
 # SentinelNet
 
-SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic, detects rogue access points, and flags suspicious activity in a home lab environment.
+A standalone network security tool for your home lab.
 
-## Requirements (as of now)
+## Easy Start (Recommended)
+
+You can run SentinelNet as a portable tool without building the source.
+
+1.  **Download**: [SentinelNet_v1.0.zip]
+2.  **Extract**: Unzip the folder to your computer.
+3.  **Run**: Double-click `run.bat` (this starts the dashboard on port 8080).
+4.  **Access**: Open your browser to [http://localhost:8080](http://localhost:8080).
+
+---
+
+## Technical Overview
+SentinelNet is a C++ backend coupled with a modern web frontend. It monitors network traffic, detects active hosts, and performs security audits.
+
+## Requirements
 - Windows 10/11
 - CMake 3.10+
 - Visual Studio 2019+ OR MinGW-w64
@@ -20,6 +34,3 @@ SentinelNet uses CMake:
 - cd build
 - cmake ..
 - make
-
-## Status
-In development
