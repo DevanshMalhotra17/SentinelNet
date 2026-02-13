@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SentinelNet Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>SentinelNet Network Dashboard</h1>
+            <a href="/hack"
+                style="color: #ff3e3e; text-decoration: none; font-weight: bold; border: 1px solid #ff3e3e; padding: 5px 15px; border-radius: 4px;">
+                SECURITY AUDIT LAB</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="total-scans">0</div>
+                <div class="stat-label">Total Scans</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="unique-hosts">0</div>
+                <div class="stat-label">Unique Hosts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="open-ports">0</div>
+                <div class="stat-label">Open Ports Found</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value status-indicator">ONLINE</div>
+                <div class="stat-label">Status:</div>
+            </div>
+        </div>
+
+        <!-- Scan Control Panel -->
+        <div class="control-panel">
+            <h2>Scan Controls</h2>
+
+            <div class="scan-options">
+                <!-- Quick Scans -->
+                <div class="scan-group">
+                    <h3>Quick Scans</h3>
+                    <button type="button" class="btn btn-primary"
+                        onclick="this.disabled=true; quickScan('localhost'); return false;">
+                        Scan Localhost
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="this.disabled=true; quickScan('router'); return false;">
+                        Scan Router
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="this.disabled=true; quickScan('network'); return false;">
+                        Scan Full Network
+                    </button>
+                </div>
+
+                <div class="scan-group">
+                    <h3>Custom Scan</h3>
+                    <div class="input-group">
+                        <input type="text" id="target-ip" placeholder="Target IP (e.g., 10.0.0.1)" class="input-field">
+                        <input type="text" id="target-ports" placeholder="Ports (e.g., 80,443,8080)"
+                            class="input-field">
+                        <button class="btn btn-secondary" onclick="this.disabled=true; customScan(); return false;">
+                            Scan Custom Target
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scan Presets -->
+                <div class="scan-group">
+                    <h3>Port Scan Presets</h3>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="this.disabled=true; quickScan('localhost', 'common'); return false;">
+                        Common Ports (Quick)
+                    </button>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="this.disabled=true; quickScan('localhost', 'web'); return false;">
+                        Web Services Only
+                    </button>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="this.disabled=true; quickScan('localhost', 'full'); return false;">
+                        Full Scan (1-1024)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button type="button" class="btn btn-secondary" onclick="refreshData()">Refresh Data</button>
+            <button type="button" class="btn btn-danger" onclick="clearData()">Clear History</button>
+        </div>
+
+        <div class="scan-list">
+            <h2>Recent Scans</h2>
+            <div id="scan-list">
+                <p class="empty-state">No scans yet. Use the controls above to start scanning.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=9"></script>
+</body>
+
+</html>
