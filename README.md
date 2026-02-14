@@ -10,6 +10,14 @@ You can run SentinelNet as a portable tool without building the source.
 2.  **Extract**: Unzip the folder to your computer.
 3.  **Run**: Double-click `run.bat` (this starts the dashboard on port 8080).
 4.  **Access**: Open your browser to [http://localhost:8080](http://localhost:8080).
+## 🌐 Live Preview
+
+You can view the project landing page and a demo of the dashboard interface live on Vercel:
+
+- **[Live Landing Page](https://sentinelnet.vercel.app)**
+
+> [!NOTE]
+> The **Interface Demo** on the live site serves as a layout preview. To perform actual network scans and see real-time data, you must run the local C++ backend on your machine as described in the "Easy Start" section below.
 
 ---
 

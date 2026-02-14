@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelNet | Pro-Grade Network Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --accent-primary: #58a6ff;
+            --accent-secondary: #238636;
+            --text-main: #c9d1d9;
+            --text-heading: #f0f6fc;
+            --border-glow: rgba(88, 166, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(88, 166, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(35, 134, 54, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #58a6ff, #238636);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Card */
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(240, 246, 252, 0.1);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+        }
+
+        h2 {
+            color: var(--text-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: left;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+            background: rgba(48, 54, 61, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(240, 246, 252, 0.05);
+        }
+
+        .feature-item h3 {
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #0d1117;
+            border: none;
+            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-heading);
+            border: 1px solid rgba(240, 246, 252, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(240, 246, 252, 0.05);
+            border-color: rgba(240, 246, 252, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .download-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(240, 246, 252, 0.05);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(35, 134, 54, 0.2);
+            color: var(--accent-secondary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(35, 134, 54, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-mesh"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">SentinelNet</div>
+            <p class="tagline">High-performance network security audit tool with real-time analytics.</p>
+        </header>
+
+        <main>
+            <div class="hero-card">
+                <span class="badge">v1.0 Standalone Ready</span>
+                <h2>Secure Your Home Lab</h2>
+                <p>Deploy a portable, C++ powered network scanner that provides immediate visibility into your local
+                    devices, open ports, and potential vulnerabilities.</p>
+
+                <div class="features">
+                    <div class="feature-item">
+                        <h3>Zero Install</h3>
+                        <p>Standalone binary that runs instantly on Windows 10/11. No dependencies required.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Live Dashboard</h3>
+                        <p>Modern web-based UI for real-time monitoring and scan management.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Deep Analysis</h3>
+                        <p>Service fingerprinting, banner grabbing, and risk assessment for every node.</p>
+                    </div>
+                </div>
+
+                <div class="cta-group">
+                    <a href="https://github.com/devanshmalhotra17/sentinelnet/raw/main/SentinelNet_v1.0.zip"
+                        class="btn btn-primary">
+                        <svg class="download-icon" viewBox="0 0 24 24">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                        </svg>
+                        Download for Windows
+                    </a>
+                    <a href="web/dashboard.html" class="btn btn-secondary">
+                        View Interface Demo
+                    </a>
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.5;">
+                    Note: The interface demo displays the layout. Real-time scanning data requires the SentinelNet
+                    backend to be running on your local machine.
+                </p>
+            </div>
+
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                Running on a local network? Start <code>run.bat</code> and head to <strong>localhost:8080</strong>
+            </p>
+        </main>
+
+        <footer>
+            &copy; 2026 SentinelNet Security Project. Built with C++ and modern Web Tech.
+        </footer>
+    </div>
+</body>
+
+</html>
