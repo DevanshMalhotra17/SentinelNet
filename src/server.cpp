@@ -253,6 +253,8 @@ void APIServer::start() {
     if (request.find("GET /hack.js") != std::string::npos) {
       std::string js = readFile("hack.js");
       if (js.empty())
+        js = readFile("web/hack.js");
+      if (js.empty())
         js = readFile("../web/hack.js");
       if (js.empty()) {
         response = "HTTP/1.1 404 Not Found\r\n\r\n404 - hack.js not found";
@@ -263,6 +265,8 @@ void APIServer::start() {
       }
     } else if (request.find("GET /hack") != std::string::npos) {
       std::string html = readFile("hack.html");
+      if (html.empty())
+        html = readFile("web/hack.html");
       if (html.empty())
         html = readFile("../web/hack.html");
       if (html.empty()) {
@@ -276,6 +280,10 @@ void APIServer::start() {
       if (html.empty())
         html = readFile("dashboard.html");
       if (html.empty())
+        html = readFile("web/index.html");
+      if (html.empty())
+        html = readFile("web/dashboard.html");
+      if (html.empty())
         html = readFile("../web/dashboard.html");
       if (html.empty())
         html = readFile("../web/index.html");
@@ -288,10 +296,14 @@ void APIServer::start() {
     } else if (request.find("GET /style.css") != std::string::npos) {
       std::string css = readFile("style.css");
       if (css.empty())
+        css = readFile("web/style.css");
+      if (css.empty())
         css = readFile("../web/style.css");
       response = "HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\n" + css;
     } else if (request.find("GET /script.js") != std::string::npos) {
       std::string js = readFile("script.js");
+      if (js.empty())
+        js = readFile("web/script.js");
       if (js.empty())
         js = readFile("../web/script.js");
       response =
