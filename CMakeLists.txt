@@ -21,3 +21,7 @@ add_executable(SentinelNet
 )
 
 target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet)
+
+if(MINGW)
+    target_link_options(SentinelNet PRIVATE "-static-libgcc" "-static-libstdc++" "-static")
+endif()
