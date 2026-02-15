@@ -224,7 +224,7 @@ void runScanner(const CLIOptions &options, NetworkScanner &scanner,
     return;
   }
 
-  // Perform scan if target specified
+  // Perform scan if target specified or options like quick/full are set
   if (!options.target.empty() && !options.ports.empty()) {
     std::cout << "Scanning " << options.target << "..." << std::endl;
 
@@ -232,17 +232,19 @@ void runScanner(const CLIOptions &options, NetworkScanner &scanner,
     log.logScanResult(options.target, openPorts);
 
     displayScanResults(options.target, openPorts);
-  } else {
-    // Default localhost scan
-    std::cout << "No target specified. Running default localhost scan..."
-              << std::endl;
+  } else if (!options.ports.empty()) {
+    // Default to localhost if ports are provided (e.g. from -q or -f) but no
+    // target
     std::string defaultTarget = "127.0.0.1";
-    std::vector<int> defaultPorts = {21,  22,  23,  25,   80,   135,
-                                     139, 443, 445, 3306, 3389, 8080};
+    std::cout << "Scanning " << defaultTarget << "..." << std::endl;
 
-    auto openPorts = scanner.scanPorts(defaultTarget, defaultPorts);
+    auto openPorts = scanner.scanPorts(defaultTarget, options.ports);
     log.logScanResult(defaultTarget, openPorts);
     displayScanResults(defaultTarget, openPorts);
+  } else {
+    // No target and no scan type specified
+    std::cout << "No target or scan type specified. Use -h for help."
+              << std::endl;
   }
 }
 
@@ -250,7 +252,7 @@ int main(int argc, char *argv[]) {
   NetworkScanner scanner;
   logger log;
 
-  log.logMessage("SentinelNet started");
+  log.logMessage("SentinelNet started - v2.0");
 
   if (argc > 1) {
     // CLI Mode: Process arguments and exit
