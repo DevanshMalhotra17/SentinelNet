@@ -203,7 +203,7 @@ void runScanner(const CLIOptions &options, NetworkScanner &scanner,
     for (const auto &i : interfaces) {
       std::cout << "  " << i.name << " | IP: " << i.ip << std::endl;
     }
-    return;
+    // REMOVED return here to allow flow to scan
   }
 
   // NEW: Start web dashboard
@@ -263,9 +263,9 @@ int main(int argc, char *argv[]) {
     runScanner(options, scanner, log);
   } else {
     // Shell Mode: Interactive loop
-    std::cout << "\n=== SentinelNet Interactive Shell ===" << std::endl;
+    std::cout << "\n=== SentinelNet Shell v2.0 ===" << std::endl;
 
-    // Initial default run (Help + Interfaces + Localhost Scan)
+    // Initial default run (Interfaces + Localhost Scan)
     CLIOptions defaultOptions;
     defaultOptions.listInterfaces = true;
     runScanner(defaultOptions, scanner, log);
