@@ -122,7 +122,12 @@ APIServer::APIServer(int port) : serverPort(port), isRunning(false) {}
 
 APIServer::~APIServer() { stop(); }
 
+#include <filesystem>
+namespace fs = std::filesystem;
+
 std::string readFile(const std::string &filepath) {
+  std::cout << "  [DEBUG] Attempting to read: " << fs::absolute(filepath)
+            << std::endl;
   std::ifstream file(filepath);
   if (!file.is_open()) {
     return "";
@@ -163,10 +168,6 @@ std::string buildScansJSON() {
 }
 
 void APIServer::start() {
-  std::cout << "\n=== SentinelNet Dashboard Starting ===" << std::endl;
-  std::cout << "Open browser: http://localhost:" << serverPort << std::endl;
-  std::cout << "Press Ctrl+C to stop\n" << std::endl;
-
   // Detect network configuration on startup
   std::string networkInfo = detectNetworkConfig();
 
@@ -276,19 +277,21 @@ void APIServer::start() {
       }
     } else if (request.find("GET / ") != std::string::npos ||
                request.find("GET /dashboard.html") != std::string::npos) {
-      std::string html = readFile("index.html");
-      if (html.empty())
-        html = readFile("dashboard.html");
-      if (html.empty())
-        html = readFile("web/index.html");
+      std::string html = readFile("dashboard.html");
       if (html.empty())
         html = readFile("web/dashboard.html");
       if (html.empty())
+        html = readFile("sentinelnet/web/dashboard.html");
+      if (html.empty())
         html = readFile("../web/dashboard.html");
       if (html.empty())
-        html = readFile("../web/index.html");
+        html = readFile("index.html");
+      if (html.empty())
+        html = readFile("web/index.html");
 
       if (html.empty()) {
+        std::cerr << "  [ERROR] Dashboard HTML not found in any path!"
+                  << std::endl;
         response = "HTTP/1.1 404 Not Found\r\n\r\n404 - HTML file not found";
       } else {
         response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
@@ -299,6 +302,8 @@ void APIServer::start() {
         css = readFile("web/style.css");
       if (css.empty())
         css = readFile("../web/style.css");
+      if (css.empty())
+        css = readFile("sentinelnet/web/style.css");
       response = "HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\n" + css;
     } else if (request.find("GET /script.js") != std::string::npos) {
       std::string js = readFile("script.js");
@@ -306,6 +311,8 @@ void APIServer::start() {
         js = readFile("web/script.js");
       if (js.empty())
         js = readFile("../web/script.js");
+      if (js.empty())
+        js = readFile("sentinelnet/web/script.js");
       response =
           "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" +
           js;

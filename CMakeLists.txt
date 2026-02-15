@@ -26,9 +26,10 @@ if(MINGW)
     target_link_options(SentinelNet PRIVATE "-static-libgcc" "-static-libstdc++" "-static")
 endif()
 
-# Automated Distribution: Copy executable to dist folder after build
+# Automated Distribution: Copy executable and assets to dist folder after build
 add_custom_command(TARGET SentinelNet POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/dist"
     COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:SentinelNet>" "${CMAKE_SOURCE_DIR}/dist/SentinelNet.exe"
-    COMMENT "Copying SentinelNet to distribution folder..."
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/web" "${CMAKE_SOURCE_DIR}/dist/web"
+    COMMENT "Copying SentinelNet and assets to distribution folder..."
 )
