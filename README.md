@@ -1,45 +1,46 @@
-# SentinelNet
+# SentinelNet v2.0
 
-SentinelNet is a self-hosted network security tool. It monitors WiFi/LAN traffic, detects rogue access points, flags suspicious activity, and simulates controlled cyber-attacks in a home lab environment.
-
-## Easy Start (Recommended)
-
-You can run SentinelNet as a portable tool without building the source.
-
-1.  **Download**: [SentinelNet_v1.0.zip]
-2.  **Extract**: Unzip the folder to your computer.
-3.  **Run**: Double-click `run.bat` (this starts the dashboard on port 8080).
-4.  **Access**: Open your browser to [http://localhost:8080](http://localhost:8080).
-
-## 🌐 Live Preview
-
-You can view the project landing page and a demo of the dashboard interface live on Vercel:
-
-- **[Live Landing Page](https://sentinelnet.vercel.app)**
-
-> [!NOTE]
-> The **Interface Demo** on the live site serves as a layout preview. To perform actual network scans and see real-time data, you must run the local C++ backend on your machine as described in the "Easy Start" section below.
+SentinelNet is a self-hosted network security tool designed for home labs and enterprise auditing. It combines a powerful **C++17 parallel-scanning engine** with a modern web dashboard for real-time visibility.
 
 ---
 
-## Technical Overview
-SentinelNet is a C++ backend coupled with a modern web frontend. It monitors network traffic, detects active hosts, and performs security audits.
+## What's New in v2.0
+- **High-Speed Multi-threading**: Port scans are now up to **10x faster** using hardware-accelerated concurrency.
+- **Professional Interactive Shell**: A redesigned CLI shell for complex auditing without leaving your terminal.
+- **Security Scoring**: Improved anomaly detection for rogue access points and suspicious device behavior.
+- **Network Discovery**: Blazingly fast device discovery using CIDR and IP range expansion.
 
-## Requirements
-- Windows 10/11
-- CMake 3.10+
-- Visual Studio 2019+ OR MinGW-w64
-- C++17 compiler
+---
 
-## Modules
-- scanner: packet capture & metadata extraction
-- detection: anomaly scoring & signature engine
-- server: lightweight HTTP interface for dashboard integration
+## Quick Start (Portable)
 
-## Build
-SentinelNet uses CMake:
+You can run SentinelNet as a portable tool without building the source.
 
-- mkdir build
-- cd build
-- cmake ..
-- make
+1.  **Download**: Get the latest release from the [Live Landing Page](https://sentinelnet.vercel.app/).
+2.  **Extract**: Unzip the folder (ensure the `web/` folder stays with the `.exe`).
+3.  **Launch**:
+    - **Dashboard**: Run `.\SentinelNet.exe -D` to start the web UI at `http://localhost:8080`.
+    - **Interactive Shell**: Run `.\SentinelNet.exe` (no arguments) to enter the security shell.
+
+---
+
+## Project Links
+- **[Live Landing Page](https://sentinelnet.vercel.app)**
+- **[Interactive Dashboard Demo](https://sentinelnet.vercel.app/dashboard.html)**
+
+---
+
+## Build from Source
+Ensure you have **CMake 3.10+** and a **C++17** compatible compiler (MinGW or MSVC).
+
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+---
+
+## Security Requirements
+SentinelNet requires **Npcap** for advanced packet capture features. You can download it here: [https://npcap.com/#download](https://npcap.com/#download)
