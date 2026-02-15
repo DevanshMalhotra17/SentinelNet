@@ -264,15 +264,9 @@ int main(int argc, char *argv[]) {
   } else {
     // Shell Mode: Interactive loop
     std::cout << "\n=== SentinelNet Shell v2.0 ===" << std::endl;
-
-    // Initial default run (Interfaces + Localhost Scan)
-    CLIOptions defaultOptions;
-    defaultOptions.listInterfaces = true;
-    runScanner(defaultOptions, scanner, log);
-
-    std::cout
-        << "\nShell Mode Active. Type commands (e.g., -q) or 'exit' to quit."
-        << std::endl;
+    std::cout << "Type '-h' or '--help' to see available commands."
+              << std::endl;
+    std::cout << "Type 'exit' or 'quit' to close." << std::endl;
 
     std::string input;
     while (true) {
