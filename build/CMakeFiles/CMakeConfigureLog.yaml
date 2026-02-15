@@ -11,11 +11,11 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/mingw64/share/cmake-4.2/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
+      - "C:/mingw64/share/cmake-4.2/Modules/CMakeMinGWFindMake.cmake:5 (find_program)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_MAKE_PROGRAM"
-    description: "Program used to build from build.ninja files."
+    description: "Path to a program."
     settings:
       SearchFramework: "NEVER"
       SearchAppBundle: "NEVER"
@@ -25,12 +25,8 @@ events:
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "ninja-build"
-      - "ninja"
-      - "samu"
+      - "mingw32-make.exe"
     candidate_directories:
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -47,6 +43,8 @@ events:
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
       - "C:/mingw64/bin/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -59,170 +57,49 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "c:/MinGW/bin/"
+      - "/MinGW/bin/"
+      - "/REGISTRY-NOTFOUND/MinGW/bin/"
     searched_directories:
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja-build.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja-build.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja-build"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/samu.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/samu.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/samu"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja-build.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja-build.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja-build"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/samu.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/samu.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/samu"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/ninja-build.com"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/ninja-build.exe"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/ninja-build"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/ninja.com"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/ninja.exe"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/ninja"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/samu.com"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/samu.exe"
-      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/samu"
-      - "C:/Windows/System32/ninja-build.com"
-      - "C:/Windows/System32/ninja-build.exe"
-      - "C:/Windows/System32/ninja-build"
-      - "C:/Windows/System32/ninja.com"
-      - "C:/Windows/System32/ninja.exe"
-      - "C:/Windows/System32/ninja"
-      - "C:/Windows/System32/samu.com"
-      - "C:/Windows/System32/samu.exe"
-      - "C:/Windows/System32/samu"
-      - "C:/Windows/ninja-build.com"
-      - "C:/Windows/ninja-build.exe"
-      - "C:/Windows/ninja-build"
-      - "C:/Windows/ninja.com"
-      - "C:/Windows/ninja.exe"
-      - "C:/Windows/ninja"
-      - "C:/Windows/samu.com"
-      - "C:/Windows/samu.exe"
-      - "C:/Windows/samu"
-      - "C:/Windows/System32/wbem/ninja-build.com"
-      - "C:/Windows/System32/wbem/ninja-build.exe"
-      - "C:/Windows/System32/wbem/ninja-build"
-      - "C:/Windows/System32/wbem/ninja.com"
-      - "C:/Windows/System32/wbem/ninja.exe"
-      - "C:/Windows/System32/wbem/ninja"
-      - "C:/Windows/System32/wbem/samu.com"
-      - "C:/Windows/System32/wbem/samu.exe"
-      - "C:/Windows/System32/wbem/samu"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja-build.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja-build.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja-build"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/samu.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/samu.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/samu"
-      - "C:/Windows/System32/OpenSSH/ninja-build.com"
-      - "C:/Windows/System32/OpenSSH/ninja-build.exe"
-      - "C:/Windows/System32/OpenSSH/ninja-build"
-      - "C:/Windows/System32/OpenSSH/ninja.com"
-      - "C:/Windows/System32/OpenSSH/ninja.exe"
-      - "C:/Windows/System32/OpenSSH/ninja"
-      - "C:/Windows/System32/OpenSSH/samu.com"
-      - "C:/Windows/System32/OpenSSH/samu.exe"
-      - "C:/Windows/System32/OpenSSH/samu"
-      - "C:/Program Files/HP/HP One Agent/ninja-build.com"
-      - "C:/Program Files/HP/HP One Agent/ninja-build.exe"
-      - "C:/Program Files/HP/HP One Agent/ninja-build"
-      - "C:/Program Files/HP/HP One Agent/ninja.com"
-      - "C:/Program Files/HP/HP One Agent/ninja.exe"
-      - "C:/Program Files/HP/HP One Agent/ninja"
-      - "C:/Program Files/HP/HP One Agent/samu.com"
-      - "C:/Program Files/HP/HP One Agent/samu.exe"
-      - "C:/Program Files/HP/HP One Agent/samu"
-      - "C:/Program Files/Git/cmd/ninja-build.com"
-      - "C:/Program Files/Git/cmd/ninja-build.exe"
-      - "C:/Program Files/Git/cmd/ninja-build"
-      - "C:/Program Files/Git/cmd/ninja.com"
-      - "C:/Program Files/Git/cmd/ninja.exe"
-      - "C:/Program Files/Git/cmd/ninja"
-      - "C:/Program Files/Git/cmd/samu.com"
-      - "C:/Program Files/Git/cmd/samu.exe"
-      - "C:/Program Files/Git/cmd/samu"
-      - "C:/Program Files/Git/bin/git.exe/ninja-build.com"
-      - "C:/Program Files/Git/bin/git.exe/ninja-build.exe"
-      - "C:/Program Files/Git/bin/git.exe/ninja-build"
-      - "C:/Program Files/Git/bin/git.exe/ninja.com"
-      - "C:/Program Files/Git/bin/git.exe/ninja.exe"
-      - "C:/Program Files/Git/bin/git.exe/ninja"
-      - "C:/Program Files/Git/bin/git.exe/samu.com"
-      - "C:/Program Files/Git/bin/git.exe/samu.exe"
-      - "C:/Program Files/Git/bin/git.exe/samu"
-      - "C:/Program Files/nodejs/ninja-build.com"
-      - "C:/Program Files/nodejs/ninja-build.exe"
-      - "C:/Program Files/nodejs/ninja-build"
-      - "C:/Program Files/nodejs/ninja.com"
-      - "C:/Program Files/nodejs/ninja.exe"
-      - "C:/Program Files/nodejs/ninja"
-      - "C:/Program Files/nodejs/samu.com"
-      - "C:/Program Files/nodejs/samu.exe"
-      - "C:/Program Files/nodejs/samu"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/ninja-build.com"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/ninja-build.exe"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/ninja-build"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/ninja.com"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/ninja.exe"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/ninja"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/samu.com"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/samu.exe"
-      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/samu"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/ninja-build.com"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/ninja-build.exe"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/ninja-build"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/ninja.com"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/ninja.exe"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/ninja"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/samu.com"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/samu.exe"
-      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/samu"
-      - "C:/Program Files/PuTTY/ninja-build.com"
-      - "C:/Program Files/PuTTY/ninja-build.exe"
-      - "C:/Program Files/PuTTY/ninja-build"
-      - "C:/Program Files/PuTTY/ninja.com"
-      - "C:/Program Files/PuTTY/ninja.exe"
-      - "C:/Program Files/PuTTY/ninja"
-      - "C:/Program Files/PuTTY/samu.com"
-      - "C:/Program Files/PuTTY/samu.exe"
-      - "C:/Program Files/PuTTY/samu"
-      - "C:/Program Files/Docker/Docker/resources/bin/ninja-build.com"
-      - "C:/Program Files/Docker/Docker/resources/bin/ninja-build.exe"
-      - "C:/Program Files/Docker/Docker/resources/bin/ninja-build"
-      - "C:/Program Files/Docker/Docker/resources/bin/ninja.com"
-      - "C:/Program Files/Docker/Docker/resources/bin/ninja.exe"
-      - "C:/Program Files/Docker/Docker/resources/bin/ninja"
-      - "C:/Program Files/Docker/Docker/resources/bin/samu.com"
-      - "C:/Program Files/Docker/Docker/resources/bin/samu.exe"
-      - "C:/Program Files/Docker/Docker/resources/bin/samu"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/ninja-build.com"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/ninja-build.exe"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/ninja-build"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/ninja.com"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/ninja.exe"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/ninja"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/samu.com"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/samu.exe"
-      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/samu"
-      - "C:/mingw64/bin/ninja-build.com"
-      - "C:/mingw64/bin/ninja-build.exe"
-      - "C:/mingw64/bin/ninja-build"
-      - "C:/mingw64/bin/ninja.com"
-    found: "C:/mingw64/bin/ninja.exe"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/mingw32-make.exe.com"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/mingw32-make.exe"
+      - "C:/Windows/System32/mingw32-make.exe.com"
+      - "C:/Windows/System32/mingw32-make.exe"
+      - "C:/Windows/mingw32-make.exe.com"
+      - "C:/Windows/mingw32-make.exe"
+      - "C:/Windows/System32/wbem/mingw32-make.exe.com"
+      - "C:/Windows/System32/wbem/mingw32-make.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mingw32-make.exe.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mingw32-make.exe"
+      - "C:/Windows/System32/OpenSSH/mingw32-make.exe.com"
+      - "C:/Windows/System32/OpenSSH/mingw32-make.exe"
+      - "C:/Program Files/HP/HP One Agent/mingw32-make.exe.com"
+      - "C:/Program Files/HP/HP One Agent/mingw32-make.exe"
+      - "C:/Program Files/Git/cmd/mingw32-make.exe.com"
+      - "C:/Program Files/Git/cmd/mingw32-make.exe"
+      - "C:/Program Files/Git/bin/git.exe/mingw32-make.exe.com"
+      - "C:/Program Files/Git/bin/git.exe/mingw32-make.exe"
+      - "C:/Program Files/nodejs/mingw32-make.exe.com"
+      - "C:/Program Files/nodejs/mingw32-make.exe"
+      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/mingw32-make.exe.com"
+      - "C:/Users/devan/Downloads/apache-maven-3.9.11-bin.zip/mingw32-make.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/mingw32-make.exe.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-17.0.16.8-hotspot/bin/mingw32-make.exe"
+      - "C:/Program Files/PuTTY/mingw32-make.exe.com"
+      - "C:/Program Files/PuTTY/mingw32-make.exe"
+      - "C:/Program Files/Docker/Docker/resources/bin/mingw32-make.exe.com"
+      - "C:/Program Files/Docker/Docker/resources/bin/mingw32-make.exe"
+      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/mingw32-make.exe.com"
+      - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/mingw32-make.exe"
+      - "C:/mingw64/bin/mingw32-make.exe.com"
+    found: "C:/mingw64/bin/mingw32-make.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -239,6 +116,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -265,7 +144,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -292,8 +174,6 @@ events:
       - "icx"
       - "clang"
     candidate_directories:
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -310,6 +190,8 @@ events:
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
       - "C:/mingw64/bin/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -322,50 +204,11 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cl.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cl.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cl"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bcc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bcc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bcc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/xlc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/xlc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/xlc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/icx.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/icx.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/icx"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/clang.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/clang.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/clang"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cl.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cl.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cl"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bcc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bcc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bcc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/xlc.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/xlc.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/xlc"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/icx.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/icx.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/icx"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/clang.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/clang.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/clang"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/cc.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/cc.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/cc"
@@ -688,8 +531,6 @@ events:
     found: "C:/mingw64/bin/gcc.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -706,6 +547,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -732,7 +575,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -760,8 +606,6 @@ events:
     found: "C:/mingw64/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -778,6 +622,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -804,7 +650,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "message-v1"
     backtrace:
@@ -848,8 +697,6 @@ events:
       - "ar"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -865,6 +712,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -877,14 +726,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/ar.com"
     found: "C:/mingw64/bin/ar.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -901,6 +751,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -927,7 +779,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -949,8 +804,6 @@ events:
       - "ranlib"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -966,6 +819,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -978,14 +833,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/ranlib.com"
     found: "C:/mingw64/bin/ranlib.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1002,6 +858,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1028,7 +886,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1050,8 +911,6 @@ events:
       - "strip"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1067,6 +926,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1079,14 +940,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/strip.com"
     found: "C:/mingw64/bin/strip.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1103,6 +965,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1129,7 +993,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1151,8 +1018,6 @@ events:
       - "ld"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1168,6 +1033,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1180,14 +1047,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/ld.com"
     found: "C:/mingw64/bin/ld.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1204,6 +1072,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1230,7 +1100,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1252,8 +1125,6 @@ events:
       - "nm"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1269,6 +1140,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1281,14 +1154,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/nm.com"
     found: "C:/mingw64/bin/nm.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1305,6 +1179,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1331,7 +1207,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1353,8 +1232,6 @@ events:
       - "objdump"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1370,6 +1247,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1382,14 +1261,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/objdump.com"
     found: "C:/mingw64/bin/objdump.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1406,6 +1286,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1432,7 +1314,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1454,8 +1339,6 @@ events:
       - "objcopy"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1471,6 +1354,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1483,14 +1368,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/objcopy.com"
     found: "C:/mingw64/bin/objcopy.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1507,6 +1393,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1533,7 +1421,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1555,8 +1446,6 @@ events:
       - "readelf"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1572,6 +1461,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1584,14 +1475,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/readelf.com"
     found: "C:/mingw64/bin/readelf.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1608,6 +1500,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1634,7 +1528,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1656,8 +1553,6 @@ events:
       - "dlltool"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1673,6 +1568,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1685,14 +1582,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/dlltool.com"
     found: "C:/mingw64/bin/dlltool.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1709,6 +1607,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1735,7 +1635,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1757,8 +1660,6 @@ events:
       - "addr2line"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1774,6 +1675,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1786,14 +1689,15 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/addr2line.com"
     found: "C:/mingw64/bin/addr2line.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1810,6 +1714,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -1836,7 +1742,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1858,8 +1767,6 @@ events:
       - "tapi"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1875,6 +1782,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -1887,17 +1796,14 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/tapi.com"
       - "C:/mingw64/bin/tapi.exe"
       - "C:/mingw64/bin/tapi"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/tapi.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/tapi.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/tapi"
@@ -1943,6 +1849,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/tapi.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/tapi.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/tapi"
+      - "C:/Program Files/Git LFS/tapi.com"
+      - "C:/Program Files/Git LFS/tapi.exe"
+      - "C:/Program Files/Git LFS/tapi"
+      - "C:/Program Files (x86)/Nmap/tapi.com"
+      - "C:/Program Files (x86)/Nmap/tapi.exe"
+      - "C:/Program Files (x86)/Nmap/tapi"
       - "C:/Users/devan/anaconda3/tapi.com"
       - "C:/Users/devan/anaconda3/tapi.exe"
       - "C:/Users/devan/anaconda3/tapi"
@@ -1979,14 +1891,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/tapi.com"
       - "C:/Users/devan/Downloads/flutter/bin/tapi.exe"
       - "C:/Users/devan/Downloads/flutter/bin/tapi"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi"
+      - "C:/Users/devan/.lmstudio/bin/tapi.com"
+      - "C:/Users/devan/.lmstudio/bin/tapi.exe"
+      - "C:/Users/devan/.lmstudio/bin/tapi"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/tapi.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/tapi.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/tapi"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/tapi.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/tapi.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/tapi"
     found: false
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2003,6 +1922,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2029,7 +1950,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2054,8 +1978,6 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -2071,6 +1993,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -2083,17 +2007,14 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/gcc-ar-15.2.com"
       - "C:/mingw64/bin/gcc-ar-15.2.exe"
       - "C:/mingw64/bin/gcc-ar-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.2.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.2.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.2"
@@ -2139,6 +2060,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.2.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.2.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.2"
+      - "C:/Program Files/Git LFS/gcc-ar-15.2.com"
+      - "C:/Program Files/Git LFS/gcc-ar-15.2.exe"
+      - "C:/Program Files/Git LFS/gcc-ar-15.2"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.2"
       - "C:/Users/devan/anaconda3/gcc-ar-15.2.com"
       - "C:/Users/devan/anaconda3/gcc-ar-15.2.exe"
       - "C:/Users/devan/anaconda3/gcc-ar-15.2"
@@ -2175,18 +2102,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.2.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.2.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.2"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.2.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.2.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.2"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.2.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.2.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.2"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.2"
       - "C:/mingw64/bin/gcc-ar-15.com"
       - "C:/mingw64/bin/gcc-ar-15.exe"
       - "C:/mingw64/bin/gcc-ar-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15"
@@ -2232,6 +2162,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15"
+      - "C:/Program Files/Git LFS/gcc-ar-15.com"
+      - "C:/Program Files/Git LFS/gcc-ar-15.exe"
+      - "C:/Program Files/Git LFS/gcc-ar-15"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15"
       - "C:/Users/devan/anaconda3/gcc-ar-15.com"
       - "C:/Users/devan/anaconda3/gcc-ar-15.exe"
       - "C:/Users/devan/anaconda3/gcc-ar-15"
@@ -2268,18 +2204,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15"
       - "C:/mingw64/bin/gcc-ar15.com"
       - "C:/mingw64/bin/gcc-ar15.exe"
       - "C:/mingw64/bin/gcc-ar15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar15"
@@ -2325,6 +2264,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar15"
+      - "C:/Program Files/Git LFS/gcc-ar15.com"
+      - "C:/Program Files/Git LFS/gcc-ar15.exe"
+      - "C:/Program Files/Git LFS/gcc-ar15"
+      - "C:/Program Files (x86)/Nmap/gcc-ar15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ar15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ar15"
       - "C:/Users/devan/anaconda3/gcc-ar15.com"
       - "C:/Users/devan/anaconda3/gcc-ar15.exe"
       - "C:/Users/devan/anaconda3/gcc-ar15"
@@ -2361,15 +2306,22 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar15"
       - "C:/mingw64/bin/gcc-ar.com"
     found: "C:/mingw64/bin/gcc-ar.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2386,6 +2338,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2412,7 +2366,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2437,8 +2394,6 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -2454,6 +2409,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -2466,17 +2423,14 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/gcc-ranlib-15.2.com"
       - "C:/mingw64/bin/gcc-ranlib-15.2.exe"
       - "C:/mingw64/bin/gcc-ranlib-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.2.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.2.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.2"
@@ -2522,6 +2476,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.2.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.2.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.2"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.2.com"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.2"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.2.com"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.2.exe"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.2"
@@ -2558,18 +2518,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.2.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.2.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.2"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.2"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.2"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
       - "C:/mingw64/bin/gcc-ranlib-15.com"
       - "C:/mingw64/bin/gcc-ranlib-15.exe"
       - "C:/mingw64/bin/gcc-ranlib-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15"
@@ -2615,6 +2578,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.com"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.exe"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.com"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.exe"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15"
@@ -2651,18 +2620,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15"
       - "C:/mingw64/bin/gcc-ranlib15.com"
       - "C:/mingw64/bin/gcc-ranlib15.exe"
       - "C:/mingw64/bin/gcc-ranlib15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib15"
@@ -2708,6 +2680,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib15"
+      - "C:/Program Files/Git LFS/gcc-ranlib15.com"
+      - "C:/Program Files/Git LFS/gcc-ranlib15.exe"
+      - "C:/Program Files/Git LFS/gcc-ranlib15"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib15"
       - "C:/Users/devan/anaconda3/gcc-ranlib15.com"
       - "C:/Users/devan/anaconda3/gcc-ranlib15.exe"
       - "C:/Users/devan/anaconda3/gcc-ranlib15"
@@ -2744,15 +2722,22 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib15"
       - "C:/mingw64/bin/gcc-ranlib.com"
     found: "C:/mingw64/bin/gcc-ranlib.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2769,6 +2754,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2795,7 +2782,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2827,8 +2817,6 @@ events:
     found: "C:/mingw64/bin/c++.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2845,6 +2833,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2871,7 +2861,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2899,8 +2892,6 @@ events:
     found: "C:/mingw64/share/cmake-4.2/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2917,6 +2908,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -2943,7 +2936,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "message-v1"
     backtrace:
@@ -2990,8 +2986,6 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -3007,6 +3001,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -3019,17 +3015,14 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/gcc-ar-15.2.com"
       - "C:/mingw64/bin/gcc-ar-15.2.exe"
       - "C:/mingw64/bin/gcc-ar-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.2.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.2.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.2"
@@ -3075,6 +3068,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.2.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.2.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.2"
+      - "C:/Program Files/Git LFS/gcc-ar-15.2.com"
+      - "C:/Program Files/Git LFS/gcc-ar-15.2.exe"
+      - "C:/Program Files/Git LFS/gcc-ar-15.2"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.2"
       - "C:/Users/devan/anaconda3/gcc-ar-15.2.com"
       - "C:/Users/devan/anaconda3/gcc-ar-15.2.exe"
       - "C:/Users/devan/anaconda3/gcc-ar-15.2"
@@ -3111,18 +3110,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.2.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.2.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.2"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.2.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.2.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.2"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.2.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.2.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.2"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.2"
       - "C:/mingw64/bin/gcc-ar-15.com"
       - "C:/mingw64/bin/gcc-ar-15.exe"
       - "C:/mingw64/bin/gcc-ar-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar-15"
@@ -3168,6 +3170,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar-15"
+      - "C:/Program Files/Git LFS/gcc-ar-15.com"
+      - "C:/Program Files/Git LFS/gcc-ar-15.exe"
+      - "C:/Program Files/Git LFS/gcc-ar-15"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ar-15"
       - "C:/Users/devan/anaconda3/gcc-ar-15.com"
       - "C:/Users/devan/anaconda3/gcc-ar-15.exe"
       - "C:/Users/devan/anaconda3/gcc-ar-15"
@@ -3204,18 +3212,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar-15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar-15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar-15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar-15"
       - "C:/mingw64/bin/gcc-ar15.com"
       - "C:/mingw64/bin/gcc-ar15.exe"
       - "C:/mingw64/bin/gcc-ar15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ar15"
@@ -3261,6 +3272,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ar15"
+      - "C:/Program Files/Git LFS/gcc-ar15.com"
+      - "C:/Program Files/Git LFS/gcc-ar15.exe"
+      - "C:/Program Files/Git LFS/gcc-ar15"
+      - "C:/Program Files (x86)/Nmap/gcc-ar15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ar15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ar15"
       - "C:/Users/devan/anaconda3/gcc-ar15.com"
       - "C:/Users/devan/anaconda3/gcc-ar15.exe"
       - "C:/Users/devan/anaconda3/gcc-ar15"
@@ -3297,15 +3314,22 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ar15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ar15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ar15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ar15"
       - "C:/mingw64/bin/gcc-ar.com"
     found: "C:/mingw64/bin/gcc-ar.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -3322,6 +3346,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -3348,7 +3374,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -3373,8 +3402,6 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "C:/mingw64/bin/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -3390,6 +3417,8 @@ events:
       - "C:/Program Files/PuTTY/"
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -3402,17 +3431,14 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/mingw64/bin/gcc-ranlib-15.2.com"
       - "C:/mingw64/bin/gcc-ranlib-15.2.exe"
       - "C:/mingw64/bin/gcc-ranlib-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.2.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.2.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.2"
@@ -3458,6 +3484,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.2.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.2.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.2"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.2.com"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.2"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.2.com"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.2.exe"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.2"
@@ -3494,18 +3526,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.2.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.2.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.2"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.2"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.2"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
       - "C:/mingw64/bin/gcc-ranlib-15.com"
       - "C:/mingw64/bin/gcc-ranlib-15.exe"
       - "C:/mingw64/bin/gcc-ranlib-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib-15"
@@ -3551,6 +3586,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib-15"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.com"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15.exe"
+      - "C:/Program Files/Git LFS/gcc-ranlib-15"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib-15"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.com"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15.exe"
       - "C:/Users/devan/anaconda3/gcc-ranlib-15"
@@ -3587,18 +3628,21 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib-15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib-15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib-15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib-15"
       - "C:/mingw64/bin/gcc-ranlib15.com"
       - "C:/mingw64/bin/gcc-ranlib15.exe"
       - "C:/mingw64/bin/gcc-ranlib15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib15.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib15.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/gcc-ranlib15"
@@ -3644,6 +3688,12 @@ events:
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib15.com"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib15.exe"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/gcc-ranlib15"
+      - "C:/Program Files/Git LFS/gcc-ranlib15.com"
+      - "C:/Program Files/Git LFS/gcc-ranlib15.exe"
+      - "C:/Program Files/Git LFS/gcc-ranlib15"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/Nmap/gcc-ranlib15"
       - "C:/Users/devan/anaconda3/gcc-ranlib15.com"
       - "C:/Users/devan/anaconda3/gcc-ranlib15.exe"
       - "C:/Users/devan/anaconda3/gcc-ranlib15"
@@ -3680,15 +3730,22 @@ events:
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib15.com"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib15.exe"
       - "C:/Users/devan/Downloads/flutter/bin/gcc-ranlib15"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib15.com"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib15.exe"
+      - "C:/Users/devan/.lmstudio/bin/gcc-ranlib15"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib15.com"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib15.exe"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/gcc-ranlib15"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/gcc-ranlib15"
       - "C:/mingw64/bin/gcc-ranlib.com"
     found: "C:/mingw64/bin/gcc-ranlib.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -3705,6 +3762,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -3731,7 +3790,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -3755,8 +3817,6 @@ events:
       - "windres"
       - "windres"
     candidate_directories:
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -3773,6 +3833,8 @@ events:
       - "C:/Program Files/Docker/Docker/resources/bin/"
       - "C:/Users/devan/AppData/Local/Packages/ngrok.ngrok_1g87z0zv29zzc/"
       - "C:/mingw64/bin/"
+      - "C:/Program Files/Git LFS/"
+      - "C:/Program Files (x86)/Nmap/"
       - "C:/Users/devan/anaconda3/"
       - "C:/Users/devan/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/devan/anaconda3/Library/usr/bin/"
@@ -3785,7 +3847,10 @@ events:
       - "C:/Users/devan/Downloads/gradle-8.14.3/bin/"
       - "C:/Users/devan/Downloads/flutter/"
       - "C:/Users/devan/Downloads/flutter/bin/"
-      - "C:/Users/devan/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.lmstudio/bin/"
+      - "C:/Users/devan/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/devan/.antigravity/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "C:/Users/devan/.antigravity/extensions/vscjava.vscode-java-debug-0.58.5-universal/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -3799,12 +3864,6 @@ events:
       - "C:/Program Files (x86)/SentinelNet/sbin/"
       - "C:/Program Files (x86)/SentinelNet/"
     searched_directories:
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/windres.com"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/windres.exe"
-      - "C:/Users/devan/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/windres"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/windres.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/windres.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/windres"
@@ -3854,8 +3913,6 @@ events:
     found: "C:/mingw64/bin/windres.exe"
     search_context:
       ENV{PATH}:
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "c:\\Users\\devan\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -3872,6 +3929,8 @@ events:
         - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
         - "C:\\Users\\devan\\AppData\\Local\\Packages\\ngrok.ngrok_1g87z0zv29zzc"
         - "C:\\mingw64\\bin"
+        - "C:\\Program Files\\Git LFS"
+        - "C:\\Program Files (x86)\\Nmap"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\windows\\system32"
         - "C:\\windows"
@@ -3898,7 +3957,10 @@ events:
         - "C:\\Users\\devan\\Downloads\\flutter"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
         - "C:\\Users\\devan\\Downloads\\flutter\\bin"
-        - "c:\\Users\\devan\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "C:\\Users\\devan\\.lmstudio\\bin"
+        - "C:\\Users\\devan\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "c:\\Users\\devan\\.antigravity\\extensions\\vscjava.vscode-java-debug-0.58.5-universal\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/SentinelNet"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -3914,8 +3976,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-r4g6d5"
-      binary: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-r4g6d5"
+      source: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4"
+      binary: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -3924,10 +3986,13 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-r4g6d5'
+        Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4'
         
-        Run Build Command(s): C:/mingw64/bin/ninja.exe -v cmTC_8f527
-        [1/2] C:\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj -c C:/mingw64/share/cmake-4.2/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): C:/mingw64/bin/cmake.exe -E env VERBOSE=1 C:/mingw64/bin/mingw32-make.exe -f Makefile cmTC_c8a20/fast
+        C:/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_c8a20.dir\\build.make CMakeFiles/cmTC_c8a20.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4'
+        Building C object CMakeFiles/cmTC_c8a20.dir/CMakeCCompilerABI.c.obj
+        C:\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj -c C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c
         Using built-in specs.
         COLLECT_GCC=C:\\mingw64\\bin\\gcc.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -3936,8 +4001,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 15.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_8f527.dir/'
-         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/mingw64/share/cmake-4.2/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_8f527.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\cc3XbgQZ.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_c8a20.dir\\'
+         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_c8a20.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\cc90qrq5.s
         GNU C23 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) version 15.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -3956,13 +4021,14 @@ events:
          C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 68078a3c6d29ebc5bc92e308e9ebfd28
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_8f527.dir/'
-         C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj C:\\Users\\devan\\AppData\\Local\\Temp\\cc3XbgQZ.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_c8a20.dir\\'
+         C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj C:\\Users\\devan\\AppData\\Local\\Temp\\cc90qrq5.s
         GNU assembler version 2.45.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r4) 2.45.1
         COMPILER_PATH=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../libexec/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../lib/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.'
-        [2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\mingw64\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj -o cmTC_8f527.exe -Wl,--out-implib,libcmTC_8f527.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.'
+        Linking C executable cmTC_c8a20.exe
+        C:\\mingw64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_c8a20.dir\\link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=C:\\mingw64\\bin\\gcc.exe
         COLLECT_LTO_WRAPPER=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
@@ -3974,12 +4040,16 @@ events:
         gcc version 15.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) 
         COMPILER_PATH=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../libexec/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../lib/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8f527.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_8f527.'
-         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccdVdcxg.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_8f527.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_8f527.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c8a20.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c8a20.'
+         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccSFxlzI.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_c8a20.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_c8a20.dir/objects.a --no-whole-archive --out-implib libcmTC_c8a20.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         collect2 version 15.2.0
-        C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccdVdcxg.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_8f527.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_8f527.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccSFxlzI.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_c8a20.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_c8a20.dir/objects.a --no-whole-archive --out-implib libcmTC_c8a20.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r4) 2.45.1
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8f527.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_8f527.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c8a20.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c8a20.'
+        C:\\mingw64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_c8a20.dir/objects.a
+        C:\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_c8a20.dir/objects.a @CMakeFiles\\cmTC_c8a20.dir\\objects1.rsp
+        C:\\mingw64\\bin\\gcc.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_c8a20.dir/objects.a -Wl,--no-whole-archive -o cmTC_c8a20.exe -Wl,--out-implib,libcmTC_c8a20.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        mingw32-make[1]: Leaving directory 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4'
         
       exitCode: 0
   -
@@ -4014,10 +4084,13 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-r4g6d5']
+        ignore line: [Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/mingw64/bin/ninja.exe -v cmTC_8f527]
-        ignore line: [[1/2] C:\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj -c C:/mingw64/share/cmake-4.2/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): C:/mingw64/bin/cmake.exe -E env VERBOSE=1 C:/mingw64/bin/mingw32-make.exe -f Makefile cmTC_c8a20/fast]
+        ignore line: [C:/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_c8a20.dir\\build.make CMakeFiles/cmTC_c8a20.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-mvscb4']
+        ignore line: [Building C object CMakeFiles/cmTC_c8a20.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [C:\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj -c C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\mingw64\\bin\\gcc.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -4026,8 +4099,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r4) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_8f527.dir/']
-        ignore line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/mingw64/share/cmake-4.2/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_8f527.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\cc3XbgQZ.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_c8a20.dir\\']
+        ignore line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_c8a20.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\cc90qrq5.s]
         ignore line: [GNU C23 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r4) version 15.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -4046,8 +4119,8 @@ events:
         ignore line: [ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 68078a3c6d29ebc5bc92e308e9ebfd28]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_8f527.dir/']
-        ignore line: [ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj C:\\Users\\devan\\AppData\\Local\\Temp\\cc3XbgQZ.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_c8a20.dir\\']
+        ignore line: [ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj C:\\Users\\devan\\AppData\\Local\\Temp\\cc90qrq5.s]
         ignore line: [GNU assembler version 2.45.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r4) 2.45.1]
         ignore line: [COMPILER_PATH=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
         ignore line: [C:/mingw64/bin/../libexec/gcc/]
@@ -4058,8 +4131,9 @@ events:
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.']
-        ignore line: [[2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\mingw64\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj -o cmTC_8f527.exe -Wl --out-implib libcmTC_8f527.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_c8a20.dir\\CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_c8a20.exe]
+        ignore line: [C:\\mingw64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_c8a20.dir\\link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\mingw64\\bin\\gcc.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
@@ -4078,13 +4152,13 @@ events:
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8f527.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_8f527.']
-        link line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccdVdcxg.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_8f527.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_8f527.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c8a20.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c8a20.']
+        link line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccSFxlzI.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_c8a20.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_c8a20.dir/objects.a --no-whole-archive --out-implib libcmTC_c8a20.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
           arg [C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccdVdcxg.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccSFxlzI.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
@@ -4106,7 +4180,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_8f527.exe] ==> ignore
+          arg [cmTC_c8a20.exe] ==> ignore
           arg [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
           arg [-LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
@@ -4116,9 +4190,11 @@ events:
           arg [-LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_8f527.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [--whole-archive] ==> ignore
+          arg [CMakeFiles\\cmTC_c8a20.dir/objects.a] ==> ignore
+          arg [--no-whole-archive] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_8f527.dll.a] ==> ignore
+          arg [libcmTC_c8a20.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -4200,8 +4276,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-ybkjv8"
-      binary: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-ybkjv8"
+      source: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli"
+      binary: "C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -4211,10 +4287,13 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-ybkjv8'
+        Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli'
         
-        Run Build Command(s): C:/mingw64/bin/ninja.exe -v cmTC_74b58
-        [1/2] C:\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj -c C:/mingw64/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): C:/mingw64/bin/cmake.exe -E env VERBOSE=1 C:/mingw64/bin/mingw32-make.exe -f Makefile cmTC_aff9e/fast
+        C:/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_aff9e.dir\\build.make CMakeFiles/cmTC_aff9e.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli'
+        Building CXX object CMakeFiles/cmTC_aff9e.dir/CMakeCXXCompilerABI.cpp.obj
+        C:\\mingw64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj -c C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=C:\\mingw64\\bin\\c++.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -4223,8 +4302,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 15.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_74b58.dir/'
-         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/mingw64/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_74b58.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\cczz8KT4.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_aff9e.dir\\'
+         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_aff9e.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\ccTpxtwY.s
         GNU C++17 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) version 15.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -4249,13 +4328,14 @@ events:
          C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 0188e02f9d5fa19bb2c8e657f6132c14
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_74b58.dir/'
-         C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\devan\\AppData\\Local\\Temp\\cczz8KT4.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_aff9e.dir\\'
+         C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\devan\\AppData\\Local\\Temp\\ccTpxtwY.s
         GNU assembler version 2.45.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r4) 2.45.1
         COMPILER_PATH=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../libexec/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../lib/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.'
-        [2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_74b58.exe -Wl,--out-implib,libcmTC_74b58.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_aff9e.exe
+        C:\\mingw64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_aff9e.dir\\link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=C:\\mingw64\\bin\\c++.exe
         COLLECT_LTO_WRAPPER=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
@@ -4267,12 +4347,16 @@ events:
         gcc version 15.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) 
         COMPILER_PATH=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../libexec/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/mingw64/bin/../lib/gcc/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_74b58.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_74b58.'
-         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccag7LZa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_74b58.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_74b58.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_aff9e.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_aff9e.'
+         C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccsPxDSq.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_aff9e.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_aff9e.dir/objects.a --no-whole-archive --out-implib libcmTC_aff9e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         collect2 version 15.2.0
-        C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccag7LZa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_74b58.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_74b58.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccsPxDSq.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_aff9e.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_aff9e.dir/objects.a --no-whole-archive --out-implib libcmTC_aff9e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r4) 2.45.1
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_74b58.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_74b58.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_aff9e.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_aff9e.'
+        C:\\mingw64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_aff9e.dir/objects.a
+        C:\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_aff9e.dir/objects.a @CMakeFiles\\cmTC_aff9e.dir\\objects1.rsp
+        C:\\mingw64\\bin\\c++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_aff9e.dir/objects.a -Wl,--no-whole-archive -o cmTC_aff9e.exe -Wl,--out-implib,libcmTC_aff9e.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        mingw32-make[1]: Leaving directory 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli'
         
       exitCode: 0
   -
@@ -4313,10 +4397,13 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-ybkjv8']
+        ignore line: [Change Dir: 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/mingw64/bin/ninja.exe -v cmTC_74b58]
-        ignore line: [[1/2] C:\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj -c C:/mingw64/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): C:/mingw64/bin/cmake.exe -E env VERBOSE=1 C:/mingw64/bin/mingw32-make.exe -f Makefile cmTC_aff9e/fast]
+        ignore line: [C:/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_aff9e.dir\\build.make CMakeFiles/cmTC_aff9e.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'C:/Users/devan/OneDrive/Desktop/SentinelNet/sentinelnet/build/CMakeFiles/CMakeScratch/TryCompile-dwlsli']
+        ignore line: [Building CXX object CMakeFiles/cmTC_aff9e.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [C:\\mingw64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj -c C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\mingw64\\bin\\c++.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -4325,8 +4412,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r4) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_74b58.dir/']
-        ignore line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/mingw64/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_74b58.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\cczz8KT4.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_aff9e.dir\\']
+        ignore line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:\\mingw64\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_aff9e.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\devan\\AppData\\Local\\Temp\\ccTpxtwY.s]
         ignore line: [GNU C++17 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r4) version 15.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -4351,8 +4438,8 @@ events:
         ignore line: [ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 0188e02f9d5fa19bb2c8e657f6132c14]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_74b58.dir/']
-        ignore line: [ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\devan\\AppData\\Local\\Temp\\cczz8KT4.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_aff9e.dir\\']
+        ignore line: [ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\devan\\AppData\\Local\\Temp\\ccTpxtwY.s]
         ignore line: [GNU assembler version 2.45.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r4) 2.45.1]
         ignore line: [COMPILER_PATH=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
         ignore line: [C:/mingw64/bin/../libexec/gcc/]
@@ -4363,8 +4450,9 @@ events:
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.']
-        ignore line: [[2/2] C:\\windows\\system32\\cmd.exe /C "cd . && C:\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_74b58.exe -Wl --out-implib libcmTC_74b58.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_aff9e.dir\\CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_aff9e.exe]
+        ignore line: [C:\\mingw64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_aff9e.dir\\link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\mingw64\\bin\\c++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
@@ -4383,13 +4471,13 @@ events:
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_74b58.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_74b58.']
-        link line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccag7LZa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_74b58.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_74b58.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_aff9e.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_aff9e.']
+        link line: [ C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccsPxDSq.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_aff9e.exe C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/mingw64/bin/../lib/gcc -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_aff9e.dir/objects.a --no-whole-archive --out-implib libcmTC_aff9e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
           arg [C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=C:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccag7LZa.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\devan\\AppData\\Local\\Temp\\ccsPxDSq.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -4411,7 +4499,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_74b58.exe] ==> ignore
+          arg [cmTC_aff9e.exe] ==> ignore
           arg [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
           arg [-LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
@@ -4421,9 +4509,11 @@ events:
           arg [-LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LC:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_74b58.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [--whole-archive] ==> ignore
+          arg [CMakeFiles\\cmTC_aff9e.dir/objects.a] ==> ignore
+          arg [--no-whole-archive] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_74b58.dll.a] ==> ignore
+          arg [libcmTC_aff9e.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore

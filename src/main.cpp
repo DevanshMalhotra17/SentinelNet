@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <iostream>
 #include <map>
+#include <sstream>
+#include <vector>
 
 std::map<int, std::string> getPortServices() {
   return {{21, "FTP"},          {22, "SSH"},       {23, "Telnet"},
@@ -186,143 +188,122 @@ void performNetworkDiscovery(NetworkScanner &scanner, logger &log,
   }
 }
 
-int main(int argc, char *argv[]) {
-  if (argc > 1 && std::string(argv[1]) == "--testNU") {
-    testNetworkUtils();
-    return 0;
-  }
-
-  NetworkScanner scanner;
-  logger log;
-
-  log.logMessage("SentinelNet started");
-
-  CLIOptions options = CLIParser::parse(argc, argv);
-
+void runScanner(const CLIOptions &options, NetworkScanner &scanner,
+                logger &log) {
   // Show help
   if (options.showHelp) {
     CLIParser::printHelp();
-    return 0;
+    return;
   }
 
-  std::cout << "=== SentinelNet Network Scanner ===" << std::endl;
-  std::cout << "Hostname: " << scanner.getHostname() << std::endl;
-
   // List interfaces
-  if (options.listInterfaces || options.target.empty()) {
+  if (options.listInterfaces) {
     auto interfaces = scanner.getInterfaces();
     std::cout << "\nNetwork Interfaces:" << std::endl;
     for (const auto &i : interfaces) {
       std::cout << "  " << i.name << " | IP: " << i.ip << std::endl;
     }
-  }
-
-  // List packet capture interfaces
-  if (options.listCaptureInterfaces) {
-    // ... existing code ...
-    return 0;
+    return;
   }
 
   // NEW: Start web dashboard
   if (options.startDashboard) {
     std::cout << "\n=== Starting Web Dashboard ===" << std::endl;
+    std::cout << "Open your browser to http://localhost:"
+              << options.dashboardPort << std::endl;
+    std::cout << "Press Ctrl+C to stop\n" << std::endl;
     APIServer server(options.dashboardPort);
     log.logMessage("Web dashboard started on port " +
                    std::to_string(options.dashboardPort));
     server.start();
-    return 0;
+    return;
   }
 
   if (options.discover && !options.discoverRange.empty()) {
     performNetworkDiscovery(scanner, log, options);
-    log.logMessage("SentinelNet shutdown");
-    return 0;
+    return;
   }
 
   // Perform scan if target specified
   if (!options.target.empty() && !options.ports.empty()) {
-    std::cout << "\nScanning " << options.target << "..." << std::endl;
+    std::cout << "Scanning " << options.target << "..." << std::endl;
 
     auto openPorts = scanner.scanPorts(options.target, options.ports);
     log.logScanResult(options.target, openPorts);
 
     displayScanResults(options.target, openPorts);
-  } else if (options.target.empty() && !options.showHelp &&
-             !options.listInterfaces) {
-    bool running = true;
-    while (running) {
-      std::cout << "SentinelNet - Choose an option:" << std::endl;
-      std::cout << "  1) Quick scan localhost" << std::endl;
-      std::cout << "  2) Scan a specific target" << std::endl;
-      std::cout << "  3) Start web dashboard (localhost:8080)" << std::endl;
-      std::cout << "  4) Discover devices on network" << std::endl;
-      std::cout << "  5) Show help" << std::endl;
-      std::cout << "  6) Quit" << std::endl;
-      std::cout << "\nEnter choice: ";
+  } else {
+    // Default localhost scan
+    std::cout << "No target specified. Running default localhost scan..."
+              << std::endl;
+    std::string defaultTarget = "127.0.0.1";
+    std::vector<int> defaultPorts = {21,  22,  23,  25,   80,   135,
+                                     139, 443, 445, 3306, 3389, 8080};
 
-      std::string choice;
-      std::getline(std::cin, choice);
+    auto openPorts = scanner.scanPorts(defaultTarget, defaultPorts);
+    log.logScanResult(defaultTarget, openPorts);
+    displayScanResults(defaultTarget, openPorts);
+  }
+}
 
-      if (choice == "1") {
-        std::cout << "\nRunning quick localhost scan..." << std::endl;
-        std::vector<int> defaultPorts = {21,  22,  23,  25,   80,   135,
-                                         139, 443, 445, 3306, 3389, 8080};
-        auto openPorts = scanner.scanPorts("127.0.0.1", defaultPorts);
-        log.logScanResult("127.0.0.1", openPorts);
-        displayScanResults("127.0.0.1", openPorts);
+int main(int argc, char *argv[]) {
+  NetworkScanner scanner;
+  logger log;
 
-      } else if (choice == "2") {
-        std::cout << "\nEnter target IP: ";
-        std::string target;
-        std::getline(std::cin, target);
-        if (target == "localhost")
-          target = "127.0.0.1";
+  log.logMessage("SentinelNet started");
 
-        if (!target.empty()) {
-          std::cout << "Scanning " << target << "..." << std::endl;
-          std::vector<int> defaultPorts = {21,  22,  23,  25,   80,   135,
-                                           139, 443, 445, 3306, 3389, 8080};
-          auto openPorts = scanner.scanPorts(target, defaultPorts);
-          log.logScanResult(target, openPorts);
-          displayScanResults(target, openPorts);
-        }
+  if (argc > 1) {
+    // CLI Mode: Process arguments and exit
+    if (std::string(argv[1]) == "--testNU") {
+      testNetworkUtils();
+      return 0;
+    }
 
-      } else if (choice == "3") {
-        std::cout << "\n=== Starting Web Dashboard ===" << std::endl;
-        std::cout << "Open your browser to http://localhost:8080" << std::endl;
-        std::cout << "Press Ctrl+C to stop\n" << std::endl;
-        APIServer server(8080);
-        log.logMessage("Web dashboard started on port 8080");
-        server.start();
-        // server.start() blocks, so we break out after it stops
+    CLIOptions options = CLIParser::parse(argc, argv);
+    runScanner(options, scanner, log);
+  } else {
+    // Shell Mode: Interactive loop
+    CLIParser::printHelp();
+
+    std::cout
+        << "Entering interactive Shell Mode. Type 'exit' or 'quit' to close."
+        << std::endl;
+
+    std::string input;
+    while (true) {
+      std::cout << "\nSentinelNet> ";
+      if (!std::getline(std::cin, input) || input == "exit" ||
+          input == "quit") {
         break;
-
-      } else if (choice == "4") {
-        std::cout << "\nEnter network range (e.g. 192.168.1.0/24): ";
-        std::string range;
-        std::getline(std::cin, range);
-
-        if (!range.empty()) {
-          CLIOptions discoverOpts;
-          discoverOpts.discover = true;
-          discoverOpts.discoverRange = range;
-          discoverOpts.ports = {21, 22, 80, 135, 443, 445, 3389, 8080};
-          performNetworkDiscovery(scanner, log, discoverOpts);
-        }
-
-      } else if (choice == "5") {
-        CLIParser::printHelp();
-
-      } else if (choice == "6" || choice == "q" || choice == "Q") {
-        running = false;
-
-      } else {
-        std::cout << "Invalid choice. Please enter 1-6." << std::endl;
       }
+
+      if (input.empty())
+        continue;
+
+      // Tokenize input for the parser
+      std::stringstream ss(input);
+      std::string token;
+      std::vector<char *> args;
+
+      // Dummy argv[0]
+      char progName[] = "SentinelNet";
+      args.push_back(progName);
+
+      std::vector<std::string> tokens;
+      while (ss >> token) {
+        tokens.push_back(token);
+      }
+
+      for (auto &t : tokens) {
+        args.push_back(const_cast<char *>(t.c_str()));
+      }
+
+      CLIOptions options =
+          CLIParser::parse(static_cast<int>(args.size()), args.data());
+      runScanner(options, scanner, log);
     }
   }
 
   log.logMessage("SentinelNet shutdown");
-
   return 0;
 }
