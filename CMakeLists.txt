@@ -25,3 +25,10 @@ target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet)
 if(MINGW)
     target_link_options(SentinelNet PRIVATE "-static-libgcc" "-static-libstdc++" "-static")
 endif()
+
+# Automated Distribution: Copy executable to dist folder after build
+add_custom_command(TARGET SentinelNet POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/dist"
+    COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:SentinelNet>" "${CMAKE_SOURCE_DIR}/dist/SentinelNet.exe"
+    COMMENT "Copying SentinelNet to distribution folder..."
+)
