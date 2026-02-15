@@ -263,10 +263,15 @@ int main(int argc, char *argv[]) {
     runScanner(options, scanner, log);
   } else {
     // Shell Mode: Interactive loop
-    CLIParser::printHelp();
+    std::cout << "\n=== SentinelNet Interactive Shell ===" << std::endl;
+
+    // Initial default run (Help + Interfaces + Localhost Scan)
+    CLIOptions defaultOptions;
+    defaultOptions.listInterfaces = true;
+    runScanner(defaultOptions, scanner, log);
 
     std::cout
-        << "Entering interactive Shell Mode. Type 'exit' or 'quit' to close."
+        << "\nShell Mode Active. Type commands (e.g., -q) or 'exit' to quit."
         << std::endl;
 
     std::string input;
