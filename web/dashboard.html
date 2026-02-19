@@ -8,11 +8,17 @@
 
 <body>
     <div class="container">
+        <!-- Remote Access Banner -->
+        <div id="remote-access-banner" style="background:#1a1a2e;border:1px solid #00ff88;border-radius:6px;padding:10px 16px;margin-bottom:14px;display:none;align-items:center;justify-content:space-between;gap:12px;">
+            <span style="color:#aaa;font-size:13px;">📡 Running on:</span>
+            <span id="remote-url" style="color:#00ff88;font-family:monospace;font-size:14px;font-weight:bold;"></span>
+            <button onclick="copyRemoteURL()" style="background:#00ff88;color:#000;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:bold;">Copy URL</button>
+            <span style="color:#777;font-size:12px;">Share this with other devices on your network</span>
+        </div>
+
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1>SentinelNet Network Dashboard</h1>
-            <a href="/hack"
-                style="color: #ff3e3e; text-decoration: none; font-weight: bold; border: 1px solid #ff3e3e; padding: 5px 15px; border-radius: 4px;">
-                SECURITY AUDIT LAB</a>
+            <a href="/hack" style="color: #ff3e3e; text-decoration: none; font-weight: bold; border: 1px solid #ff3e3e; padding: 5px 15px; border-radius: 4px;">SECURITY AUDIT LAB</a>
         </div>
 
         <div class="stats">
@@ -34,55 +40,28 @@
             </div>
         </div>
 
-        <!-- Scan Control Panel -->
         <div class="control-panel">
             <h2>Scan Controls</h2>
-
             <div class="scan-options">
-                <!-- Quick Scans -->
                 <div class="scan-group">
                     <h3>Quick Scans</h3>
-                    <button type="button" class="btn btn-primary"
-                        onclick="this.disabled=true; quickScan('localhost'); return false;">
-                        Scan Localhost
-                    </button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="this.disabled=true; quickScan('router'); return false;">
-                        Scan Router
-                    </button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="this.disabled=true; quickScan('network'); return false;">
-                        Scan Full Network
-                    </button>
+                    <button type="button" class="btn btn-primary" onclick="this.disabled=true; quickScan('localhost'); return false;">Scan Localhost</button>
+                    <button type="button" class="btn btn-primary" onclick="this.disabled=true; quickScan('router'); return false;">Scan Router</button>
+                    <button type="button" class="btn btn-primary" onclick="this.disabled=true; quickScan('network'); return false;">Scan Full Network</button>
                 </div>
-
                 <div class="scan-group">
                     <h3>Custom Scan</h3>
                     <div class="input-group">
                         <input type="text" id="target-ip" placeholder="Target IP (e.g., 10.0.0.1)" class="input-field">
-                        <input type="text" id="target-ports" placeholder="Ports (e.g., 80,443,8080)"
-                            class="input-field">
-                        <button class="btn btn-secondary" onclick="this.disabled=true; customScan(); return false;">
-                            Scan Custom Target
-                        </button>
+                        <input type="text" id="target-ports" placeholder="Ports (e.g., 80,443,8080)" class="input-field">
+                        <button class="btn btn-secondary" onclick="this.disabled=true; customScan(); return false;">Scan Custom Target</button>
                     </div>
                 </div>
-
-                <!-- Scan Presets -->
                 <div class="scan-group">
                     <h3>Port Scan Presets</h3>
-                    <button type="button" class="btn btn-secondary"
-                        onclick="this.disabled=true; quickScan('localhost', 'common'); return false;">
-                        Common Ports (Quick)
-                    </button>
-                    <button type="button" class="btn btn-secondary"
-                        onclick="this.disabled=true; quickScan('localhost', 'web'); return false;">
-                        Web Services Only
-                    </button>
-                    <button type="button" class="btn btn-secondary"
-                        onclick="this.disabled=true; quickScan('localhost', 'full'); return false;">
-                        Full Scan (1-1024)
-                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="this.disabled=true; quickScan('localhost', 'common'); return false;">Common Ports (Quick)</button>
+                    <button type="button" class="btn btn-secondary" onclick="this.disabled=true; quickScan('localhost', 'web'); return false;">Web Services Only</button>
+                    <button type="button" class="btn btn-secondary" onclick="this.disabled=true; quickScan('localhost', 'full'); return false;">Full Scan (1-1024)</button>
                 </div>
             </div>
         </div>
@@ -98,6 +77,75 @@
                 <p class="empty-state">No scans yet. Use the controls above to start scanning.</p>
             </div>
         </div>
+
+        <!-- Remote Control Panel -->
+        <div class="control-panel" style="margin-top:30px;">
+            <h2>⚙️ Remote Control <span id="uptime-badge" style="font-size:13px;color:#8b949e;font-weight:normal;margin-left:10px;"></span></h2>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+                <button class="btn btn-secondary" onclick="restartSentinel()">🔄 Restart SentinelNet</button>
+                <button class="btn btn-danger" onclick="shutdownSentinel()">⛔ Shutdown SentinelNet</button>
+            </div>
+        </div>
+
+        <!-- Remote Access Panel -->
+        <div class="control-panel" style="margin-top:10px;">
+            <h2>🖥️ Remote Access</h2>
+
+            <div style="margin-bottom:20px;">
+                <h3 style="color:#c9d1d9;font-size:15px;margin-bottom:10px;">Screenshot</h3>
+                <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
+                    <button class="btn btn-secondary" onclick="takeScreenshot()">📸 Take Screenshot</button>
+                    <label style="display:flex;align-items:center;gap:6px;color:#8b949e;font-size:13px;">
+                        <input type="checkbox" id="screenshot-autorefresh" onchange="toggleScreenshotRefresh()"> Auto-refresh every 3s
+                    </label>
+                    <span id="screenshot-time" style="color:#8b949e;font-size:12px;"></span>
+                </div>
+                <div id="screenshot-container" style="background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:10px;display:none;">
+                    <img id="screenshot-img" style="width:100%;border-radius:4px;cursor:crosshair;" onclick="handleScreenshotClick(event)" title="Click to send click to PC2">
+                    <div style="color:#8b949e;font-size:11px;margin-top:6px;">💡 Click anywhere on the screenshot to send that click to PC2</div>
+                </div>
+            </div>
+
+            <hr style="border-color:#30363d;margin:16px 0;">
+
+            <div style="margin-bottom:16px;">
+                <h3 style="color:#c9d1d9;font-size:15px;margin-bottom:10px;">Open URL on PC2</h3>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <input type="text" id="remote-url-input" placeholder="https://google.com" class="input-field" style="flex:1;min-width:200px;">
+                    <button class="btn btn-secondary" onclick="openRemoteURL()">🌐 Open in Background</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color:#c9d1d9;font-size:15px;margin-bottom:10px;">Open File on PC2</h3>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <input type="text" id="remote-file-input" placeholder="C:\Users\You\Desktop\file.txt" class="input-field" style="flex:1;min-width:200px;">
+                    <button class="btn btn-secondary" onclick="openRemoteFile()">📂 Open File</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Viewer -->
+        <div class="control-panel" style="margin-top:10px;">
+            <h2>📄 Log Viewer</h2>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+                <select id="log-file-select" class="input-field" style="max-width:260px;" onchange="loadLogFile()">
+                    <option value="">-- Select a log file --</option>
+                </select>
+                <button class="btn btn-secondary" onclick="refreshLogList()">Refresh</button>
+                <button class="btn btn-secondary" onclick="loadLogFile()">Reload File</button>
+                <label style="display:flex;align-items:center;gap:6px;color:#8b949e;font-size:13px;">
+                    <input type="checkbox" id="log-autoscroll" checked> Auto-scroll
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;color:#8b949e;font-size:13px;">
+                    <input type="checkbox" id="log-autorefresh" onchange="toggleLogAutoRefresh()"> Live refresh
+                </label>
+            </div>
+            <div id="log-viewer" style="background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:14px;font-family:monospace;font-size:12px;color:#c9d1d9;height:320px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;">
+                <span style="color:#8b949e;">Select a log file above to view its contents.</span>
+            </div>
+        </div>
+
     </div>
 
     <script src="script.js?v=9"></script>
