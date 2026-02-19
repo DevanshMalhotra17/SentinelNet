@@ -146,10 +146,16 @@ VOID WINAPI ServiceMain(DWORD argc, LPSTR *argv) {
   g_stopEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
   if (!g_stopEvent) { setServiceStatus(SERVICE_STOPPED, GetLastError()); return; }
 
+  char exePath[MAX_PATH];
+  GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+  std::string exeDir(exePath);
+  exeDir = exeDir.substr(0, exeDir.rfind('\\'));
+  SetCurrentDirectoryA(exeDir.c_str());
+
   setServiceStatus(SERVICE_RUNNING);
 
   logger log;
-  log.logMessage("SentinelNet service started");
+  log.logMessage("SentinelNet service started from " + exeDir);
 
   // Run dashboard on background thread
   CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
