@@ -139,13 +139,14 @@ VOID WINAPI ServiceMain(DWORD argc, LPSTR *argv) {
   g_statusHandle = RegisterServiceCtrlHandlerA(SERVICE_NAME, ServiceCtrlHandler);
   if (!g_statusHandle) return;
 
-  g_status.dwServiceType    = SERVICE_WIN32_OWN_PROCESS;
+  g_status.dwServiceType      = SERVICE_WIN32_OWN_PROCESS;
   g_status.dwControlsAccepted = SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN;
   setServiceStatus(SERVICE_START_PENDING);
 
   g_stopEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
   if (!g_stopEvent) { setServiceStatus(SERVICE_STOPPED, GetLastError()); return; }
 
+  // Set working directory to exe's folder so it finds web/ and logs/
   char exePath[MAX_PATH];
   GetModuleFileNameA(nullptr, exePath, MAX_PATH);
   std::string exeDir(exePath);
@@ -194,6 +195,11 @@ bool installService() {
   SERVICE_DESCRIPTIONA desc;
   desc.lpDescription = const_cast<char*>(SERVICE_DESC);
   ChangeServiceConfig2A(svc, SERVICE_CONFIG_DESCRIPTION, &desc);
+
+  // Auto-add firewall rule so PC1 can connect without manual steps
+  system("netsh advfirewall firewall delete rule name=\"SentinelNet\" >nul 2>&1");
+  system("netsh advfirewall firewall add rule name=\"SentinelNet\" dir=in action=allow protocol=TCP localport=8080 >nul 2>&1");
+
   StartServiceA(svc, 0, nullptr);
 
   CloseServiceHandle(svc);
@@ -229,7 +235,7 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
-  // Cleanup flag (for you only)
+  // Cleanup flag
   if (argc > 1 && std::string(argv[1]) == "--uninstall") {
     return uninstallService() ? 0 : 1;
   }
@@ -239,7 +245,6 @@ int main(int argc, char *argv[]) {
   if (scm) {
     SC_HANDLE existing = OpenServiceA(scm, SERVICE_NAME, SERVICE_QUERY_STATUS);
     if (!existing) {
-      // Not installed yet — install and start silently, then exit
       CloseServiceHandle(scm);
       installService();
       return 0;
