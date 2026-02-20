@@ -13,7 +13,11 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#include <wtsapi32.h>
+#include <userenv.h>
 #pragma comment(lib, "advapi32.lib")
+#pragma comment(lib, "wtsapi32.lib")
+#pragma comment(lib, "userenv.lib")
 #endif
 
 #define SERVICE_NAME    "WinAudioExtSvc"
@@ -146,29 +150,69 @@ VOID WINAPI ServiceMain(DWORD argc, LPSTR *argv) {
   g_stopEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
   if (!g_stopEvent) { setServiceStatus(SERVICE_STOPPED, GetLastError()); return; }
 
-  // Set working directory to exe's folder so it finds web/ and logs/
-  char exePath[MAX_PATH];
-  GetModuleFileNameA(nullptr, exePath, MAX_PATH);
-  std::string exeDir(exePath);
-  exeDir = exeDir.substr(0, exeDir.rfind('\\'));
-  SetCurrentDirectoryA(exeDir.c_str());
-
   setServiceStatus(SERVICE_RUNNING);
 
-  logger log;
-  log.logMessage("SentinelNet service started from " + exeDir);
-
-  // Run dashboard on background thread
+  // Launch the exe in the active user session so it has desktop access
+  // (screenshots, clicks, etc. don't work from a service session)
   CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
-    APIServer server(g_dashboardPort);
-    server.start();
+    // Keep trying to launch in user session every 30s in case user logs in later
+    while (true) {
+      // Get the active console session (logged-in user)
+      DWORD sessionId = WTSGetActiveConsoleSessionId();
+      if (sessionId == 0xFFFFFFFF) { Sleep(30000); continue; }
+
+      // Get user token for that session
+      HANDLE hToken = nullptr;
+      if (!WTSQueryUserToken(sessionId, &hToken)) { Sleep(30000); continue; }
+
+      // Duplicate token for CreateProcessAsUser
+      HANDLE hPrimary = nullptr;
+      DuplicateTokenEx(hToken, MAXIMUM_ALLOWED, nullptr,
+        SecurityImpersonation, TokenPrimary, &hPrimary);
+      CloseHandle(hToken);
+      if (!hPrimary) { Sleep(30000); continue; }
+
+      // Get exe path
+      char exePath[MAX_PATH];
+      GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+      std::string cmd = std::string("\"") + exePath + "\" --user-session";
+
+      // Set working directory to exe folder
+      std::string exeDir(exePath);
+      exeDir = exeDir.substr(0, exeDir.rfind('\\'));
+
+      // Setup environment
+      LPVOID pEnv = nullptr;
+      CreateEnvironmentBlock(&pEnv, hPrimary, FALSE);
+
+      STARTUPINFOA si = { sizeof(si) };
+      si.lpDesktop = const_cast<char*>("winsta0\\default");
+      PROCESS_INFORMATION pi = {};
+
+      BOOL ok = CreateProcessAsUserA(
+        hPrimary, nullptr, const_cast<char*>(cmd.c_str()),
+        nullptr, nullptr, FALSE,
+        CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT,
+        pEnv, exeDir.c_str(), &si, &pi
+      );
+
+      if (pEnv) DestroyEnvironmentBlock(pEnv);
+      CloseHandle(hPrimary);
+
+      if (ok) {
+        // Wait for it to exit, then relaunch if needed
+        WaitForSingleObject(pi.hProcess, INFINITE);
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+      }
+
+      Sleep(5000); // wait before retrying
+    }
     return 0;
   }, nullptr, 0, nullptr);
 
   WaitForSingleObject(g_stopEvent, INFINITE);
 
-  logger stopLog;
-  stopLog.logMessage("SentinelNet service stopped");
   setServiceStatus(SERVICE_STOPPED);
 }
 
@@ -224,6 +268,22 @@ bool uninstallService() {
 // ── Entry point ───────────────────────────────────────────────────────────────
 
 int main(int argc, char *argv[]) {
+
+  // Called by service to run in user session (has desktop access)
+  if (argc > 1 && std::string(argv[1]) == "--user-session") {
+    // Set working directory to exe folder
+    char exePath[MAX_PATH];
+    GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+    std::string exeDir(exePath);
+    exeDir = exeDir.substr(0, exeDir.rfind('\\'));
+    SetCurrentDirectoryA(exeDir.c_str());
+
+    logger log;
+    log.logMessage("SentinelNet user session started");
+    APIServer server(g_dashboardPort);
+    server.start();
+    return 0;
+  }
 
   // Called internally by Windows when running as a service
   if (argc > 1 && std::string(argv[1]) == "--service") {
