@@ -18,9 +18,11 @@ add_executable(SentinelNet
     src/network_utils.cpp
     src/main.cpp
     src/packet_monitor.cpp
+    src/tunnel.cpp
+    resources.rc
 )
 
-target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet wtsapi32 userenv)
+target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet wtsapi32 userenv winhttp)
 
 if(MINGW)
     target_link_options(SentinelNet PRIVATE "-static-libgcc" "-static-libstdc++" "-static")

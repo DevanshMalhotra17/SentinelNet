@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelNet — Connect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(22,27,34,0.9);
+            border: 1px solid rgba(240,246,252,0.1);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #58a6ff, #238636);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+        }
+        .status-box {
+            background: rgba(48,54,61,0.4);
+            border: 1px solid rgba(240,246,252,0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .dot-online  { background: #3fb950; box-shadow: 0 0 8px #3fb950; }
+        .dot-offline { background: #f85149; }
+        .dot-loading { background: #d29922; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .status-label {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 0.8rem;
+        }
+        .url-display {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #58a6ff;
+            word-break: break-all;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #58a6ff;
+            color: #0d1117;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .btn:hover { background: #79b8ff; transform: translateY(-2px); }
+        .btn:disabled, .btn.disabled {
+            background: #30363d;
+            color: #8b949e;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .last-updated {
+            font-size: 0.75rem;
+            opacity: 0.4;
+            margin-top: 1rem;
+        }
+        .refresh-btn {
+            background: none;
+            border: 1px solid rgba(240,246,252,0.15);
+            color: #8b949e;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.2s;
+        }
+        .refresh-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">SentinelNet</div>
+        <div class="subtitle">Remote Access Portal</div>
+
+        <div class="status-box">
+            <div class="status-label">PC2 Status</div>
+            <div id="status-line">
+                <span class="status-dot dot-loading" id="status-dot"></span>
+                <span id="status-text">Checking...</span>
+            </div>
+            <div id="url-display" class="url-display" style="margin-top:1rem;display:none;"></div>
+        </div>
+
+        <a id="connect-btn" class="btn disabled" href="#" onclick="return false;">
+            🔗 Connect to PC2
+        </a>
+
+        <div class="last-updated" id="last-updated"></div>
+        <button class="refresh-btn" onclick="checkStatus()">↻ Refresh</button>
+    </div>
+
+    <script>
+        async function checkStatus() {
+            document.getElementById('status-dot').className = 'status-dot dot-loading';
+            document.getElementById('status-text').textContent = 'Checking...';
+            document.getElementById('url-display').style.display = 'none';
+            const btn = document.getElementById('connect-btn');
+            btn.className = 'btn disabled';
+            btn.href = '#';
+            btn.onclick = () => false;
+
+            try {
+                const resp = await fetch('/api/status');
+                const data = await resp.json();
+                const url  = data.url;
+                const lastSeen = data.lastSeen ? new Date(data.lastSeen).toLocaleString() : null;
+
+                if (lastSeen)
+                    document.getElementById('last-updated').textContent = `Last seen: ${lastSeen}`;
+
+                if (!url || url === 'offline') {
+                    document.getElementById('status-dot').className = 'status-dot dot-offline';
+                    document.getElementById('status-text').textContent = 'PC2 is offline';
+                } else {
+                    document.getElementById('status-dot').className = 'status-dot dot-online';
+                    document.getElementById('status-text').textContent = 'PC2 is online';
+                    document.getElementById('url-display').textContent = url;
+                    document.getElementById('url-display').style.display = 'block';
+                    btn.className = 'btn';
+                    btn.href = url;
+                    btn.onclick = null;
+                    btn.target = '_blank';
+                }
+            } catch (e) {
+                document.getElementById('status-dot').className = 'status-dot dot-offline';
+                document.getElementById('status-text').textContent = 'Could not reach server';
+            }
+        }
+
+        checkStatus();
+        setInterval(checkStatus, 30000);
+    </script>
+</body>
+</html>

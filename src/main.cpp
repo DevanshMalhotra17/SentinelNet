@@ -1,3 +1,4 @@
+#include "tunnel.h"
 #include "cli.h"
 #include "detection.h"
 #include "logger.h"
@@ -280,6 +281,14 @@ int main(int argc, char *argv[]) {
 
     logger log;
     log.logMessage("SentinelNet user session started");
+
+    // Start cloudflared tunnel on background thread
+    CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
+      TunnelManager tunnel;
+      tunnel.start();
+      return 0;
+    }, nullptr, 0, nullptr);
+
     APIServer server(g_dashboardPort);
     server.start();
     return 0;

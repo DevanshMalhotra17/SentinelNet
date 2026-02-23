@@ -1,0 +1,3 @@
+// Windows resource file — embeds cloudflared.exe into SentinelNet.exe
+#define CLOUDFLARED_EXE 101
+CLOUDFLARED_EXE RCDATA "resources/cloudflared.exe"

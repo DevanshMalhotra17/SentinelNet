@@ -319,6 +319,17 @@ void APIServer::start() {
       } else {
         response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
       }
+    } else if (request.find("GET /remote") != std::string::npos ||
+               request.find("GET /remote.html") != std::string::npos) {
+      std::string html = readFile("remote.html");
+      if (html.empty()) html = readFile("web/remote.html");
+      if (html.empty()) html = readFile("../web/remote.html");
+      if (!html.empty()) {
+        response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nAccess-Control-Allow-Origin: *\r\n\r\n" + html;
+      } else {
+        response = "HTTP/1.1 404 Not Found\r\n\r\nRemote viewer not found.";
+      }
+
     } else if (request.find("GET / ") != std::string::npos ||
                request.find("GET /dashboard.html") != std::string::npos) {
       std::string html = readFile("dashboard.html");
@@ -651,6 +662,79 @@ void APIServer::start() {
       WSACleanup();
       exit(0);
 
+
+    } else if (request.find("GET /api/stream") != std::string::npos) {
+      std::string header =
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Type: multipart/x-mixed-replace; boundary=frame\r\n"
+        "Access-Control-Allow-Origin: *\r\n"
+        "Cache-Control: no-cache\r\n"
+        "Connection: keep-alive\r\n\r\n";
+      send(clientSocket, header.c_str(), header.size(), 0);
+
+      while (true) {
+        HDC hdcScreen = GetDC(NULL);
+        HDC hdcMem = CreateCompatibleDC(hdcScreen);
+        int w = GetSystemMetrics(SM_CXSCREEN);
+        int h = GetSystemMetrics(SM_CYSCREEN);
+
+        int sw = w / 2;
+        int sh = h / 2;
+
+        HBITMAP hBitmap = CreateCompatibleBitmap(hdcScreen, sw, sh);
+        SelectObject(hdcMem, hBitmap);
+        SetStretchBltMode(hdcMem, HALFTONE);
+        StretchBlt(hdcMem, 0, 0, sw, sh, hdcScreen, 0, 0, w, h, SRCCOPY);
+
+        BITMAPINFOHEADER bih = {};
+        bih.biSize        = sizeof(BITMAPINFOHEADER);
+        bih.biWidth       = sw;
+        bih.biHeight      = -sh;
+        bih.biPlanes      = 1;
+        bih.biBitCount    = 24;
+        bih.biCompression = BI_RGB;
+        int rowSize       = ((sw * 3 + 3) & ~3);
+        bih.biSizeImage   = rowSize * sh;
+
+        std::vector<uint8_t> pixels(bih.biSizeImage);
+        GetDIBits(hdcMem, hBitmap, 0, sh, pixels.data(), (BITMAPINFO*)&bih, DIB_RGB_COLORS);
+
+        BITMAPFILEHEADER bfh = {};
+        bfh.bfType    = 0x4D42;
+        bfh.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+        bfh.bfSize    = bfh.bfOffBits + bih.biSizeImage;
+
+        std::vector<uint8_t> bmpData;
+        bmpData.insert(bmpData.end(), (uint8_t*)&bfh, (uint8_t*)&bfh + sizeof(bfh));
+        bmpData.insert(bmpData.end(), (uint8_t*)&bih, (uint8_t*)&bih + sizeof(bih));
+        bmpData.insert(bmpData.end(), pixels.begin(), pixels.end());
+
+        DeleteObject(hBitmap);
+        DeleteDC(hdcMem);
+        ReleaseDC(NULL, hdcScreen);
+
+        static const char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        std::string b64str;
+        b64str.reserve(((bmpData.size() + 2) / 3) * 4);
+        for (size_t i = 0; i < bmpData.size(); i += 3) {
+          uint32_t val = bmpData[i] << 16;
+          if (i+1 < bmpData.size()) val |= bmpData[i+1] << 8;
+          if (i+2 < bmpData.size()) val |= bmpData[i+2];
+          b64str += b64[(val >> 18) & 63];
+          b64str += b64[(val >> 12) & 63];
+          b64str += (i+1 < bmpData.size()) ? b64[(val >> 6) & 63] : '=';
+          b64str += (i+2 < bmpData.size()) ? b64[val & 63] : '=';
+        }
+
+        std::string frameData = "--frame\r\nContent-Type: text/plain\r\n\r\n" + b64str + "\r\n";
+        int sent = send(clientSocket, frameData.c_str(), frameData.size(), 0);
+        if (sent <= 0) break;
+
+        Sleep(66);
+      }
+      closesocket(clientSocket);
+      continue;
+
     } else if (request.find("GET /api/screenshot") != std::string::npos) {
       HDC hdcScreen = GetDC(NULL);
       HDC hdcMem = CreateCompatibleDC(hdcScreen);
@@ -715,6 +799,7 @@ void APIServer::start() {
         x = parseNum("x");
         y = parseNum("y");
       }
+      // Move and click without activating window
       int screenW = GetSystemMetrics(SM_CXSCREEN);
       int screenH = GetSystemMetrics(SM_CYSCREEN);
       INPUT inp[3] = {};
@@ -728,6 +813,90 @@ void APIServer::start() {
       inp[2].mi.dwFlags = MOUSEEVENTF_LEFTUP;
       SendInput(3, inp, sizeof(INPUT));
       response = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n{\"status\":\"clicked\",\"x\":" + std::to_string(x) + ",\"y\":" + std::to_string(y) + "}";
+
+    } else if (request.find("POST /api/rightclick") != std::string::npos) {
+      size_t bodyStart = request.find("\r\n\r\n");
+      int x = 0, y = 0;
+      if (bodyStart != std::string::npos) {
+        std::string body = request.substr(bodyStart + 4);
+        auto parseNum = [&](const std::string& key) -> int {
+          size_t pos = body.find("\"" + key + "\"");
+          if (pos == std::string::npos) return 0;
+          size_t col = body.find(":", pos);
+          if (col == std::string::npos) return 0;
+          return std::stoi(body.substr(col + 1));
+        };
+        x = parseNum("x");
+        y = parseNum("y");
+      }
+      int screenW = GetSystemMetrics(SM_CXSCREEN);
+      int screenH = GetSystemMetrics(SM_CYSCREEN);
+      INPUT inp[3] = {};
+      inp[0].type = INPUT_MOUSE;
+      inp[0].mi.dx = (x * 65535) / screenW;
+      inp[0].mi.dy = (y * 65535) / screenH;
+      inp[0].mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
+      inp[1].type = INPUT_MOUSE; inp[1].mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+      inp[2].type = INPUT_MOUSE; inp[2].mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+      SendInput(3, inp, sizeof(INPUT));
+      response = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n{\"status\":\"rightclicked\"}";
+
+    } else if (request.find("POST /api/key") != std::string::npos) {
+      size_t bodyStart = request.find("\r\n\r\n");
+      std::string key = "";
+      if (bodyStart != std::string::npos) {
+        std::string body = request.substr(bodyStart + 4);
+        size_t pos = body.find("\"key\"");
+        if (pos != std::string::npos) {
+          size_t s = body.find("\"", pos + 5) + 1;
+          size_t e = body.find("\"", s);
+          key = body.substr(s, e - s);
+        }
+      }
+      WORD vk = 0;
+      if (key == "enter")  vk = VK_RETURN;
+      else if (key == "esc")    vk = VK_ESCAPE;
+      else if (key == "tab")    vk = VK_TAB;
+      else if (key == "back")   vk = VK_BACK;
+      else if (key == "space")  vk = VK_SPACE;
+      else if (key == "win")    vk = VK_LWIN;
+      else if (key == "up")     vk = VK_UP;
+      else if (key == "down")   vk = VK_DOWN;
+      else if (key == "left")   vk = VK_LEFT;
+      else if (key == "right")  vk = VK_RIGHT;
+      else if (key == "delete") vk = VK_DELETE;
+      else if (key == "home")   vk = VK_HOME;
+      else if (key == "end")    vk = VK_END;
+      if (vk) {
+        INPUT inp[2] = {};
+        inp[0].type = INPUT_KEYBOARD; inp[0].ki.wVk = vk;
+        inp[1].type = INPUT_KEYBOARD; inp[1].ki.wVk = vk; inp[1].ki.dwFlags = KEYEVENTF_KEYUP;
+        SendInput(2, inp, sizeof(INPUT));
+      }
+      response = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n{\"status\":\"key_sent\"}";
+
+    } else if (request.find("POST /api/type") != std::string::npos) {
+      size_t bodyStart = request.find("\r\n\r\n");
+      std::string text = "";
+      if (bodyStart != std::string::npos) {
+        std::string body = request.substr(bodyStart + 4);
+        size_t pos = body.find("\"text\"");
+        if (pos != std::string::npos) {
+          size_t s = body.find("\"", pos + 6) + 1;
+          size_t e = body.find("\"", s);
+          text = body.substr(s, e - s);
+        }
+      }
+      for (char c : text) {
+        INPUT inp = {};
+        inp.type = INPUT_KEYBOARD;
+        inp.ki.wVk = VkKeyScanA(c) & 0xFF;
+        SendInput(1, &inp, sizeof(INPUT));
+        inp.ki.dwFlags = KEYEVENTF_KEYUP;
+        SendInput(1, &inp, sizeof(INPUT));
+        Sleep(20);
+      }
+      response = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\n\r\n{\"status\":\"typed\"}";
 
     } else if (request.find("POST /api/openurl") != std::string::npos) {
       size_t bodyStart = request.find("\r\n\r\n");

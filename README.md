@@ -1,12 +1,12 @@
 # SentinelNet v2.0
 
-> ## **FOR EDUCATIONAL PURPOSES ONLY**
+> ⚠️ **FOR EDUCATIONAL PURPOSES ONLY**
 >
-> ## **SentinelNet is built strictly for learning, personal home lab use, and authorized network auditing. Do **not** use this tool on any network or machine you do not own or have explicit written permission to access. Unauthorized use of remote access, port scanning, or network monitoring tools may be **illegal** in your country. I am **not responsible** for any misuse, damage, or legal consequences caused by this software.**
+> ## SentinelNet is built strictly for learning, personal home lab use, and authorized network auditing. Do **not** use this tool on any network or machine you do not own or have explicit written permission to access. Unauthorized use of remote access, port scanning, or network monitoring tools may be **illegal** in your country. I am **not responsible** for any misuse, damage, or legal consequences caused by this software.
 
 ---
 
-SentinelNet is a self-hosted network security tool designed for home labs and enterprise auditing. It combines a powerful **C++17 parallel-scanning engine** with a modern web dashboard for real-time visibility — plus a built-in remote access layer so you can monitor and control the host machine from any device on your LAN.
+SentinelNet is a self-hosted network security tool designed for home labs and enterprise auditing. It combines a powerful **C++17 parallel-scanning engine** with a modern web dashboard for real-time visibility and a full remote access and control layer so you can monitor, control, and see the host machine from anywhere in the world.
 
 ---
 
@@ -15,56 +15,53 @@ SentinelNet is a self-hosted network security tool designed for home labs and en
 - **Professional Interactive Shell**: A redesigned CLI shell for complex auditing without leaving your terminal.
 - **Security Scoring**: Improved anomaly detection for rogue access points and suspicious device behavior.
 - **Network Discovery**: Blazingly fast device discovery using CIDR and IP range expansion.
-- **Remote Access Dashboard**: View screenshots, send clicks, open URLs/files, and manage the process — all from a browser on another machine.
+- **Silent Windows Service**: Installs itself as a hidden background service on first run — auto-starts on every boot, no terminal, no tray icon.
+- **Cloudflare Tunnel**: Built-in Cloudflare tunnel gives you a public URL to access the dashboard from anywhere in the world — no port forwarding, no static IP needed.
+- **Live Remote Desktop**: Stream PC2's screen live at 15fps with full click, right-click, keyboard, and typing support directly in your browser.
+- **Remote Access Dashboard**: View screenshots, send clicks, open URLs/files, and manage the process — all from a browser on another device.
 - **Live Log Viewer**: Read and live-refresh log files directly from the dashboard.
 - **Remote Management**: Restart or shut down SentinelNet remotely with uptime tracking.
-- **Smart Viewer Detection**: The remote access panel is only shown to remote viewers — local users see the standard dashboard.
 
 ---
 
-## Quick Start (Portable)
+## Quick Start
 
-You can run SentinelNet as a portable tool without building the source.
+1. **Download**: Get the latest release from the [Live Landing Page](https://sentinelnet.vercel.app/).
+2. **Extract**: Unzip the folder (ensure the `web/` folder stays with the `.exe`).
+3. **Run as Administrator**: Right-click `SentinelNet.exe` → **Run as administrator**. The window will close on its own — that's normal. It's now running silently in the background and will auto-start on every boot.
+4. **Connect from another device**: Open `sentinelnet.vercel.app/connect.html` on PC1 — wait ~30 seconds for the tunnel to start, then click the connect button.
 
-1.  **Download**: Get the latest release from the [Live Landing Page](https://sentinelnet.vercel.app/).
-2.  **Extract**: Unzip the folder (ensure the `web/` folder stays with the `.exe`).
-3.  **Launch**:
-    - **Dashboard**: Run `.\SentinelNet.exe -D` to start the web UI at `http://localhost:8080`.
-    - **Interactive Shell**: Run `.\SentinelNet.exe` (no arguments) to enter the security shell.
+> **Prerequisite**: SentinelNet requires **Npcap** for packet capture. Download it at [npcap.com](https://npcap.com/#download) and install it before running.
 
 ---
 
-## Remote Access Setup
+## Remote Access
 
-SentinelNet includes a built-in remote access system so you can control the host machine from another device on your LAN. This is intended for **personal use across your own machines only**.
+SentinelNet includes a full remote access system for controlling the host machine from any device, anywhere in the world.
 
-### On the host machine (PC being accessed):
-```bat
-SentinelNet.exe -D
-```
-The console will print two URLs:
-```
-Local access  : http://localhost:8080
-Network access: http://192.168.1.42:8080
-```
+### How it works:
+1. PC2 runs `SentinelNet.exe` as administrator (once, first time only)
+2. SentinelNet installs itself as a silent Windows service
+3. On every boot, it starts a Cloudflare tunnel and reports the public URL to your connect page
+4. Open `sentinelnet.vercel.app/connect.html` on PC1 — click **Connect to PC2**
 
-### On the remote machine (PC doing the accessing):
-Open a browser and go to the **Network access** URL. You'll see the full dashboard including the Remote Access panel with:
-- **Screenshot** - capture the host screen, auto-refresh every 3s
-- **Remote Click** - click anywhere on the screenshot to click that spot on the host
-- **Open URL** - open a URL in the host's browser (background, no focus steal)
-- **Open File** - open any file on the host silently
-- **Restart / Shutdown** - manage the SentinelNet process remotely
-- **Log Viewer** - browse and live-refresh log files
-- **Uptime / Status** - see host IP, port, version, and uptime
+### Dashboard features:
+- 📸 **Screenshot** — capture the host screen on demand
+- 🖥️ **Live Remote Desktop** — stream PC2's screen at 15fps, click anywhere to control it
+- 🖱️ **Remote Click / Right-click** — full mouse control
+- ⌨️ **Type / Keypress** — send text and special keys remotely
+- 🌐 **Open URL** — open a URL in the host's browser silently
+- 📂 **Open File** — open any file on the host silently
+- 🔄 **Restart / Shutdown** — manage the SentinelNet process remotely
+- 📄 **Log Viewer** — browse and live-refresh log files
+- ⏱️ **Uptime / Status** — see host IP, port, version, and uptime
 
-### Auto-start on boot (optional):
-To have SentinelNet start automatically when the host boots, create a `.bat` file in the Windows startup folder (`shell:startup`):
-```bat
-@echo off
-cd /d "C:\Path\To\SentinelNet"
-start "" SentinelNet.exe -D
-```
+### Access URLs:
+| URL | What it does |
+|-----|-------------|
+| `sentinelnet.vercel.app/connect.html` | PC1 connect page — shows PC2 status and link |
+| `[tunnel-url]/` | Full dashboard |
+| `[tunnel-url]/remote` | Live remote desktop viewer |
 
 ---
 
@@ -81,10 +78,14 @@ start "" SentinelNet.exe -D
 | GET | `/api/logs` | List log files |
 | GET | `/api/logs/read?file=` | Read a specific log file |
 | GET | `/api/screenshot` | Capture host screen (base64 BMP) |
+| GET | `/api/stream` | Live screen stream (MJPEG) |
 | GET | `/api/online` | Heartbeat / online check |
 | POST | `/api/scan/trigger` | Trigger a port scan |
 | POST | `/api/audit/fingerprint` | Grab service banner |
-| POST | `/api/click` | Send mouse click to host |
+| POST | `/api/click` | Send left click to host |
+| POST | `/api/rightclick` | Send right click to host |
+| POST | `/api/key` | Send keypress to host |
+| POST | `/api/type` | Send text input to host |
 | POST | `/api/openurl` | Open URL on host |
 | POST | `/api/openfile` | Open file on host |
 | POST | `/api/restart` | Restart SentinelNet |
@@ -94,27 +95,26 @@ start "" SentinelNet.exe -D
 ---
 
 ## Build from Source
-Ensure you have **CMake 3.10+** and a **C++17** compatible compiler (MinGW or MSVC).
+
+Ensure you have **CMake 3.10+**, a **C++17** compatible compiler (MinGW or MSVC), and **Npcap SDK**.
 
 ```bash
 mkdir build
 cd build
 cmake ..
-cmake --build .
+cmake --build . --config Release
 ```
+
+Place `cloudflared.exe` in the `resources/` folder before building — it gets embedded into the final exe automatically.
 
 ---
 
 ## Project Links
 - **[Live Landing Page](https://sentinelnet.vercel.app)**
-- **[Interactive Dashboard Demo](https://sentinelnet.vercel.app/dashboard.html)**
-
----
-
-## Security Requirements
-SentinelNet requires **Npcap** for advanced packet capture features. You can download it here: [https://npcap.com/#download](https://npcap.com/#download)
+- **[Connect Page](https://sentinelnet.vercel.app/connect.html)**
+- **[Dashboard Demo](https://sentinelnet.vercel.app/web/dashboard.html)**
 
 ---
 
 ## License
-## **This project is intended for **educational and personal use only**. Do not use on networks or machines you do not own. I assume no liability for misuse.**
+This project is intended for **educational and personal use only**. Do not use on networks or machines you do not own. The author assumes no liability for misuse.
