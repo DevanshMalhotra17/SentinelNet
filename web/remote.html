@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelNet — Remote Desktop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top bar */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 1.2rem;
+            background: rgba(22,27,34,0.95);
+            border-bottom: 1px solid rgba(240,246,252,0.08);
+            flex-shrink: 0;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: linear-gradient(90deg, #58a6ff, #238636);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.35rem 0.9rem;
+            border-radius: 6px;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-primary { background: #58a6ff; color: #0d1117; }
+        .btn-primary:hover { background: #79b8ff; }
+        .btn-danger  { background: #f85149; color: #fff; }
+        .btn-danger:hover { background: #ff6b6b; }
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(240,246,252,0.15);
+            color: #8b949e;
+        }
+        .btn-ghost:hover { border-color: #58a6ff; color: #58a6ff; }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #d29922;
+            animation: pulse 1s infinite;
+            display: inline-block;
+        }
+        .status-dot.live  { background: #3fb950; animation: none; box-shadow: 0 0 6px #3fb950; }
+        .status-dot.dead  { background: #f85149; animation: none; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        .fps-counter {
+            font-size: 0.75rem;
+            color: #8b949e;
+            white-space: nowrap;
+        }
+
+        /* Screen area */
+        .screen-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            background: #010409;
+        }
+
+        #screen {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: crosshair;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .overlay-msg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #8b949e;
+        }
+
+        .overlay-msg .icon { font-size: 3rem; margin-bottom: 1rem; }
+        .overlay-msg p { font-size: 0.9rem; }
+
+        /* Click flash effect */
+        .click-flash {
+            position: absolute;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            border: 2px solid #58a6ff;
+            pointer-events: none;
+            animation: clickAnim 0.4s ease-out forwards;
+            transform: translate(-50%, -50%);
+        }
+        @keyframes clickAnim {
+            0%   { opacity: 1; transform: translate(-50%,-50%) scale(0.5); }
+            100% { opacity: 0; transform: translate(-50%,-50%) scale(2); }
+        }
+
+        /* Bottom bar */
+        .bottombar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.4rem 1.2rem;
+            background: rgba(22,27,34,0.95);
+            border-top: 1px solid rgba(240,246,252,0.08);
+            font-size: 0.75rem;
+            color: #8b949e;
+            flex-shrink: 0;
+        }
+
+        .quality-select {
+            background: #161b22;
+            border: 1px solid rgba(240,246,252,0.1);
+            color: #c9d1d9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Type toolbar */
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.2rem;
+            background: rgba(13,17,23,0.8);
+            border-top: 1px solid rgba(240,246,252,0.05);
+            flex-shrink: 0;
+        }
+
+        .type-input {
+            flex: 1;
+            background: #161b22;
+            border: 1px solid rgba(240,246,252,0.1);
+            color: #c9d1d9;
+            padding: 0.35rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'Outfit', sans-serif;
+        }
+        .type-input:focus { outline: none; border-color: #58a6ff; }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="logo">SentinelNet Remote</div>
+    <div class="controls">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text" style="font-size:0.8rem;">Connecting...</span>
+        <span class="fps-counter" id="fps-counter"></span>
+        <button class="btn btn-primary" onclick="toggleStream()" id="toggle-btn">⏸ Pause</button>
+        <button class="btn btn-ghost" onclick="sendKey('win')">⊞ Win</button>
+        <button class="btn btn-ghost" onclick="sendKey('esc')">Esc</button>
+        <button class="btn btn-ghost" onclick="sendKey('enter')">↵ Enter</button>
+        <button class="btn btn-ghost" onclick="sendKey('tab')">Tab</button>
+        <button class="btn btn-danger" onclick="window.close()">✕ Close</button>
+    </div>
+</div>
+
+<div class="screen-wrap" id="screen-wrap">
+    <img id="screen" alt="Remote Screen" style="display:none;" />
+    <div class="overlay-msg" id="overlay">
+        <div class="icon">🖥️</div>
+        <p>Connecting to PC2...</p>
+    </div>
+</div>
+
+<div class="type-row">
+    <input class="type-input" id="type-input" placeholder="Type here to send keystrokes to PC2..." />
+    <button class="btn btn-primary" onclick="sendTyped()">Send ↵</button>
+    <button class="btn btn-ghost" onclick="openURL()">🌐 Open URL</button>
+</div>
+
+<div class="bottombar">
+    <span id="resolution">Resolution: —</span>
+    <span>
+        Quality:
+        <select class="quality-select" id="quality-select" onchange="changeQuality()">
+            <option value="2">High (50%)</option>
+            <option value="3">Medium (33%)</option>
+            <option value="4">Low (25%)</option>
+        </select>
+    </span>
+    <span id="latency">Latency: —</span>
+</div>
+
+<script>
+    const BASE = window.location.origin; // e.g. http://10.0.0.21:8080 or tunnel URL
+    let streaming = true;
+    let frameCount = 0;
+    let lastFPSTime = Date.now();
+    let scaleFactor = 2; // divisor — screen is captured at 1/scaleFactor
+    let streamReader = null;
+    let abortController = null;
+
+    const screenImg   = document.getElementById('screen');
+    const overlay     = document.getElementById('overlay');
+    const statusDot   = document.getElementById('status-dot');
+    const statusText  = document.getElementById('status-text');
+    const fpsCounter  = document.getElementById('fps-counter');
+    const resolutionEl = document.getElementById('resolution');
+    const latencyEl   = document.getElementById('latency');
+
+    function setStatus(state) {
+        statusDot.className = 'status-dot ' + state;
+        if (state === 'live')  statusText.textContent = 'Live';
+        if (state === 'dead')  statusText.textContent = 'Disconnected';
+        if (state === '')      statusText.textContent = 'Connecting...';
+    }
+
+    // ── Stream via polling /api/screenshot every ~66ms ────────────────────────
+    // (Pure MJPEG is hard to parse in JS, so we poll the screenshot endpoint
+    //  at high frequency — gives smooth 10-15fps without complex streaming)
+
+    let pollInterval = null;
+    let lastFrameTime = 0;
+
+    async function fetchFrame() {
+        if (!streaming) return;
+        const t0 = Date.now();
+        try {
+            const resp = await fetch(BASE + '/api/screenshot?q=' + scaleFactor + '&_=' + t0);
+            const data = await resp.json();
+
+            if (data.data) {
+                const src = 'data:image/bmp;base64,' + data.data;
+                screenImg.src = src;
+                screenImg.style.display = 'block';
+                overlay.style.display = 'none';
+                setStatus('live');
+
+                // Update resolution display
+                resolutionEl.textContent = `Resolution: ${data.width}×${data.height}`;
+
+                // FPS counter
+                frameCount++;
+                const now = Date.now();
+                if (now - lastFPSTime >= 1000) {
+                    fpsCounter.textContent = frameCount + ' fps';
+                    frameCount = 0;
+                    lastFPSTime = now;
+                }
+
+                // Latency
+                latencyEl.textContent = 'Latency: ' + (Date.now() - t0) + 'ms';
+            }
+        } catch(e) {
+            setStatus('dead');
+            overlay.style.display = 'flex';
+            overlay.innerHTML = '<div class="icon">⚠️</div><p>Connection lost. Retrying...</p>';
+        }
+    }
+
+    function startStream() {
+        if (pollInterval) clearInterval(pollInterval);
+        pollInterval = setInterval(fetchFrame, 66); // 15fps target
+        fetchFrame();
+    }
+
+    function toggleStream() {
+        streaming = !streaming;
+        document.getElementById('toggle-btn').textContent = streaming ? '⏸ Pause' : '▶ Resume';
+        if (streaming) startStream();
+        else clearInterval(pollInterval);
+    }
+
+    function changeQuality() {
+        scaleFactor = parseInt(document.getElementById('quality-select').value);
+    }
+
+    // ── Click handling ────────────────────────────────────────────────────────
+
+    screenImg.addEventListener('click', async function(e) {
+        const rect = screenImg.getBoundingClientRect();
+
+        // Map click position back to actual screen coordinates
+        const relX = (e.clientX - rect.left) / rect.width;
+        const relY = (e.clientY - rect.top)  / rect.height;
+
+        // Get actual screen resolution from last frame
+        const actualX = Math.round(relX * (screenImg.naturalWidth  * scaleFactor));
+        const actualY = Math.round(relY * (screenImg.naturalHeight * scaleFactor));
+
+        // Show click flash
+        const flash = document.createElement('div');
+        flash.className = 'click-flash';
+        flash.style.left = e.clientX + 'px';
+        flash.style.top  = e.clientY + 'px';
+        document.body.appendChild(flash);
+        setTimeout(() => flash.remove(), 400);
+
+        // Send click to PC2
+        await fetch(BASE + '/api/click', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({x: actualX, y: actualY})
+        });
+    });
+
+    // Right click
+    screenImg.addEventListener('contextmenu', async function(e) {
+        e.preventDefault();
+        const rect = screenImg.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width;
+        const relY = (e.clientY - rect.top)  / rect.height;
+        const actualX = Math.round(relX * (screenImg.naturalWidth  * scaleFactor));
+        const actualY = Math.round(relY * (screenImg.naturalHeight * scaleFactor));
+
+        await fetch(BASE + '/api/rightclick', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({x: actualX, y: actualY})
+        });
+    });
+
+    // ── Keyboard ──────────────────────────────────────────────────────────────
+
+    document.addEventListener('keydown', function(e) {
+        // Don't intercept if typing in the input
+        if (document.activeElement === document.getElementById('type-input')) return;
+
+        const keyMap = {
+            'Enter': 'enter', 'Escape': 'esc', 'Tab': 'tab',
+            'Backspace': 'back', ' ': 'space', 'ArrowUp': 'up',
+            'ArrowDown': 'down', 'ArrowLeft': 'left', 'ArrowRight': 'right',
+            'Delete': 'delete', 'Home': 'home', 'End': 'end'
+        };
+
+        if (keyMap[e.key]) {
+            e.preventDefault();
+            sendKey(keyMap[e.key]);
+        }
+    });
+
+    async function sendKey(key) {
+        await fetch(BASE + '/api/key', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({key})
+        });
+    }
+
+    async function sendTyped() {
+        const input = document.getElementById('type-input');
+        const text = input.value;
+        if (!text) return;
+        await fetch(BASE + '/api/type', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({text})
+        });
+        input.value = '';
+    }
+
+    document.getElementById('type-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') sendTyped();
+    });
+
+    async function openURL() {
+        const url = prompt('Enter URL to open on PC2:');
+        if (!url) return;
+        await fetch(BASE + '/api/openurl', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({url})
+        });
+    }
+
+    // ── Start ─────────────────────────────────────────────────────────────────
+    startStream();
+</script>
+</body>
+</html>
