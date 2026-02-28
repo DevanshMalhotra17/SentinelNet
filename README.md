@@ -1,10 +1,10 @@
-# SentinelNet v2.0
+# SentinelNet
 
 SentinelNet is a self-hosted network security tool designed for home labs and enterprise auditing. It combines a powerful **C++17 parallel-scanning engine** with a modern web dashboard for real-time visibility.
 
 ---
 
-## What's New in v2.0
+## What's New
 - **High-Speed Multi-threading**: Port scans are now up to **10x faster** using hardware-accelerated concurrency.
 - **Professional Interactive Shell**: A redesigned CLI shell for complex auditing without leaving your terminal.
 - **Security Scoring**: Improved anomaly detection for rogue access points and suspicious device behavior.

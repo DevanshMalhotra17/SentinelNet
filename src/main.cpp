@@ -252,7 +252,7 @@ int main(int argc, char *argv[]) {
   NetworkScanner scanner;
   logger log;
 
-  log.logMessage("SentinelNet started - v2.0");
+  log.logMessage("SentinelNet started");
 
   if (argc > 1) {
     // CLI Mode: Process arguments and exit
@@ -265,7 +265,7 @@ int main(int argc, char *argv[]) {
     runScanner(options, scanner, log);
   } else {
     // Shell Mode: Interactive loop
-    std::cout << "\n=== SentinelNet Shell v2.0 ===" << std::endl;
+    std::cout << "\n=== SentinelNet Shell ===" << std::endl;
     std::cout << "Type '-h' or '--help' to see available commands."
               << std::endl;
     std::cout << "Type 'exit' or 'quit' to close." << std::endl;
