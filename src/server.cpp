@@ -126,9 +126,7 @@ APIServer::~APIServer() { stop(); }
 namespace fs = std::filesystem;
 
 std::string readFile(const std::string &filepath) {
-  std::cout << "  [DEBUG] Attempting to read: " << fs::absolute(filepath)
-            << std::endl;
-  std::ifstream file(filepath);
+  std::ifstream file(filepath, std::ios::binary);
   if (!file.is_open()) {
     return "";
   }
@@ -212,34 +210,23 @@ void APIServer::start() {
 
     std::string request;
     char buffer[4096];
-    int bytesRead = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
-    if (bytesRead > 0) {
+    bool requestComplete = false;
+
+    // Read until we find the end of the HTTP headers (\r\n\r\n)
+    while (!requestComplete) {
+      int bytesRead = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
+      if (bytesRead <= 0)
+        break;
       buffer[bytesRead] = '\0';
       request.append(buffer, bytesRead);
 
-      // Check for POST body if it's a POST request
-      if (request.find("POST") == 0) {
-        size_t contentLengthPos = request.find("Content-Length: ");
-        if (contentLengthPos != std::string::npos) {
-          size_t start = contentLengthPos + 16;
-          size_t end = request.find("\r\n", start);
-          int contentLength = std::stoi(request.substr(start, end - start));
-
-          size_t bodyStart = request.find("\r\n\r\n");
-          if (bodyStart != std::string::npos) {
-            bodyStart += 4;
-            int currentBodyLen = request.length() - bodyStart;
-            while (currentBodyLen < contentLength) {
-              bytesRead = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
-              if (bytesRead <= 0)
-                break;
-              buffer[bytesRead] = '\0';
-              request.append(buffer, bytesRead);
-              currentBodyLen += bytesRead;
-            }
-          }
-        }
+      if (request.find("\r\n\r\n") != std::string::npos) {
+        requestComplete = true;
       }
+
+      // Safety break for extremely large requests
+      if (request.length() > 65536)
+        break;
     }
 
     if (request.empty()) {
@@ -248,8 +235,11 @@ void APIServer::start() {
     }
 
     std::string response;
-    std::cout << "[REQUEST] " << request.substr(0, request.find("\r\n")) << " ("
-              << request.length() << " bytes)" << std::endl;
+    // Capture the request line for logging
+    size_t lineEnd = request.find("\r\n");
+    std::string requestLine =
+        (lineEnd != std::string::npos) ? request.substr(0, lineEnd) : "INVALID";
+    std::cout << "[REQUEST] " << requestLine << std::endl;
 
     if (request.find("GET /hack.js") != std::string::npos) {
       std::string js = readFile("hack.js");
@@ -276,25 +266,29 @@ void APIServer::start() {
         response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
       }
     } else if (request.find("GET / ") != std::string::npos ||
-               request.find("GET /dashboard.html") != std::string::npos) {
+               request.find("GET /dashboard.html") != std::string::npos ||
+               request.find("GET /index.html") != std::string::npos) {
       std::string html = readFile("dashboard.html");
       if (html.empty())
         html = readFile("web/dashboard.html");
       if (html.empty())
-        html = readFile("sentinelnet/web/dashboard.html");
-      if (html.empty())
-        html = readFile("../web/dashboard.html");
-      if (html.empty())
         html = readFile("index.html");
       if (html.empty())
         html = readFile("web/index.html");
+      if (html.empty())
+        html = readFile("../web/dashboard.html");
 
       if (html.empty()) {
-        std::cerr << "  [ERROR] Dashboard HTML not found in any path!"
-                  << std::endl;
-        response = "HTTP/1.1 404 Not Found\r\n\r\n404 - HTML file not found";
+        std::cerr << "  [ERROR] UI files not found!" << std::endl;
+        response = "HTTP/1.1 404 Not Found\r\n\r\n404 - UI file not found";
       } else {
-        response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
+        response = "HTTP/1.1 200 OK\r\n"
+                   "Content-Type: text/html\r\n"
+                   "Content-Length: " +
+                   std::to_string(html.length()) +
+                   "\r\n"
+                   "Connection: close\r\n\r\n" +
+                   html;
       }
     } else if (request.find("GET /style.css") != std::string::npos) {
       std::string css = readFile("style.css");
@@ -302,20 +296,36 @@ void APIServer::start() {
         css = readFile("web/style.css");
       if (css.empty())
         css = readFile("../web/style.css");
-      if (css.empty())
-        css = readFile("sentinelnet/web/style.css");
-      response = "HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\n" + css;
+
+      if (css.empty()) {
+        response = "HTTP/1.1 404 Not Found\r\n\r\n";
+      } else {
+        response = "HTTP/1.1 200 OK\r\n"
+                   "Content-Type: text/css\r\n"
+                   "Content-Length: " +
+                   std::to_string(css.length()) +
+                   "\r\n"
+                   "Connection: close\r\n\r\n" +
+                   css;
+      }
     } else if (request.find("GET /script.js") != std::string::npos) {
       std::string js = readFile("script.js");
       if (js.empty())
         js = readFile("web/script.js");
       if (js.empty())
         js = readFile("../web/script.js");
-      if (js.empty())
-        js = readFile("sentinelnet/web/script.js");
-      response =
-          "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" +
-          js;
+
+      if (js.empty()) {
+        response = "HTTP/1.1 404 Not Found\r\n\r\n";
+      } else {
+        response = "HTTP/1.1 200 OK\r\n"
+                   "Content-Type: application/javascript\r\n"
+                   "Content-Length: " +
+                   std::to_string(js.length()) +
+                   "\r\n"
+                   "Connection: close\r\n\r\n" +
+                   js;
+      }
     } else if (request.find("GET /hack1.js") != std::string::npos) {
       std::string js = readFile("hack1.js");
       if (js.empty())
