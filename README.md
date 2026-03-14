@@ -26,7 +26,8 @@ You can run SentinelNet as a portable tool without building the source.
 
 ## Project Links
 - **[Live Landing Page](https://sentinelnet.vercel.app)**
-- **[Interactive Dashboard Demo](https://sentinelnet.vercel.app/dashboard.html)**
+- **[Interactive Dashboard Demo](https://sentinelnet.vercel.app/web/dashboard.html)**
+> **Note:** The demo shows the UI only. Full scanning functionality requires running the compiled executable (`SentinelNet.exe`) locally with admin privileges.
 
 ---
 
