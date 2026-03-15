@@ -265,6 +265,18 @@ void APIServer::start() {
       } else {
         response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
       }
+    } else if (request.find("GET /connect.html") != std::string::npos) {
+      std::string html = readFile("connect.html");
+      if (html.empty())
+        html = readFile("web/connect.html");
+      if (html.empty())
+        html = readFile("../web/connect.html");
+
+      if (html.empty()) {
+        response = "HTTP/1.1 404 Not Found\r\n\r\n404 - connect.html not found";
+      } else {
+        response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + html;
+      }
     } else if (request.find("GET / ") != std::string::npos ||
                request.find("GET /dashboard.html") != std::string::npos ||
                request.find("GET /index.html") != std::string::npos) {
