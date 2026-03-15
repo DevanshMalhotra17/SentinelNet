@@ -16,7 +16,7 @@ SentinelNet is a self-hosted network security tool designed for home labs and en
 
 You can run SentinelNet as a portable tool without building the source.
 
-<1.  **Download**: Get the latest release from the [Live Landing Page](https://sentinelnet.vercel.app/).
+1.  **Download**: Get the latest release from the [Live Landing Page](https://sentinelnet-v2.vercel.app/).
 2.  **Extract**: Unzip the folder (ensure the `web/` folder stays with the `.exe`).
 3.  **Launch**:
     - **Dashboard**: Run `.\SentinelNet.exe -D` to start the web UI at `http://localhost:8080`.
@@ -34,7 +34,7 @@ SentinelNet includes a full remote access system for controlling the host machin
 1. PC2 runs `SentinelNet.exe` as administrator (once, first time only)
 2. SentinelNet installs itself as a silent Windows service
 3. On every boot, it starts a Cloudflare tunnel and reports the public URL to your connect page
-4. Open `sentinelnet.vercel.app/connect.html` on PC1 — click **Connect to PC2**
+4. Open `sentinelnet-v2.vercel.app/connect.html` on PC1 — click **Connect to PC2**
 
 ### Dashboard features:
 - **Screenshot** — capture the host screen on demand
@@ -45,12 +45,12 @@ SentinelNet includes a full remote access system for controlling the host machin
 - **Open File** — open any file on the host silently
 - **Restart / Shutdown** — manage the SentinelNet process remotely
 - **Log Viewer** — browse and live-refresh log files
-- ⏱**Uptime / Status** — see host IP, port, version, and uptime
+- **Uptime / Status** — see host IP, port, version, and uptime
 
 ### Access URLs:
 | URL | What it does |
 |-----|-------------|
-| `sentinelnet.vercel.app/connect.html` | PC1 connect page — shows PC2 status and link |
+| `sentinelnet-v2.vercel.app/connect.html` | PC1 connect page — shows PC2 status and link |
 | `[tunnel-url]/` | Full dashboard |
 | `[tunnel-url]/remote` | Live remote desktop viewer |
 
@@ -86,8 +86,8 @@ SentinelNet includes a full remote access system for controlling the host machin
 ---
 
 ## Project Links
-- **[Live Landing Page](https://sentinelnet.vercel.app)**
-- **[Interactive Dashboard Demo](https://sentinelnet.vercel.app/web/dashboard.html)**
+- **[Live Landing Page](https://sentinelnet-v2.vercel.app)**
+- **[Interactive Dashboard Demo](https://sentinelnet-v2.vercel.app/web/dashboard.html)**
 > **Note:** The demo shows the UI only. Full scanning functionality requires running the compiled executable (`SentinelNet.exe`) locally with admin privileges.
 
 ---
