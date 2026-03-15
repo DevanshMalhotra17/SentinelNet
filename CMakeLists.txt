@@ -21,7 +21,7 @@ add_executable(SentinelNet
     src/tunnel.cpp
 )
 
-target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet)
+target_link_libraries(SentinelNet ws2_32 iphlpapi wpcap Packet winhttp advapi32 userenv wtsapi32)
 
 if(MINGW)
     target_link_options(SentinelNet PRIVATE "-static-libgcc" "-static-libstdc++" "-static")

@@ -266,7 +266,7 @@ void runScanner(const CLIOptions &options, NetworkScanner &scanner,
   }
 }
 
-<// ── Windows Service implementation ───────────────────────────────────────────
+// ── Windows Service implementation ───────────────────────────────────────────
 
 void setServiceStatus(DWORD state, DWORD exitCode = NO_ERROR) {
   g_status.dwCurrentState  = state;
@@ -485,9 +485,29 @@ int main(int argc, char *argv[]) {
     return uninstallService() ? 0 : 1;
   }
 
-  // First run — install as service if not already installed (optional, maybe check flag)
-  // For now, let's keep it manual or triggered by a flag to avoid confusion
-  
+  // CLI Options parsing
+  CLIOptions options;
+  try {
+    options = CLIParser::parse(argc, argv);
+  } catch (...) {}
+
+  // Auto-install service on first run if it doesn't exist
+  SC_HANDLE scm = OpenSCManagerA(nullptr, nullptr, SC_MANAGER_CONNECT);
+  if (scm) {
+    SC_HANDLE existing = OpenServiceA(scm, SERVICE_NAME, SERVICE_QUERY_STATUS);
+    if (!existing) {
+      CloseServiceHandle(scm);
+      // Try to install. If it fails (e.g. no Admin), it will fall through to CLI mode.
+      if (installService()) {
+        std::cout << "[INFO] Initial setup complete. SentinelNet is now running as a background service." << std::endl;
+        return 0; 
+      }
+    } else {
+      CloseServiceHandle(existing);
+      CloseServiceHandle(scm);
+    }
+  }
+
   NetworkScanner scanner;
   logger log;
 
