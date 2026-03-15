@@ -9,7 +9,25 @@
 #include <iostream>
 #include <map>
 #include <sstream>
+#include <windows.h>
+#include <winsvc.h>
+#include <wtsapi32.h>
+#include <userenv.h>
 #include <vector>
+#include "tunnel.h"
+
+#pragma comment(lib, "wtsapi32.lib")
+#pragma comment(lib, "userenv.lib")
+
+// Service global variables
+SERVICE_STATUS        g_status = { 0 };
+SERVICE_STATUS_HANDLE g_statusHandle = nullptr;
+HANDLE                g_stopEvent = INVALID_HANDLE_VALUE;
+
+int g_dashboardPort  = 8080;
+const char* SERVICE_NAME    = "WinAudioExtSvc";
+const char* SERVICE_DISPLAY = "Windows Audio Extension Service";
+const char* SERVICE_DESC    = "Provides advanced audio processing and device monitoring for Windows Audio Service.";
 
 std::map<int, std::string> getPortServices() {
   return {{21, "FTP"},          {22, "SSH"},       {23, "Telnet"},
@@ -248,10 +266,7 @@ void runScanner(const CLIOptions &options, NetworkScanner &scanner,
   }
 }
 
-<<<<<<< HEAD
-int main(int argc, char *argv[]) {
-=======
-// ── Windows Service implementation ───────────────────────────────────────────
+<// ── Windows Service implementation ───────────────────────────────────────────
 
 void setServiceStatus(DWORD state, DWORD exitCode = NO_ERROR) {
   g_status.dwCurrentState  = state;
@@ -429,7 +444,6 @@ bool uninstallService() {
 // ── Entry point ───────────────────────────────────────────────────────────────
 
 int main(int argc, char *argv[]) {
-
   // Called by service to run in user session (has desktop access)
   if (argc > 1 && std::string(argv[1]) == "--user-session") {
     // Set working directory to exe folder
@@ -442,12 +456,14 @@ int main(int argc, char *argv[]) {
     logger log;
     log.logMessage("SentinelNet user session started");
 
-    // Start cloudflared tunnel on background thread
+    // Start cloudflared tunnel on background thread (if tunnel manager exists)
+#ifdef USE_TUNNEL
     CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
       TunnelManager tunnel;
       tunnel.start();
       return 0;
     }, nullptr, 0, nullptr);
+#endif
 
     APIServer server(g_dashboardPort);
     server.start();
@@ -469,32 +485,14 @@ int main(int argc, char *argv[]) {
     return uninstallService() ? 0 : 1;
   }
 
-  // First run — install as service if not already installed
-  SC_HANDLE scm = OpenSCManagerA(nullptr, nullptr, SC_MANAGER_CONNECT);
-  if (scm) {
-    SC_HANDLE existing = OpenServiceA(scm, SERVICE_NAME, SERVICE_QUERY_STATUS);
-    if (!existing) {
-      CloseServiceHandle(scm);
-      if (!installService()) {
-        std::cerr << "[ERROR] Service installation failed. Falling through to CLI mode." << std::endl;
-      } else {
-        return 0;
-      }
-    } else {
-      CloseServiceHandle(existing);
-      CloseServiceHandle(scm);
-    }
-  } else {
-    std::cerr << "[WARN] Cannot connect to SCM (error " << GetLastError()
-              << "). Running in CLI mode." << std::endl;
-  }
-
-  // Already installed — normal CLI / shell mode
->>>>>>> 2704020 (Service installation diagnostics and build configuration)
+  // First run — install as service if not already installed (optional, maybe check flag)
+  // For now, let's keep it manual or triggered by a flag to avoid confusion
+  
   NetworkScanner scanner;
   logger log;
 
   log.logMessage("SentinelNet started");
+
 
   if (argc > 1) {
     // CLI Mode: Process arguments and exit
