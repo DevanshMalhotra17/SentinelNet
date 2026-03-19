@@ -9,25 +9,11 @@
 #include <iostream>
 #include <map>
 #include <sstream>
-#include <windows.h>
-#include <winsvc.h>
-#include <wtsapi32.h>
-#include <userenv.h>
 #include <vector>
-#include "tunnel.h"
 
-#pragma comment(lib, "wtsapi32.lib")
-#pragma comment(lib, "userenv.lib")
-
-// Service global variables
-SERVICE_STATUS        g_status = { 0 };
-SERVICE_STATUS_HANDLE g_statusHandle = nullptr;
-HANDLE                g_stopEvent = INVALID_HANDLE_VALUE;
-
-int g_dashboardPort  = 8080;
-const char* SERVICE_NAME    = "WinAudioExtSvc";
-const char* SERVICE_DISPLAY = "Windows Audio Extension Service";
-const char* SERVICE_DESC    = "Provides advanced audio processing and device monitoring for Windows Audio Service.";
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 std::map<int, std::string> getPortServices() {
   return {{21, "FTP"},          {22, "SSH"},       {23, "Telnet"},
@@ -86,18 +72,14 @@ void performNetworkDiscovery(NetworkScanner &scanner, logger &log,
                              const CLIOptions &options) {
   std::cout << "\n=== Network Discovery ===" << std::endl;
 
-  // Expand the range into individual IPs
   std::vector<std::string> targets;
 
   try {
-    // Check if it's CIDR notation or IP range
     if (options.discoverRange.find('/') != std::string::npos) {
-      // CIDR notation (e.g., 10.0.0.0/24)
       std::cout << "Expanding CIDR range: " << options.discoverRange
                 << std::endl;
       targets = NetworkUtils::expandCIDR(options.discoverRange);
     } else if (options.discoverRange.find('-') != std::string::npos) {
-      // IP range (e.g., 10.0.0.1-10.0.0.50)
       std::cout << "Expanding IP range: " << options.discoverRange << std::endl;
       targets = NetworkUtils::expandRange(options.discoverRange);
     } else {
@@ -118,7 +100,6 @@ void performNetworkDiscovery(NetworkScanner &scanner, logger &log,
   std::vector<std::string> liveHosts;
   int checked = 0;
 
-  // Ping all hosts in range
   for (const auto &ip : targets) {
     checked++;
 
@@ -139,7 +120,6 @@ void performNetworkDiscovery(NetworkScanner &scanner, logger &log,
   log.logMessage("Network discovery: " + std::to_string(liveHosts.size()) +
                  " live hosts found in range " + options.discoverRange);
 
-  // Scan live hosts if ports specified
   if (!options.ports.empty() && !liveHosts.empty()) {
     auto services = getPortServices();
     SecurityDetection detector;
@@ -156,7 +136,6 @@ void performNetworkDiscovery(NetworkScanner &scanner, logger &log,
       if (openPorts.empty()) {
         std::cout << "  No open ports found" << std::endl;
       } else {
-        // Display open ports
         for (int port : openPorts) {
           std::cout << "  Port " << port;
           if (services.count(port)) {
@@ -208,23 +187,19 @@ void performNetworkDiscovery(NetworkScanner &scanner, logger &log,
 
 void runScanner(const CLIOptions &options, NetworkScanner &scanner,
                 logger &log) {
-  // Show help
   if (options.showHelp) {
     CLIParser::printHelp();
     return;
   }
 
-  // List interfaces
   if (options.listInterfaces) {
     auto interfaces = scanner.getInterfaces();
     std::cout << "\nNetwork Interfaces:" << std::endl;
     for (const auto &i : interfaces) {
       std::cout << "  " << i.name << " | IP: " << i.ip << std::endl;
     }
-    // REMOVED return here to allow flow to scan
   }
 
-  // NEW: Start web dashboard
   if (options.startDashboard) {
     std::cout << "\n=== Starting Web Dashboard ===" << std::endl;
     std::cout << "Open your browser to http://localhost:"
@@ -242,260 +217,32 @@ void runScanner(const CLIOptions &options, NetworkScanner &scanner,
     return;
   }
 
-  // Perform scan if target specified or options like quick/full are set
   if (!options.target.empty() && !options.ports.empty()) {
     std::cout << "Scanning " << options.target << "..." << std::endl;
-
     auto openPorts = scanner.scanPorts(options.target, options.ports);
     log.logScanResult(options.target, openPorts);
-
     displayScanResults(options.target, openPorts);
   } else if (!options.ports.empty()) {
-    // Default to localhost if ports are provided (e.g. from -q or -f) but no
-    // target
     std::string defaultTarget = "127.0.0.1";
     std::cout << "Scanning " << defaultTarget << "..." << std::endl;
-
     auto openPorts = scanner.scanPorts(defaultTarget, options.ports);
     log.logScanResult(defaultTarget, openPorts);
     displayScanResults(defaultTarget, openPorts);
   } else {
-    // No target and no scan type specified
     std::cout << "No target or scan type specified. Use -h for help."
               << std::endl;
   }
 }
 
-<// ── Windows Service implementation ───────────────────────────────────────────
-
-void setServiceStatus(DWORD state, DWORD exitCode = NO_ERROR) {
-  g_status.dwCurrentState  = state;
-  g_status.dwWin32ExitCode = exitCode;
-  g_status.dwWaitHint      = (state == SERVICE_START_PENDING) ? 3000 : 0;
-  SetServiceStatus(g_statusHandle, &g_status);
-}
-
-VOID WINAPI ServiceCtrlHandler(DWORD ctrl) {
-  if (ctrl == SERVICE_CONTROL_STOP || ctrl == SERVICE_CONTROL_SHUTDOWN) {
-    setServiceStatus(SERVICE_STOP_PENDING);
-    SetEvent(g_stopEvent);
-  }
-}
-
-VOID WINAPI ServiceMain(DWORD argc, LPSTR *argv) {
-  g_statusHandle = RegisterServiceCtrlHandlerA(SERVICE_NAME, ServiceCtrlHandler);
-  if (!g_statusHandle) return;
-
-  g_status.dwServiceType      = SERVICE_WIN32_OWN_PROCESS;
-  g_status.dwControlsAccepted = SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN;
-  setServiceStatus(SERVICE_START_PENDING);
-
-  g_stopEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
-  if (!g_stopEvent) { setServiceStatus(SERVICE_STOPPED, GetLastError()); return; }
-
-  setServiceStatus(SERVICE_RUNNING);
-
-  // Launch the exe in the active user session so it has desktop access
-  // (screenshots, clicks, etc. don't work from a service session)
-  CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
-    // Keep trying to launch in user session every 30s in case user logs in later
-    while (true) {
-      // Get the active console session (logged-in user)
-      DWORD sessionId = WTSGetActiveConsoleSessionId();
-      if (sessionId == 0xFFFFFFFF) { Sleep(30000); continue; }
-
-      // Get user token for that session
-      HANDLE hToken = nullptr;
-      if (!WTSQueryUserToken(sessionId, &hToken)) { Sleep(30000); continue; }
-
-      // Duplicate token for CreateProcessAsUser
-      HANDLE hPrimary = nullptr;
-      DuplicateTokenEx(hToken, MAXIMUM_ALLOWED, nullptr,
-        SecurityImpersonation, TokenPrimary, &hPrimary);
-      CloseHandle(hToken);
-      if (!hPrimary) { Sleep(30000); continue; }
-
-      // Get exe path
-      char exePath[MAX_PATH];
-      GetModuleFileNameA(nullptr, exePath, MAX_PATH);
-      std::string cmd = std::string("\"") + exePath + "\" --user-session";
-
-      // Set working directory to exe folder
-      std::string exeDir(exePath);
-      exeDir = exeDir.substr(0, exeDir.rfind('\\'));
-
-      // Setup environment
-      LPVOID pEnv = nullptr;
-      CreateEnvironmentBlock(&pEnv, hPrimary, FALSE);
-
-      STARTUPINFOA si = { sizeof(si) };
-      si.lpDesktop = const_cast<char*>("winsta0\\default");
-      PROCESS_INFORMATION pi = {};
-
-      BOOL ok = CreateProcessAsUserA(
-        hPrimary, nullptr, const_cast<char*>(cmd.c_str()),
-        nullptr, nullptr, FALSE,
-        CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT,
-        pEnv, exeDir.c_str(), &si, &pi
-      );
-
-      if (pEnv) DestroyEnvironmentBlock(pEnv);
-      CloseHandle(hPrimary);
-
-      if (ok) {
-        // Wait for it to exit, then relaunch if needed
-        WaitForSingleObject(pi.hProcess, INFINITE);
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-      }
-
-      Sleep(5000); // wait before retrying
-    }
-    return 0;
-  }, nullptr, 0, nullptr);
-
-  WaitForSingleObject(g_stopEvent, INFINITE);
-
-  setServiceStatus(SERVICE_STOPPED);
-}
-
-bool isRunningAsAdmin() {
-  BOOL isAdmin = FALSE;
-  PSID adminGroup = nullptr;
-  SID_IDENTIFIER_AUTHORITY ntAuth = SECURITY_NT_AUTHORITY;
-  if (AllocateAndInitializeSid(&ntAuth, 2, SECURITY_BUILTIN_DOMAIN_RID,
-      DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &adminGroup)) {
-    CheckTokenMembership(nullptr, adminGroup, &isAdmin);
-    FreeSid(adminGroup);
-  }
-  return isAdmin != FALSE;
-}
-
-bool installService() {
-  char exePath[MAX_PATH];
-  GetModuleFileNameA(nullptr, exePath, MAX_PATH);
-  std::string cmd = std::string("\"") + exePath + "\" --service";
-
-  if (!isRunningAsAdmin()) {
-    std::cerr << "[ERROR] Cannot install service: not running as Administrator." << std::endl;
-    std::cerr << "        Right-click the exe and select 'Run as administrator'." << std::endl;
-    return false;
-  }
-
-  SC_HANDLE scm = OpenSCManagerA(nullptr, nullptr, SC_MANAGER_CREATE_SERVICE);
-  if (!scm) {
-    std::cerr << "[ERROR] OpenSCManager failed (error " << GetLastError() << ")." << std::endl;
-    return false;
-  }
-
-  SC_HANDLE svc = CreateServiceA(
-    scm, SERVICE_NAME, SERVICE_DISPLAY,
-    SERVICE_ALL_ACCESS, SERVICE_WIN32_OWN_PROCESS,
-    SERVICE_AUTO_START, SERVICE_ERROR_NORMAL,
-    cmd.c_str(), nullptr, nullptr, nullptr, nullptr, nullptr
-  );
-
-  if (!svc) {
-    DWORD err = GetLastError();
-    if (err == ERROR_SERVICE_EXISTS) {
-      std::cerr << "[WARN] Service already exists." << std::endl;
-    } else {
-      std::cerr << "[ERROR] CreateService failed (error " << err << ")." << std::endl;
-    }
-    CloseServiceHandle(scm);
-    return false;
-  }
-
-  std::cout << "[OK] Service '" << SERVICE_NAME << "' installed successfully." << std::endl;
-
-  SERVICE_DESCRIPTIONA desc;
-  desc.lpDescription = const_cast<char*>(SERVICE_DESC);
-  ChangeServiceConfig2A(svc, SERVICE_CONFIG_DESCRIPTION, &desc);
-
-  // Auto-add firewall rule so PC1 can connect without manual steps
-  system("netsh advfirewall firewall delete rule name=\"SentinelNet\" >nul 2>&1");
-  system("netsh advfirewall firewall add rule name=\"SentinelNet\" dir=in action=allow protocol=TCP localport=8080 >nul 2>&1");
-
-  if (!StartServiceA(svc, 0, nullptr)) {
-    std::cerr << "[WARN] Service installed but failed to start (error " << GetLastError() << ")." << std::endl;
-  } else {
-    std::cout << "[OK] Service started." << std::endl;
-  }
-
-  CloseServiceHandle(svc);
-  CloseServiceHandle(scm);
-  return true;
-}
-
-bool uninstallService() {
-  SC_HANDLE scm = OpenSCManagerA(nullptr, nullptr, SC_MANAGER_ALL_ACCESS);
-  if (!scm) return false;
-  SC_HANDLE svc = OpenServiceA(scm, SERVICE_NAME, SERVICE_STOP | DELETE);
-  if (!svc) { CloseServiceHandle(scm); return false; }
-  SERVICE_STATUS status;
-  ControlService(svc, SERVICE_CONTROL_STOP, &status);
-  Sleep(1000);
-  DeleteService(svc);
-  CloseServiceHandle(svc);
-  CloseServiceHandle(scm);
-  return true;
-}
-
 // ── Entry point ───────────────────────────────────────────────────────────────
 
 int main(int argc, char *argv[]) {
-  // Called by service to run in user session (has desktop access)
-  if (argc > 1 && std::string(argv[1]) == "--user-session") {
-    // Set working directory to exe folder
-    char exePath[MAX_PATH];
-    GetModuleFileNameA(nullptr, exePath, MAX_PATH);
-    std::string exeDir(exePath);
-    exeDir = exeDir.substr(0, exeDir.rfind('\\'));
-    SetCurrentDirectoryA(exeDir.c_str());
-
-    logger log;
-    log.logMessage("SentinelNet user session started");
-
-    // Start cloudflared tunnel on background thread (if tunnel manager exists)
-#ifdef USE_TUNNEL
-    CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
-      TunnelManager tunnel;
-      tunnel.start();
-      return 0;
-    }, nullptr, 0, nullptr);
-#endif
-
-    APIServer server(g_dashboardPort);
-    server.start();
-    return 0;
-  }
-
-  // Called internally by Windows when running as a service
-  if (argc > 1 && std::string(argv[1]) == "--service") {
-    SERVICE_TABLE_ENTRYA table[] = {
-      { const_cast<char*>(SERVICE_NAME), ServiceMain },
-      { nullptr, nullptr }
-    };
-    StartServiceCtrlDispatcherA(table);
-    return 0;
-  }
-
-  // Cleanup flag
-  if (argc > 1 && std::string(argv[1]) == "--uninstall") {
-    return uninstallService() ? 0 : 1;
-  }
-
-  // First run — install as service if not already installed (optional, maybe check flag)
-  // For now, let's keep it manual or triggered by a flag to avoid confusion
-  
   NetworkScanner scanner;
   logger log;
 
   log.logMessage("SentinelNet started");
 
-
   if (argc > 1) {
-    // CLI Mode: Process arguments and exit
     if (std::string(argv[1]) == "--testNU") {
       testNetworkUtils();
       return 0;
@@ -504,7 +251,6 @@ int main(int argc, char *argv[]) {
     CLIOptions options = CLIParser::parse(argc, argv);
     runScanner(options, scanner, log);
   } else {
-    // Shell Mode: Interactive loop
     std::cout << "\n=== SentinelNet Shell ===" << std::endl;
     std::cout << "Type '-h' or '--help' to see available commands."
               << std::endl;
@@ -521,12 +267,10 @@ int main(int argc, char *argv[]) {
       if (input.empty())
         continue;
 
-      // Tokenize input for the parser
       std::stringstream ss(input);
       std::string token;
       std::vector<char *> args;
 
-      // Dummy argv[0]
       char progName[] = "SentinelNet";
       args.push_back(progName);
 
