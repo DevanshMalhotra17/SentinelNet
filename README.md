@@ -4,6 +4,29 @@ SentinelNet is a high-performance network security scanner and auditing tool. It
 
 SentinelNet features a powerful **C++17 parallel-scanning engine** and a modern **web-based project dashboard** for real-time visibility into your network security.
 
+## Project Links
+- **[Live Landing Page](https://sentinelnet.vercel.app)**
+- **[Interactive Dashboard Demo](https://sentinelnet.vercel.app/web/dashboard.html)**
+- **[SentinelNet v2.0 (Remote Access)](https://github.com/DevanshMalhotra17/SentinelNet_v2.0)**
+
+> [!NOTE]
+> ### Demo vs Full Functionality
+> The **Interactive Dashboard Demo** is a static, visual preview of SentinelNet’s user interface.  
+> It is intended for demonstration purposes only.
+>
+> - Buttons and controls in the demo are **non-functional by design**
+> - No real network scanning or API interaction occurs in the demo
+> - The demo exists solely to showcase the UI/UX
+>
+> To access full functionality (including scanning, API usage, and the interactive shell), you must run the **SentinelNet executable locally**.
+>
+> Please refer to the **Quick Start** section below for instructions on running the full application.
+
+---
+
+> [!CAUTION]
+> **USE AT YOUR OWN RISK.** This tool is for educational and ethical auditing purposes only. Whoever has access to the SentinelNet interface potentially has access to information on your host machine. I am **NOT responsible** for any damages or misuse caused by this software.
+
 ---
 
 ## Key Features
