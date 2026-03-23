@@ -172,10 +172,15 @@ void APIServer::start() {
     } else if (request.find("GET / ") != std::string::npos || request.find("GET /dashboard") != std::string::npos || request.find("GET /web/dashboard") != std::string::npos) {
       std::string html = readFile("web/dashboard.html");
       response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\n\r\n" + html;
+    } else if (request.find("GET /hack.html") != std::string::npos || request.find("GET /web/hack.html") != std::string::npos) {
+      std::string html = readFile("web/hack.html");
+      response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\n\r\n" + html;
     } else if (request.find("GET /style.css") != std::string::npos || request.find("GET /web/style.css") != std::string::npos) {
       response = "HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\n" + readFile("web/style.css");
     } else if (request.find("GET /script.js") != std::string::npos || request.find("GET /web/script.js") != std::string::npos) {
       response = "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" + readFile("web/script.js");
+    } else if (request.find("GET /hack.js") != std::string::npos || request.find("GET /web/hack.js") != std::string::npos) {
+      response = "HTTP/1.1 200 OK\r\nContent-Type: application/javascript\r\n\r\n" + readFile("web/hack.js");
     } else {
       response = "HTTP/1.1 404 Not Found\r\n\r\n404 Not Found";
     }
