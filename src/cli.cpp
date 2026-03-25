@@ -39,12 +39,6 @@ CLIOptions CLIParser::parse(int argc, char *argv[]) {
       if (i + 1 < argc) {
         options.discoverRange = argv[++i];
       }
-    } else if (arg == "--detect-rogue" || arg == "-r") {
-      options.detectRogue = true;
-    } else if (arg == "--trust") {
-      options.trustMode = true;
-    } else if (arg == "--list-capture" || arg == "-lc") {
-      options.listCaptureInterfaces = true;
     } else if (arg == "--dashboard" || arg == "-D") {
       options.startDashboard = true;
       if (i + 1 < argc) {
@@ -90,8 +84,6 @@ void CLIParser::printHelp() {
   std::cout << "  -h, --help              Show this help message" << std::endl;
   std::cout << "  -l, --list-interfaces   List all network interfaces"
             << std::endl;
-  std::cout << "  -lc, --list-capture     List packet capture interfaces"
-            << std::endl;
   std::cout << "  -t, --target <IP>       Target IP address to scan"
             << std::endl;
   std::cout
@@ -103,11 +95,6 @@ void CLIParser::printHelp() {
             << std::endl;
   std::cout << "  -d, --discover <range>  Discover devices (CIDR or range)"
             << std::endl;
-  std::cout << "  -r, --detect-rogue      Detect unknown/rogue devices"
-            << std::endl;
-  std::cout
-      << "  --trust                 Trust mode (add unknown devices as known)"
-      << std::endl;
   std::cout << "  -D, --dashboard [port]  Start web dashboard (default: 8080)"
             << std::endl;
   std::cout << "\nIf no options provided, runs default localhost quick scan.\n"

@@ -12,9 +12,6 @@ struct CLIOptions {
     bool listInterfaces = false;
     bool discover = false;
     std::string discoverRange = "";
-    bool detectRogue = false;
-    bool trustMode = false;
-    bool listCaptureInterfaces = false;
     bool startDashboard = false;
     int dashboardPort = 8080;
 };
